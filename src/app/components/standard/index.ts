@@ -2,7 +2,6 @@
 export * from './domain-editor.component';
 export * from './domain-list.component';
 export * from './domain-log.component';
-export * from './domain-synonym-editor.dialog';
 export * from './domain-update.component';
 export * from './standard-copy.component';
 export * from './standard-editor.component';

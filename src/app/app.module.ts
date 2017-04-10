@@ -93,7 +93,6 @@ type StoreType = {
     Standard.VariableEditorComponent,
     Standard.VariableEditorTerminologyComponent,
     Standard.VariableListComponent,
-    Standard.DomainSynonymEditorDialog,
     /**
      * 我的工作
      */
@@ -173,7 +172,6 @@ type StoreType = {
 
     Standard.VariableEditorComponent,
     Standard.VariableEditorTerminologyComponent,
-    Standard.DomainSynonymEditorDialog,
 
     Mapping.MappingConfigComponent,
     Mapping.MappingMatchFilterComponent,
