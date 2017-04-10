@@ -1,0 +1,257 @@
+﻿<div class="topContent">
+    <div class="backPageButton">
+        <i class="icon iconfont">&#xe614;</i>
+        <span (click)="back()">返回</span>
+    </div>
+    <div class="dialogContent">
+        <span class="checkStatus">待审核</span>
+        <span class="dialogButton">日志</span>
+    </div>
+</div>
+<div class="option_main clearfix">
+    <div class="option_body">
+        <div class="var-title">
+            <ul>
+                <li *ngFor="let item of mappingEditorTab" [ngClass]="{'current' : (currentEditorTab.key === item.key)}" (click)="changSelectedTab(item)" [title]="item.name">
+                    <span></span><b>{{item.name}}</b>
+                </li>
+            </ul>
+        </div>
+
+        <div [ngClass]="{'mappingRule':true,'hidden':currentEditorTab.key !== 'option'}">
+            <div class="option">
+                <div class="search form-inline">
+                    <div class="form-group">
+                        <label class="form-label">变量</label><input type="text" class="form-control" placeholder="变量" [(ngModel)]="treeSearchParam.fieldName" (keyup)="search()" />
+                        <label class="form-label">状态</label><select class="form-control" [(ngModel)]="treeSearchParam.fieldStatus" (change)="search()">
+                            <option value="0">全部</option>
+                            <option *ngFor="let item of enumFieldOptionMapStatus | enumKeyValues : 0" [value]="item.key">{{item.value}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="tableList" [ngStyle]="{'height.px':editorHeight}">
+                    <div class="treeContainer">
+                        <ul class="ztree" [attr.id]="mappingTreeId"></ul>
+                    </div>
+                </div>
+            </div>
+            <div class="source">
+                <div class="search form-inline">
+                    <div class="form-group">
+                        <label class="form-label">源</label><input type="text" class="form-control" placeholder="搜索源值" [(ngModel)]="sourceSearchParam.fieldName" (keyup)="search('source')" />
+                    </div>
+                </div>
+                <div class="tableList" [ngStyle]="{'height.px':editorHeight}">
+                    <div class="listContainer">
+                        <div class="listHead">
+                            <ul>
+                                <li>
+                                    <input type="checkbox" (change)="selectAllSourceOption($event.target.checked)" /><span>全选</span>
+                                </li>
+                                <li>
+                                    <span>排序</span>
+                                    <i [ngClass]="{'iconfont':true,'current':optionMapping.FirstMapping?.S_IsAsc}" (click)="sourceSort(true)">&#xe93c;</i>
+                                    <i [ngClass]="{'iconfont':true,'current':!optionMapping.FirstMapping?.S_IsAsc}" (click)="sourceSort(false)">&#xe93a;</i>
+                                </li>
+                                <li>
+                                    <input type="checkbox" [(ngModel)]="sourceSearchParam.fieldIsMapping" (change)="search('source')" /><span>未映射项</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <ng-container *ngFor="let item of optionMapping.FirstMapping.SourceValues;">
+                            <ng-container *ngIf="!item.S_IsHidden">
+                                <div #sourceOptionItem [title]="item.ValueName" [ngClass]="{'listRow':true,'disable': (item.IsMapping || item.ValueStatus === enumFieldSourceOptionStatus['删除'])}">
+                                    <ul>
+                                        <li>
+                                            <input type="checkbox" (click)="changeSourceOptionCheckBoxStatus(item)" [ngModel]="item.S_Status === '10' || item.S_Status === '11'" [disabled]="item.S_Status === '01' || item.S_Status === '11'" />{{item.ValueName}}
+                                        </li>
+                                        <li>
+                                            出现频次：{{item.ValueCount}}
+                                        </li>
+                                        <li>
+                                            状态：{{enumFieldSourceOptionStatus[item.ValueStatus]}}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </ng-container>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+            <div class="target">
+                <div class="search form-inline">
+                    <div class="form-group">
+                        <label class="form-label">目标</label>
+                        <input type="text" class="form-control" placeholder="搜索目标值" [(ngModel)]="targetSearchParam.fieldName" (keyup)="search('target')" />
+                    </div>
+                </div>
+                <div class="dropField">
+                    <div class="fieldArea">
+                        <div class="title drop">
+                            <span>放弃</span>
+                            <i class="iconfont" (click)="optionMapping.FirstMapping.D_IsToggle = !optionMapping.FirstMapping.D_IsToggle">{{optionMapping.FirstMapping.D_IsToggle?'&#xe61a;':'&#xe7ff;'}}</i>
+                            <i class="iconfont" (click)="emptyDropOptionItem()">&#xe605;</i>
+                        </div>
+                        <div [ngClass]="{'item':true,'hidden':optionMapping.FirstMapping.D_IsToggle}" #dropOptionItem>
+                            <ng-container *ngIf="optionMapping.FirstMapping.DiscardSourceValues.length === 0">
+                                <span class="drag">+拖拽变量</span>
+                            </ng-container>
+                            <ng-container *ngIf="optionMapping.FirstMapping.DiscardSourceValues.length > 0">
+                                <ul>
+                                    <li *ngFor="let item of optionMapping.FirstMapping.DiscardSourceValues;">
+                                        {{item.ValueName}}<i class="iconfont itemDelete" (click)="deleteDropOptionItem(item.ValueName)">&#xe6cc;</i>
+                                    </li>
+                                </ul>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+                <div class="tableList" [ngStyle]="{height:editorHeight - 185}">
+                    <ng-container *ngFor="let item of optionMapping.FirstMapping.OptionValues;">
+                        <ng-container *ngIf="!item.T_IsHidden">
+                            <!-- 未删除 -->
+                            <ng-container *ngIf="item.OptionStatus !== enumFieldTargetOptionStatus['删除']">
+                                <div class="fieldArea" #targetOptionItem>
+                                    <div class="title">
+                                        <span>{{item.OptionName}}&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;状态：{{enumFieldTargetOptionStatus[item.OptionStatus]}}</span>
+                                        <i class="iconfont" (click)="item.T_IsToggle = !item.T_IsToggle">{{item.T_IsToggle?'&#xe61a;':'&#xe7ff;'}}</i>
+                                        <i class="iconfont" (click)="emptyTargetOptionItem(item)">&#xe605;</i>
+                                    </div>
+                                    <div [ngClass]="{'item':true,'hidden':item.T_IsToggle}" [attr.data-optionname]="'target_' + item.OptionName">
+                                        <ng-container *ngIf="item.SourceValues.length === 0">
+                                            <span class="drag">+拖拽变量</span>
+                                        </ng-container>
+                                        <ng-container *ngIf="item.SourceValues.length > 0">
+                                            <ul>
+                                                <ng-container *ngFor="let itemValue of item.SourceValues">
+                                                    <ng-container *ngIf="itemValue.ValueStatus !== enumFieldSourceOptionStatus['删除']">
+                                                        <li>
+                                                            {{itemValue.ValueName}}<i class="iconfont itemDelete" (click)="deleteTargetOptionItem(item,itemValue.ValueName)">&#xe6cc;</i>
+                                                        </li>
+                                                    </ng-container>
+                                                    <ng-container *ngIf="itemValue.ValueStatus === enumFieldSourceOptionStatus['删除']">
+                                                        <li class="disable" title="已被删除，保存后将不再显示。">
+                                                            {{itemValue.ValueName}}
+                                                        </li>
+                                                    </ng-container>
+                                                </ng-container>
+                                            </ul>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </ng-container>
+                            <!-- 已删除 -->
+                            <ng-container *ngIf="item.OptionStatus === enumFieldTargetOptionStatus['删除']">
+                                <div class="fieldArea disable" *ngIf="item.OptionStatus === enumFieldTargetOptionStatus['删除']" #targetOptionItem>
+                                    <div class="title">
+                                        <span>{{item.OptionName}}&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;状态：{{enumFieldTargetOptionStatus[item.OptionStatus]}}</span>
+                                        <i class="iconfont" (click)="item.T_IsToggle = !item.T_IsToggle">{{item.T_IsToggle?'&#xe61a;':'&#xe7ff;'}}</i>
+                                    </div>
+                                    <div [ngClass]="{'item':true,'hidden':item.T_IsToggle}" [attr.data-optionname]="'target_' + item.OptionName">
+                                        <ng-container *ngIf="item.SourceValues.length === 0">
+                                            <span class="drag">无</span>
+                                        </ng-container>
+                                        <ng-container *ngIf="item.SourceValues.length > 0">
+                                            <ul>
+                                                <li *ngFor="let itemValue of item.SourceValues">
+                                                    {{itemValue.ValueName}}
+                                                </li>
+                                            </ul>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </ng-container>
+                        </ng-container>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+
+        <div [ngClass]="{'mappingRule':true,'hidden':currentEditorTab.key !== 'relate'}">
+            <div class="relateSummary" [ngStyle]="{'height':editorHeight + 112}">
+                <div class="tableList">
+                    <div class="relateHead">
+                        <ul>
+                            <li>
+                                域名
+                            </li>
+                            <li>状态</li>
+                        </ul>
+                    </div>
+                    <ng-container *ngFor="let item of associativeTableDomains">
+                        <div [ngClass]="{'relateRow':true,'disable':(item.DomainStatus === enumFieldTargetOptionStatus['删除'])}" [title]="item.DomainName" [attr.data-domainid]="item.DomainID" #associativeDomainItem>
+                            <ul>
+                                <li>
+                                    {{item.DomainName}}
+                                </li>
+                                <li>{{enumFieldTargetOptionStatus[item.DomainStatus]}}</li>
+                            </ul>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="relateDetail" [ngStyle]="{'height':editorHeight + 112}">
+                <div class="tableList">
+                    <div class="relateHead">
+                        <ul>
+                            <li>
+                                关联域1
+                            </li>
+                            <li>关联变量</li>
+                            <li>
+                                关联域2
+                            </li>
+                            <li>关联变量</li>
+                            <li>
+                                操作
+                            </li>
+                        </ul>
+                    </div>
+                    <ng-container *ngFor="let item of associativeFieldMappings;let i = index;">
+                        <div class="relateRow" #associativeMappingItem>
+                            <ul>
+                                <li>
+                                    <div [ngClass]="{'relateDrop':true,'noContent':!item.FirstDomainID}" [attr.data-index]="i" data-flag="first">
+                                        {{item.FirstDomainID ? item.FirstDomainName : '+关联域1'}}
+                                    </div>
+                                </li>
+                                <li>
+                                    <select class="form-control" [(ngModel)]="item.FirstFieldID" [disabled]="!item.FirstFieldID">
+                                        <ng-container *ngFor="let option of item.FirstFields">
+                                            <option [value]="option.FieldID">{{option.FieldName}}</option>
+                                        </ng-container>
+                                    </select>
+                                </li>
+                                <li>
+                                    <div [ngClass]="{'relateDrop':true,'noContent':!item.SecondFieldID}" [attr.data-index]="i" data-flag="second">
+                                        {{item.SecondDomainID ? item.SecondDomainName : '+关联域2'}}
+                                    </div>
+                                </li>
+                                <li>
+                                    <select class="form-control" [(ngModel)]="item.SecondFieldID" [disabled]="!item.SecondFieldID">
+                                        <ng-container *ngFor="let option of item.SecondFields">
+                                            <option [value]="option.FieldID">{{option.FieldName}}</option>
+                                        </ng-container>
+                                    </select>
+                                </li>
+                                <li>
+                                    <i class="iconfont" (click)="deleteAssosciativeMapping(item)">&#xe605;</i>
+                                </li>
+                            </ul>
+                        </div>
+                    </ng-container>
+                    <div class="relateRow addRow">
+                        <span (click)="addAssosciativeMapping()">+添加映射</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="operate" *ngIf="currentEditorTab.key === 'option'">
+            <button class="btn btn-default btnsave"><i class="iconfont" (click)="saveOption()">&#xe60c;</i>保存</button>
+        </div>
+    </div>
+</div>
+<div class="operate optsubmit">
+    <button class="btn btn-blue btnsubmit"><i class="iconfont" (click)="submitOption()">&#xe65c;</i>提交</button>
+</div>

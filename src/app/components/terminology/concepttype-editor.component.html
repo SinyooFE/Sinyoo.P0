@@ -1,0 +1,26 @@
+﻿<div class="modal-content">
+    <form (ngSubmit)="ok()">
+        <div class="modal-header">
+            <button type="button" class="close" (click)="cancel()"><span aria-hidden="true" class="icon iconfont">&#xe6cc;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title">概念类型{{context.action === '2' ? '修改' : '添加'}}</h4>
+        </div>
+        <div class="modal-body">
+            <div class="gainian-edit">
+                <div>名称</div>
+                <div class="textarea-edit">
+                    <input class="form-control" [(ngModel)]="context.currentTypeDetail.ConceptTypeName" [ngModelOptions]="{standalone: true}" required="required" />
+                </div>
+            </div>
+            <div class="gainian-edit">
+                <div>描述</div>
+                <div class="textarea-edit">
+                    <textarea class="form-control" style="height: 90px;" [(ngModel)]="context.currentTypeDetail.ConceptTypeDesc" [ngModelOptions]="{standalone: true}"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-blue-default" (click)="cancel()">取消</button>
+            <button type="submit" class="btn btn-blue">确认</button>
+        </div>
+    </form>
+</div>

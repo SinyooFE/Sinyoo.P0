@@ -1,0 +1,108 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" (click)="cancel()"><span aria-hidden="true" class="icon iconfont">&#xe6cc;</span><span class="sr-only">Close</span></button>
+    <h4 class="modal-title">标准审核日志</h4>
+</div>
+<div class="modal-body clearfix">
+    <div class="col-xs-6">
+        <div class="ibox-content">
+            <div class="table-responsive">
+                <div class="variable_log_list">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th style="width:40%">操作时间</th>
+                                <th style="width:20%">操作人员</th>
+                                <th style="width:20%">操作类型</th>
+                                <th style="width:20%">审核状态</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of standardLogList" [ngClass]="{'current': (item.ID === selectedStandardLog.selectedLog.ID)}" (click)="setSelectedLog(item)">
+                                <td>{{item.ProcTime | date:'y/M/d HH:mm:ss'}}</td>
+                                <td>{{item.SubmitterName}}</td>
+                                <td>{{enumLogAction[item.LogAction]}}</td>
+                                <td class="green">{{enumLogAuditAction[item.AuditAction]}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-6">
+        <div class="clearfix">
+
+            <div class="filed">
+                <label class="textbold">标准名称：</label>
+                <span class="textbold">{{context.standardName}}</span>
+            </div>
+            <div class="filed-list">
+                <div class="filed">
+                    <label>操作时间：</label>
+                    <span>{{selectedStandardLog.selectedLog.ProcTime | date:'y/M/d HH:mm:ss'}}</span>
+                </div>
+                <div class="filed">
+                    <label>审核状态：</label>
+                    <span>{{enumLogAction[selectedStandardLog.selectedLog.LogAction]}}</span>
+                </div>
+                <div class="filed">
+                    <label>操作类型：</label>
+                    <span>{{enumLogAuditAction[selectedStandardLog.selectedLog.AuditAction]}}</span>
+                </div>
+                <div class="filed">
+                    <label>操作人员：</label>
+                    <span>{{selectedStandardLog.selectedLog.SubmitterName}}</span>
+                </div>
+                <div class="filed">
+                    <label>备注：</label>
+                    <span>{{selectedStandardLog.selectedLog.ProcRemark}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="variable_log_detail">
+            <table class="table able-striped table-bordered table-hover ">
+                <thead>
+                    <tr>
+                        <th style="width: 30%; border:none;">&nbsp;</th>
+                        <th style="width: 35%; border:none;">修改前</th>
+                        <th style="width: 35%; border:none;">修改后</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>标准名称</td>
+                        <td>{{selectedStandardLog.originalDetail.StandardName}}</td>
+                        <td>{{selectedStandardLog.currentDetail.StandardName}}</td>
+                    </tr>
+                    <tr>
+                        <td>标准用途</td>
+                        <td>{{selectedStandardLog.originalDetail.StandardPurpose}}</td>
+                        <td>{{selectedStandardLog.currentDetail.StandardPurpose}}</td>
+                    </tr>
+                    <tr>
+                        <td>标准描述</td>
+                        <td>{{selectedStandardLog.originalDetail.StandardDesc}}</td>
+                        <td>{{selectedStandardLog.currentDetail.StandardDesc}}</td>
+                    </tr>
+                    <tr>
+                        <td>Name</td>
+                        <td>{{selectedStandardLog.originalDetail.StandardNameEn}}</td>
+                        <td>{{selectedStandardLog.currentDetail.StandardNameEn}}</td>
+                    </tr>
+                    <tr>
+                        <td>Purpose</td>
+                        <td>{{selectedStandardLog.originalDetail.StandardPurposeEn}}</td>
+                        <td>{{selectedStandardLog.currentDetail.StandardPurposeEn}}</td>
+                    </tr>
+                    <tr>
+                        <td>Describe</td>
+                        <td>{{selectedStandardLog.originalDetail.StandardDescEn}}</td>
+                        <td>{{selectedStandardLog.currentDetail.StandardDescEn}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,8 @@
+﻿/*审核意见*/
+.commentsContent textarea{
+	width:100%;
+	padding:4px 14px;
+	height:100px;
+	border-radius: 4px;
+}
+

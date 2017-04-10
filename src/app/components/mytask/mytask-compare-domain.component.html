@@ -1,0 +1,151 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" (click)="onclose(false)"><span aria-hidden="true" class="icon iconfont">&#xe6cc;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">{{Title}}</h4>
+    </div>
+    <div class="modal-body">
+        <!--域审核弹窗-->
+        <!--弹窗开始-->
+        <div class="domainDialog clearfix">
+            <!--主体内容-->
+            <!--标准的对比，或者单一展示：新、旧-->
+            <div class="domainDialogMainContent clearfix">
+                <!--旧的数据-->
+                <div class="detailContent new" [class.singlelValue]="!(originalVal && currentVal)" *ngIf="originalVal">
+                    <p class="middleTitle">基本设置</p>
+                    <div>
+                        <label>域中文名称</label>
+                        <input type="text" class="form-control" disabled [ngModel]="originalVal.DomainName">
+                    </div>
+                    <div>
+                        <label>域缩写</label>
+                        <input type="text" class="form-control" disabled [ngModel]="originalVal.DomainAbb">
+                    </div>
+                    <div>
+                        <label>域代码</label>
+                        <input type="text" class="form-control" disabled [ngModel]="originalVal.DomainCode">
+                    </div>
+                    <div>
+                        <label>域描述</label>
+                        <input type="text" class="form-control" disabled [ngModel]="originalVal.DomainDesc">
+                    </div>
+                    <div>
+                        <label>域观测类别</label>
+                        <input type="text" class="form-control" disabled [ngModel]="domainObservationType[originalVal.DomainType]">
+                    </div>
+                    <div>
+                        <label>域填写指南</label>
+                        <input type="text" class="form-control" disabled [ngModel]="originalVal.DomainGuide">
+                    </div>
+                    <div>
+                        <label>Domain</label>
+                        <input type="text" class="form-control" disabled [ngModel]="originalVal.DomainNameEn">
+                    </div>
+                    <div>
+                        <label>Describe</label>
+                        <input type="text" class="form-control" disabled [ngModel]="originalVal.DomainDescEn">
+                    </div>
+                    <div>
+                        <label>Observation</label>
+                        <input type="text" class="form-control" disabled [ngModel]="domainObservationTypeEn[originalVal.DomainType]">
+                    </div>
+                    <div>
+                        <label>Complete Guide</label>
+                        <textarea class="form-control completeGuide" type="text" disabled [ngModel]="originalVal.DomainGuideEn"></textarea>
+                    </div>
+                    <div>
+                        <p class="middleTitle">同义词设置</p>
+                        <table class="synonymsPart">
+                            <thead>
+                                <tr>
+                                    <td>序号</td>
+                                    <td>同义词域名</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let per_synonymDomains of originalVal.SynonymDomains">
+                                    <td>{{per_synonymDomains.ID}}</td>
+                                    <td>{{per_synonymDomains.SynonymDomainName}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--新的数据-->
+                <div class="detailContent old" [class.singlelValue]="!(originalVal && currentVal)" *ngIf="currentVal">
+                    <p class="middleTitle">基本设置</p>
+                    <div>
+                        <label>域中文名称</label>
+                        <input type="text" class="form-control" disabled [ngModel]="currentVal.DomainName">
+                    </div>
+                    <div>
+                        <label>域缩写</label>
+                        <input type="text" class="form-control" disabled [ngModel]="currentVal.DomainAbb">
+                    </div>
+                    <div>
+                        <label>域代码</label>
+                        <input type="text" class="form-control" disabled [ngModel]="currentVal.DomainCode">
+                    </div>
+                    <div>
+                        <label>域描述</label>
+                        <input type="text" class="form-control" disabled [ngModel]="currentVal.DomainDesc">
+                    </div>
+                    <div>
+                        <label for="current_domain_type">域观测类别</label>
+                        <input type="text" class="form-control" disabled [ngModel]="domainObservationType[currentVal.DomainType]">
+                    </div>
+                    <div *ngIf="currentVal.DomainGuide">
+                        <label>域填写指南</label>
+                        <input type="text" name="current_domain_guide" id="current_domain_guide" disabled [ngModel]="currentVal.DomainGuide">
+                    </div>
+                    <div>
+                        <label>Domain</label>
+                        <input type="text" class="form-control" disabled [ngModel]="currentVal.DomainNameEn">
+                    </div>
+                    <div>
+                        <label>Describe</label>
+                        <input type="text" class="form-control" disabled [ngModel]="currentVal.DomainDescEn">
+                    </div>
+                    <div>
+                        <label>Observation</label>
+                        <input type="text" class="form-control" disabled [ngModel]="domainObservationTypeEn[currentVal.DomainType]">
+                    </div>
+                    <div>
+                        <label>Complete Guide</label>
+                        <textarea class="completeGuide form-control" type="text" disabled [ngModel]="currentVal.DomainGuideEn"></textarea>
+                    </div>
+                    <div>
+                        <p class="middleTitle">同义词设置</p>
+                        <table class="synonymsPart">
+                            <thead>
+                                <tr>
+                                    <td>序号</td>
+                                    <td>同义词域名</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let per_synonymDomains of currentVal.SynonymDomains">
+                                    <td>{{per_synonymDomains.ID}}</td>
+                                    <td>{{per_synonymDomains.SynonymDomainName}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <!--审核意见-->
+        <div class="col-lg-12">
+            <div class="form-group commentsContent">
+                <label>审核意见：</label>
+                <textarea [(ngModel)]="Remark" [disabled]="!(context.forApproval && hasApprovePermission)"></textarea>
+            </div>
+        </div>
+        <button *ngIf="context.forApproval && hasApprovePermission" type="button" class="btn btn-blue" (click)="approve()"><i class="icon iconfont">&#xe611;</i>审核通过</button>
+        <button *ngIf="context.forApproval && hasApprovePermission" type="button" class="btn btn-blue-default" (click)="reject()"><i class="icon iconfont">&#xe6cc;</i>驳回</button>
+        <button type="button" class="btn btn-default" (click)="onclose(false)"><i class="icon iconfont">&#xe85c;</i>关闭</button>
+    </div>
+</div>
+

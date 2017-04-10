@@ -1,0 +1,120 @@
+﻿
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" (click)="cancel()"><span aria-hidden="true" class="icon iconfont">&#xe6cc;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">新建域</h4>
+    </div>
+    <form (ngSubmit)="ok()">
+        <div class="modal-body">
+            <div class="table-box">
+                <div class="var-title">
+                    <ul>
+                        <li *ngFor="let item of domainEditorTab" [ngClass]="{'current':(currentEditorTab.key === item.key)}" (click)="changeSelectedTab(item)">
+                            <span></span><b>{{item.name}}</b>
+                        </li>
+                    </ul>
+                </div>
+                <div class="modle-content">
+                    <div class="model-area" *ngIf="currentEditorTab.key === 'basic'" style="display:block;">
+                        <div class="table-left">
+                            <h5 class="bz-title">基本设置</h5>
+                            <div class="form-group">
+                                <label>域中文名称<i>*</i></label>
+                                <input type="text" class="form-control required" name="DomainName" [(ngModel)]="domainDetail.DomainName" [ngModelOptions]="{standalone: true}" required="required" maxlength="20">
+                            </div>
+                            <div class="form-group">
+                                <label>域缩写</label>
+                                <input type="text" class="form-control required" name="DomainAbb" [(ngModel)]="domainDetail.DomainAbb" [ngModelOptions]="{standalone: true}" maxlength="10">
+                            </div>
+                            <div class="form-group">
+                                <label>域代码<i>*</i></label>
+                                <input type="text" class="form-control required" name="DomainCode" [(ngModel)]="domainDetail.DomainCode" [ngModelOptions]="{standalone: true}" required="required" maxlength="30">
+                            </div>
+                            <div class="form-group">
+                                <label>域描述</label>
+                                <div class="textarea-edit">
+                                    <textarea class="form-control" rows="3" name="DomainDesc" [(ngModel)]="domainDetail.DomainDesc" [ngModelOptions]="{standalone: true}" maxlength="300"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>域观测类别</label>
+                                <select class="form-control m-b" name="DomainType" [(ngModel)]="domainDetail.DomainType" [ngModelOptions]="{standalone: true}">
+                                    <option value="0"></option>
+                                    <option *ngFor="let item of enumDomainObservationType | enumKeyValues" [value]="item.key">{{item.value}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>域填写指南</label>
+                                <div class="textarea-edit">
+                                    <textarea class="form-control" rows="3" name="DomainGuide" [(ngModel)]="domainDetail.DomainGuide" [ngModelOptions]="{standalone: true}" maxlength="300"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-right">
+                            <h5 class="bz-title">Primary Configuration</h5>
+                            <div class="form-group">
+                                <label>Domain<i>*</i></label>
+                                <input type="text" class="form-control required" name="DomainNameEn" [(ngModel)]="domainDetail.DomainNameEn" [ngModelOptions]="{standalone: true}" required="required" maxlength="100">
+                            </div>
+                            <div class="form-group">
+                                <label>Describe</label>
+                                <div class="textarea-edit">
+                                    <textarea class="form-control" rows="3" name="DomainDescEn" [(ngModel)]="domainDetail.DomainDescEn" [ngModelOptions]="{standalone: true}" maxlength="1000"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Observation</label>
+                                <select class="form-control m-b" name="DomainType" [(ngModel)]="domainDetail.DomainType" [ngModelOptions]="{standalone: true}">
+                                    <option value="0"></option>
+                                    <option *ngFor="let item of enumDomainObservationTypeEn | enumKeyValues" [value]="item.key">{{item.value}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Complete Guide</label>
+                                <div class="textarea-edit">
+                                    <textarea class="form-control" rows="3" name="DomainGuideEn" [(ngModel)]="domainDetail.DomainGuideEn" [ngModelOptions]="{standalone: true}" maxlength="1000"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="model-area" *ngIf="currentEditorTab.key === 'synonym'" style="display: block;">
+                        <div class="switch-table">
+                            <div class="ibox-content">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-hover dataTable dataTables-example">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 5%;">序号</th>
+                                                <th style="width: 90%;">同义词域名</th>
+                                                <th style="width: 5%;">删除</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let item of domainDetail.SynonymDomains;let i = index;">
+                                                <td>{{i+1}}</td>
+                                                <td><input type="text" [(ngModel)]="item.SynonymDomainName" [ngModelOptions]="{standalone: true}" placeholder="同义词域名" style="width: 95%" required="required" /></td>
+                                                <td class="deletes">
+                                                    <i class="icon iconfont" (click)="deleteSynonym(i)">&#xe60e;</i>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="buttons addButton">
+                                <button type="button" class="btn btn-apply" (click)="addSynonym()">
+                                    <i class="icon iconfont">&#xe616;</i>添加
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer" style="border:none;">
+            <button type="button" class="btn btn-blue-default" (click)="cancel()">取消</button>
+            <button type="submit" class="btn btn-blue">确认</button>
+        </div>
+    </form>
+
+</div>

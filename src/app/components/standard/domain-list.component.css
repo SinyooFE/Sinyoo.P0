@@ -1,0 +1,46 @@
+﻿.listTitle{ color:#18aefb; font-size: 16px;text-indent: 20px;}
+.listMain{background-color: #fff;padding: 10px; width:100%; margin-top:15px;border-top:#b8c5da 8px solid; border-radius: 5px;}
+.listMain .table-box{ background: #fff;width: 100%; overflow-y: auto;overflow-x: hidden;}
+.listMain .buttons{ position: inherit;margin-bottom:15px;}
+
+
+/*按钮*/
+.dataButton .btn, .dataButton .btn:hover, .dataButton .btn:active, .dataButton .btn:focus{ padding:2px 8px; font-size:12px;}
+.dataButton .btn i{font-size:14px;padding-right:2px;}
+
+/*全部域*/
+.table-title{height:34px;line-height:34px;position:relative; padding-left:15px;}
+.table-list li .table-title p{ background:url(/assets/img/jia.png) no-repeat 0 center;text-indent:20px;}
+.table-list li.active .table-title p{background:url(/assets/img/jian.png) no-repeat 0 center;text-indent:20px;}
+.table-title p{color:#77879f;}
+.table-title:hover{background-color:#ebf2fb}
+.table-title p i{padding-right:5px;}
+
+/*域列表、操作按钮*/
+.t-row{position:relative;height:34px;padding-left:20px; line-height:34px;}
+.t-row p{color:#77879f;text-indent:5px;}
+.t-row:hover{background-color:#ebf2fb}
+.operation{right:10px;top:0;width:120px;}
+.operation i{ color: #bdcadd;} 
+.operation span{width:22px; height:22px;margin:0; padding: 0; background:none; border-radius:0;display:inline-block;text-align: center;}
+
+.t-row:hover .operation{display:block!important;visibility:visible!important;}
+.t-row:hover .operation span {
+    background-color:#ffffff;
+    background-color:rgba(255,255,255,0.7);
+}
+.t-row:hover .operation span i{
+    height: 22px;
+    line-height: 22px;
+}
+
+.textshow {
+    width: 70%;
+    white-space: nowrap;
+    word-break: keep-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/*选中样式*/
+.current{background-color:#c7d4e6;color:#515e75}

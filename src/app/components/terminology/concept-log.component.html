@@ -1,0 +1,131 @@
+﻿
+<div class="modal-header">
+    <button type="button" class="close" (click)="cancel()"><span aria-hidden="true" class="icon iconfont">&#xe6cc;</span><span class="sr-only">Close</span></button>
+    <h4 class="modal-title">日志查询</h4>
+</div>
+<div class="modal-body clearfix">
+    <div class="col-xs-6">
+        <div class="ibox-content">
+            <div class="table-responsive">
+                <div class="concept_log_list">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>时间</th>
+                                <th>操作类型</th>
+                                <th>操作人员</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let itemLog of conceptLogList" [ngClass]="{'current':(selectedConceptLog.selectedLog.LogId === itemLog.LogId)}" (click)="setSelectedConceptLog(itemLog)">
+                                <td [title]="itemLog.ProcTime | date:'y/M/d HH:mm:ss'">{{itemLog.ProcTime | date:'y/M/d HH:mm:ss'}}</td>
+                                <td>{{enumLogAction[itemLog.LogAction]}} {{enumLogAuditAction[itemLog.AuditAction]}}</td>
+                                <td>{{itemLog.SubmitterName}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-6">
+        <div class="clearfix">
+
+            <div class="filed">
+                <label class="textbold">概念名称：</label>
+                <span class="textbold">{{context.conceptName}}</span>
+            </div>
+            <div class="filed-list">
+                <div class="filed">
+                    <label>操作时间：</label>
+                    <span>{{selectedConceptLog.selectedLog.ProcTime | date:'y/M/d HH:mm:ss'}}</span>
+                </div>
+                <div class="filed">
+                    <label>审核状态：</label>
+                    <span>{{enumLogAction[selectedConceptLog.selectedLog.LogAction]}}</span>
+                </div>
+                <div class="filed">
+                    <label>操作类型：</label>
+                    <span>{{enumLogAuditAction[selectedConceptLog.selectedLog.AuditAction]}}</span>
+                </div>
+                <div class="filed">
+                    <label>操作人员：</label>
+                    <span>{{selectedConceptLog.selectedLog.SubmitterName}}</span>
+                </div>
+                <div class="filed">
+                    <label>备注：</label>
+                    <span>{{selectedConceptLog.selectedLog.ProcRemark}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="concept_log_detail">
+            <table class="table able-striped table-bordered table-hover ">
+                <thead>
+                    <tr>
+                        <th>&nbsp;</th>
+                        <th>修改前</th>
+                        <th>修改后</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>中文名称</td>
+                        <td>{{selectedConceptLog.originalConcept.ConceptName}}</td>
+                        <td>{{selectedConceptLog.currentConcept.ConceptName}}</td>
+                    </tr>
+                    <tr>
+                        <td>拼音首字母</td>
+                        <td>{{selectedConceptLog.originalConcept.ConceptNamePy}}</td>
+                        <td>{{selectedConceptLog.currentConcept.ConceptNamePy}}</td>
+                    </tr>
+                    <tr>
+                        <td>英文名称</td>
+                        <td>{{selectedConceptLog.originalConcept.ConceptNameEn}}</td>
+                        <td>{{selectedConceptLog.currentConcept.ConceptNameEn}}</td>
+                    </tr>
+                    <tr>
+                        <td>缩写</td>
+                        <td>{{selectedConceptLog.originalConcept.ConceptNameAb}}</td>
+                        <td>{{selectedConceptLog.currentConcept.ConceptNameAb}}</td>
+                    </tr>
+                    <tr>
+                        <td>编码</td>
+                        <td>{{selectedConceptLog.originalConcept.ConceptCode}}</td>
+                        <td>{{selectedConceptLog.currentConcept.ConceptCode}}</td>
+                    </tr>
+                    <tr>
+                        <td>详细定义</td>
+                        <td>
+                            <div class="conceptdetail_log" innerHTML="{{selectedConceptLog.originalConcept.ConceptDefinition}}">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div class="conceptdetail_log" innerHTML="{{selectedConceptLog.currentConcept.ConceptDefinition}}">
+
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>概念类型</td>
+                        <td>{{selectedConceptLog.originalConcept.ConceptTypeName}}</td>
+                        <td>{{selectedConceptLog.currentConcept.ConceptTypeName}}</td>
+                    </tr>
+                    <tr *ngFor="let itemAttr of selectedConceptLog.attributes;let i = index;">
+                        <td>属性{{i+1}}</td>
+                        <td>{{itemAttr.key}}</td>
+                        <td>{{itemAttr.value}}</td>
+                    </tr>
+                    <tr *ngFor="let itemSyno of selectedConceptLog.synonymes;let i = index;">
+                        <td>同义词{{i+1}}</td>
+                        <td>{{itemSyno.key}}</td>
+                        <td>{{itemSyno.value}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+

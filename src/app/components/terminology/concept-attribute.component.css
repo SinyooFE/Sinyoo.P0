@@ -1,0 +1,12 @@
+﻿.attribute-edit div{color: #515e75;font-size: 14px;}
+.attribute-edit .textarea-edit{color: #77879f; font-size: 12px;width: 95%;margin:10px 0;}
+.dropdown-menu{margin: 0;}
+.dropdown-menu div{margin:0;}
+
+/*文字显示*/
+.textshow {
+    white-space: nowrap;
+    word-break: keep-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

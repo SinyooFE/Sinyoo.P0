@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- base url -->
+    <base href="<%= htmlWebpackPlugin.options.metadata.baseUrl %>">
+    
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+
+    <meta name="description" content="<%= htmlWebpackPlugin.options.title %>">
+
+    <!--css-->
+    <link href="./assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="./assets/css/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="./assets/plugius/jquery-ui-1.12.1/jquery-ui.min.css" rel="stylesheet" />
+    <link href="./assets/css/reset.min.css" rel="stylesheet" />
+    <!--字体图标-->
+    <link href="./assets/fonts/iconfont.css" rel="stylesheet" />
+    <!--树形结构-->
+    <link href="./assets/css/zTreeStyle/zTreeStyle.css" rel="stylesheet">
+    <!--文本编辑器-->
+    <link href="./assets/plugius/summernote/css/summernote.css" rel="stylesheet">
+    <!--表格样式-->
+    <link href="./assets/plugius/dataTables/datatables.min.css" rel="stylesheet">
+    <link href="./assets/plugius/dataTables/iCheck/custom.css" rel="stylesheet" />
+    <!-- layer -->
+    <link href="./assets/plugius/layer/skin/default/layer.css" rel="stylesheet" />
+    <link href="./assets/css/Hint/hint.min.css" rel="stylesheet" />
+    <!-- bootstrap-select -->
+    <link href="./assets/plugius/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet" />
+    <link href="./assets/css/public.css" rel="stylesheet" />
+    <link href="./assets/css/index.css" rel="stylesheet" />
+    <!-- 等待条 -->
+    <link href="./assets/css/busy.css" rel="stylesheet" />
+    <!-- QueryBuilder -->
+    <link href="./assets/plugius/jQuery-QueryBuilder/css/query-builder.default.css" rel="stylesheet" />
+    <link href="./assets/plugius/datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
+
+    <!--配置其它第三方javascript 文件-->
+    <!--<script src="https://cdn.rawgit.com/exceptionless/Exceptionless.JavaScript/v1.4.3/dist/exceptionless.min.js"></script>-->
+    <script src="./assets/js/jquery-2.1.4.min.js"></script>
+    <script src="./assets/js/bootstrap.min.js"></script>
+    <script src="./assets/plugius/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+    <script src="./assets/plugius/tree/jquery.ztree.all.min.js"></script>
+    <script src="./assets/plugius/tree/jquery.ztree.exhide.min.js"></script>
+    <!--文本编辑器-->
+    <script src="./assets/plugius/summernote/js/summernote.min.js"></script>
+    <script src="./assets/plugius/summernote/lang/summernote-zh-CN.js"></script>
+    <!-- 汉字转拼音 -->
+    <script src="./assets/plugius/pinyin/dict/pinyin_dict_notone.js"></script>
+    <script src="./assets/plugius/pinyin/dict/pinyin_dict_withtone.js"></script>
+    <script src="./assets/plugius/pinyin/pinyinUtil.js"></script>
+    <!-- layer -->
+    <script src="./assets/plugius/layer/layer.js"></script>
+    <!-- bootstrap-select -->
+    <script src="./assets/plugius/bootstrap-select/js/bootstrap-select.min.js"></script>
+    <!-- QueryBuilder -->
+    <script src="./assets/plugius/datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="./assets/plugius/datepicker/locales/bootstrap-datepicker.zh-CN.min.js"></script>
+    <script src="./assets/plugius/jQuery-QueryBuilder/moment.js"></script>
+    <script src="./assets/plugius/jQuery-QueryBuilder/doT.min.js"></script>
+    <script src="./assets/plugius/jQuery-QueryBuilder/jQuery.extendext.min.js"></script>
+    <script src="./assets/plugius/jQuery-QueryBuilder/js/query-builder.standalone.js"></script>
+    <script src="./assets/plugius/jQuery-QueryBuilder/js/query-builder.min.js"></script>
+    <script src="./assets/plugius/jQuery-QueryBuilder/i18n/query-builder.zh-CN.js"></script>
+
+    <!-- Configured Head Tags  -->
+    <!--<% if (webpackConfig.htmlElements.headTags) { %>   
+        <%= webpackConfig.htmlElements.headTags %>
+            <% } %>-->
+</head>
+
+<body>
+    <sinyoo-main>
+        Loading...
+    </sinyoo-main>
+
+    <% if (htmlWebpackPlugin.options.metadata.isDevServer && htmlWebpackPlugin.options.metadata.HMR !== true) { %>
+        <!-- Webpack Dev Server reload -->
+        <script src="/webpack-dev-server.js"></script>
+        <% } %>
+</body>
+
+</html>

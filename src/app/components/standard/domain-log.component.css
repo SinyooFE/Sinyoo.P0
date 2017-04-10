@@ -1,0 +1,50 @@
+﻿th {
+    background-color: #d9e1ed;
+}
+
+.table tr.current td, .table tr.current:hover td {
+    background-color: #c7d4e6;
+    color: #515e75;
+}
+
+.filed {
+    width: 50%;
+    float: left;
+}
+
+    .filed label {
+        float: left;
+        line-height: 30px;
+        width: 90px;
+        text-align: right;
+    }
+
+    .filed span, .filed-list .filed span {
+        float: left;
+        text-indent: 10px;
+        height: 30px;
+        line-height: 30px;
+        color: #515e75;
+    }
+
+.col-xs-6 {
+    padding: 10px;
+}
+
+.domain_log_list {
+    height: 568px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border-right: #cdd5de 1px solid;
+}
+
+.domain_log_detail {
+    max-height: 500px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin: 15px 0;
+}
+
+.textbold {
+    font-weight: bold;
+}

@@ -1,0 +1,35 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" (click)="cancel()"><span aria-hidden="true" class="icon iconfont">&#xe6cc;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">{{context.isAdd ? '添加' : '修改'}}{{enumSynonymType[context.curSynonym.SynonymType]}}</h4>
+        <h4 class="modal-title pull-right" style="position: absolute; right: 15px; top: 6px; width: 224px; border-left: #cdd5de 1px solid; height: 55px; line-height: 55px; text-indent: 15px;">已添加的{{enumSynonymType[context.curSynonym.SynonymType]}}</h4>
+    </div>
+    <div class="modal-body">
+        <div class="tongyici pull-left" style="width: 60%">
+            <form (ngSubmit)="ok()">
+                <div class="gainian-edit">
+                    <div>概念名称：{{context.conceptName}}</div>
+                    <div class="textarea-edit">
+                        <input type="text" class="form-control" [(ngModel)]="context.curSynonym.SynonymName" [ngModelOptions]="{standalone: true}" required="required" maxlength="100" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-blue-default" (click)="cancel()">取消</button>
+                    <button type="submit" class="btn btn-blue">确认</button>
+                </div>
+            </form>
+        </div>
+        <div class="yitianjia pull-left" style="width: 40%">
+            <div class="table-box">
+                <table class="table table-hover">
+                    <tbody>
+                        <tr *ngFor="let item of getSynonymTypeList()">
+                            <td>{{item.SynonymName}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>

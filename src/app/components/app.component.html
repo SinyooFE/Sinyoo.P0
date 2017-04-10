@@ -1,0 +1,40 @@
+<header>
+    <nav class="navbar navbar-default top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="logo"></a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li *ngFor="let item of mainFunctionList" class="{{item.class}}" [title]="item.name">
+                        <a (click)="loadFunction($event,item)">
+                            <i class="icon iconfont" innerHTML="{{item.icon}}"></i>{{item.name}}<em></em>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="admins">
+                <div class="dropdown">
+                    <a href="javascript://" class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                        {{currentUserName}}
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">问题反馈</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" (click)="loadChangePasswordLog()">修改密码</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">系统用户</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" (click)="logOff()">退出系统</a></li>
+                    </ul>
+                </div>
+                <i class="icon iconfont userImg">&#xe607;</i>
+            </div>
+
+        </div>
+    </nav>
+</header>
+<div class="main-container" [ngStyle]="{'height.px':editorHeight}">
+    <router-outlet></router-outlet>
+    <!--<span defaultOverlayTarget></span>-->
+</div>
+<div [ngBusy]="{busy: busy, message: '正在拼命的加载...', backdrop: true, delay: 500, minDuration: 500}"></div>
+<footer></footer>

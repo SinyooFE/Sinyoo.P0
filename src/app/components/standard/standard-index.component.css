@@ -1,0 +1,8 @@
+﻿.standardMain{ margin: 15px;overflow: hidden;}
+.standardList{ float: left;width: 20%;padding: 0 5px;}
+.domainList{ float: left;width: 30%;padding: 0 5px;}
+.variableList{ float: left;width: 50%;padding: 0 5px;}
+.standarButtons{text-align: right;padding: 0 20px;margin: 10px 0;}
+.standarButtons button{ min-width: 120px;}
+
+

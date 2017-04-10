@@ -1,0 +1,37 @@
+﻿
+/*弹窗外层框架*/
+.standardDialog{
+	color:#4f5c79;
+	background-color: #ffffff;
+}
+.standardDialog label{
+	display: block;
+	line-height: 40px;
+}
+/*弹窗标题、新增，修改，删除*/
+.statusClass{
+	border-bottom:1px solid #cdd5de;
+	line-height: 40px;
+	padding-left:2%;
+}
+.detailContent{
+	float:left;
+	width:50%;
+	padding-left:2%;
+}
+/*表单设置*/
+.standardDialogMainContent input,textarea{
+	width:96%;
+	border-radius: 4px;
+	padding:6px 14px;
+	background-color: #ffffff;
+	border:1px solid #b1c0d8;
+
+}
+/*审核意见*/
+.commentsContent textarea{
+	width:100%;
+	padding:5px 10px;
+	height:100px;
+	border-radius: 4px;
+}

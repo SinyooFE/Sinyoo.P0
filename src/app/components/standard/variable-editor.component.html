@@ -1,0 +1,301 @@
+﻿<div class="row" style="padding:15px 20px;">
+    <div class="col-xs-12">
+        <div class="variableSetting">
+            <a class="return" (click)="cancel()" style="cursor:pointer;"><i class="icon iconfont">&#xe614;</i>返回</a>
+            <div class="variable-attr" *ngIf="!context.isAdd">
+                <div class="var-title">变量属性<i class="icon iconfont fr" (click)="toggleBasicInfo()" innerHTML="{{isShowAttribute ? '&#xe7ff;' : '&#xe61a;'}}">&#xe6b6;</i></div>
+                <div [ngClass]="{'modle-content':true,'hidden': !isShowAttribute}">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>创建人</label>
+                            <input type="text" class="form-control required" [ngModel]="variableDetail.CreateUserName" readonly="readonly" />
+                        </div>
+                        <div class="form-group">
+                            <label>最后修改人</label>
+                            <input type="text" class="form-control" [ngModel]="variableDetail.UpdateUserName" readonly="readonly" />
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>创建时间</label>
+                            <input type="text" class="form-control required" [ngModel]="variableDetail.CreateTime | date:'y年M月d日 HH:mm:ss'" readonly="readonly" />
+                        </div>
+                        <div class="form-group">
+                            <label>最后修改时间</label>
+                            <input type="text" class="form-control" [ngModel]="variableDetail.UpdateTime | date:'y年M月d日 HH:mm:ss'" readonly="readonly" />
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>所属标准</label>
+                            <input type="text" class="form-control required" [ngModel]="variableDetail.StandardName" readonly="readonly" />
+                        </div>
+                        <div class="form-group">
+                            <label>所属域</label>
+                            <input type="text" class="form-control" [ngModel]="variableDetail.DomainName" readonly="readonly" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <form (ngSubmit)="ok()">
+                <div class="switchsArea">
+                    <div *ngIf="!context.isAdd" class="apply-title pull-right">
+                        <span>{{enumApprovalStatus[variableDetail.ApprovedStatus]}}</span>
+                        <button type="button" class="btn btn-green" (click)="showStandardLog()">审核日志</button>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="var-title">
+                        <ul>
+                            <li *ngFor="let item of variableEditorTab" [ngClass]="{'current' : (currentEditorTab.key === item.key)}" (click)="changSelectedTab(item)" [title]="item.name">
+                                <span></span><b>{{item.name}}</b>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="modle-content" [ngStyle]="{'height.px':editorHeight}">
+                        <div *ngIf="currentEditorTab.key === 'basic'" class="model-area" [ngStyle]="{display: 'block'}">
+                            <div class="switch-table gray-bg">
+                                <h6>基本设置</h6>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>变量名称</label>
+                                        <input type="text" class="form-control required" name="FieldName" [(ngModel)]="variableDetail.FieldName" [ngModelOptions]="{standalone: true}" required="required" maxlength="50" />
+                                        <i>*</i>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>变量标签</label>
+                                        <input type="text" class="form-control" name="FieldLabel" [(ngModel)]="variableDetail.FieldLabel" [ngModelOptions]="{standalone: true}" required="required" maxlength="20" />
+                                        <i>*</i>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>变量定义</label>
+                                        <textarea class="form-control ng-pristine ng-valid ng-touched" name="FieldDefinition" [(ngModel)]="variableDetail.FieldDefinition" [ngModelOptions]="{standalone: true}" style="height: 60px;" maxlength="200"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>核心类别</label>
+                                        <select class="form-control m-b" name="FieldCategory" [(ngModel)]="variableDetail.FieldCategory" [ngModelOptions]="{standalone: true}">
+                                            <option value="0"></option>
+                                            <option *ngFor="let item of enumFieldCoreCategory | enumKeyValues" [value]="item.key">{{item.value}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>CRF填写指南</label>
+                                        <textarea class="form-control ng-pristine ng-valid ng-touched" name="FieldGuide" [(ngModel)]="variableDetail.FieldGuide" [ngModelOptions]="{standalone: true}" style="height: 60px;" maxlength="100"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>变量角色</label>
+                                        <select class="form-control m-b" name="FieldRole" [(ngModel)]="variableDetail.FieldRole" [ngModelOptions]="{standalone: true}">
+                                            <option value="0"></option>
+                                            <option *ngFor="let item of enumFieldRole | enumKeyValues" [value]="item.key">{{item.value}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>问题描述</label>
+                                        <textarea class="form-control ng-pristine ng-valid ng-touched" name="QuestionText" [(ngModel)]="variableDetail.QuestionText" [ngModelOptions]="{standalone: true}" style="height: 60px;" maxlength="50"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>其他说明</label>
+                                        <textarea class="form-control ng-pristine ng-valid ng-touched" name="FieldRemark" [(ngModel)]="variableDetail.FieldRemark" [ngModelOptions]="{standalone: true}" style="height: 60px;" maxlength="300"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="switch-table gray-bg">
+                                <h6>Primary Configuration</h6>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Variable Label </label>
+                                        <input type="text" class="form-control required" name="FieldLabelEn" [(ngModel)]="variableDetail.FieldLabelEn" [ngModelOptions]="{standalone: true}" required="required" maxlength="100" />
+                                        <i>*</i>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Variable Definition </label>
+                                        <textarea class="form-control ng-pristine ng-valid ng-touched" name="FieldDefinitionEn" [(ngModel)]="variableDetail.FieldDefinitionEn" [ngModelOptions]="{standalone: true}" style="height: 60px;" maxlength="1000"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Core</label>
+                                        <select class="form-control m-b" name="FieldCategory" [(ngModel)]="variableDetail.FieldCategory" [ngModelOptions]="{standalone: true}">
+                                            <option value="0"></option>
+                                            <option *ngFor="let item of enumFieldCoreCategoryEn | enumKeyValues" [value]="item.key">{{item.value}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>CRF Complete Guide </label>
+                                        <textarea class="form-control ng-pristine ng-valid ng-touched" name="FieldGuideEn" [(ngModel)]="variableDetail.FieldGuideEn" [ngModelOptions]="{standalone: true}" style="height: 60px;" maxlength="1000"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Roles </label>
+                                        <select class="form-control m-b" name="FieldRole" [(ngModel)]="variableDetail.FieldRole" [ngModelOptions]="{standalone: true}">
+                                            <option value="0"></option>
+                                            <option *ngFor="let item of enumFieldRoleEn | enumKeyValues" [value]="item.key">{{item.value}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Question Text</label>
+                                        <textarea class="form-control ng-pristine ng-valid ng-touched" name="QuestionTextEn" [(ngModel)]="variableDetail.QuestionTextEn" [ngModelOptions]="{standalone: true}" style="height: 60px;" maxlength="200"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Bridg</label>
+                                        <input type="text" class="form-control required" name="Bridg" [(ngModel)]="variableDetail.Bridg" [ngModelOptions]="{standalone: true}" maxlength="200" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="switch-table gray-bg">
+                                <h6>属性设置</h6>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>数据类型</label>
+                                        <select class="form-control m-b" name="FieldDataType" [(ngModel)]="variableDetail.FieldDataType" [ngModelOptions]="{standalone: true}" required="required">
+                                            <option *ngFor="let item of enumFieldDataType | enumKeyValues" [value]="item.key">{{item.value}}</option>
+                                        </select>
+                                        <i>*</i>
+                                    </div>
+                                    <div class="form-group" *ngIf="variableDetail.FieldDataType == enumFieldDataType['字符']">
+                                        <label>字符长度</label>
+                                        <input type="number" class="form-control required" name="FieldLength" [(ngModel)]="variableDetail.FieldLength" [ngModelOptions]="{standalone: true}" required="required" />
+                                        <i>*</i>
+                                    </div>
+                                    <div class="form-group" *ngIf="variableDetail.FieldDataType == enumFieldDataType['日期']">
+                                        <label>日期显示</label>
+                                        <select class="form-control m-b" name="DateFormat" [(ngModel)]="variableDetail.DateFormat" [ngModelOptions]="{standalone: true}" required="required">
+                                            <option *ngFor="let item of fieldCannotEnumOptions.FieldDateFormat;let i = index;" value="{{i}}">{{item}}</option>
+                                        </select>
+                                        <i>*</i>
+                                    </div>
+                                    <div class="form-group" *ngIf="variableDetail.FieldDataType == enumFieldDataType['数值']">
+                                        <label>数值长度</label>
+                                        <input type="number" class="form-control required" name="IntegerPart" [(ngModel)]="variableDetail.IntegerPart" [ngModelOptions]="{standalone: true}" style="width: 25%; margin-right: 20px;" placeholder="整数部分" required="required" />
+                                        <input type="number" class="form-control required" name="DecimalPart" [(ngModel)]="variableDetail.DecimalPart" [ngModelOptions]="{standalone: true}" style="width: 25%;" placeholder="小数部分" required="required" />
+                                        <i>*</i>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>统计分类</label>
+                                        <select class="form-control m-b" name="StatCategory" [(ngModel)]="variableDetail.StatCategory" [ngModelOptions]="{standalone: true}" required="required">
+                                            <option *ngFor="let item of enumFieldStatisticType | enumKeyValues" [value]="item.key">{{item.value}}</option>
+                                        </select>
+                                        <i>*</i>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>控件类型</label>
+                                        <select class="form-control m-b" name="ControlType" [(ngModel)]="variableDetail.ControlType" [ngModelOptions]="{standalone: true}" required="required">
+                                            <option *ngFor="let item of enumFieldControlType | enumKeyValues" [value]="item.key">{{item.value}}</option>
+                                        </select>
+                                        <i>*</i>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>是否隐私变量</label>
+                                        <select class="form-control m-b" style="width: 25%;" name="IsPrivate" [(ngModel)]="variableDetail.IsPrivate" [ngModelOptions]="{standalone: true}" required="required">
+                                            <option *ngFor="let item of enumFieldIsPrivate | enumKeyValues" [value]="item.key">{{item.value}}</option>
+                                        </select>
+                                        <i>*</i>
+                                        <label>变量类别</label>
+                                        <select class="form-control m-b" style="width: 25%;" name="FieldType" [(ngModel)]="variableDetail.FieldType" [ngModelOptions]="{standalone: true}">
+                                            <option value="0"></option>
+                                            <option *ngFor="let item of enumFieldType | enumKeyValues" [value]="item.key">{{item.value}}</option>
+                                        </select>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label>数据分级</label>
+                                        <select class="form-control m-b" style="width: 25%;" name="Level" [(ngModel)]="variableDetail.Level" [ngModelOptions]="{standalone: true}">
+                                            <option *ngFor="let item of enumFieldDataLevel | enumKeyValues" [value]="item.key">{{item.value}}</option>
+                                        </select>
+                                        <i>*</i>
+                                        <label>受控术语格式</label>
+                                        <select class="form-control m-b" style="width: 25%;" name="ControlTermFormat" [(ngModel)]="variableDetail.ControlTermFormat" [ngModelOptions]="{standalone: true}">
+                                            <option value="0"></option>
+                                            <option *ngFor="let item of enumFieldControlTermFormat | enumKeyValues" [value]="item.key">{{item.value}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="currentEditorTab.key === 'option'" class="model-area" [ngStyle]="{display: 'block'}">
+                            <div class="apply-title pull-right conceptdisplay">
+                                <select class="form-control m-b" [(ngModel)]="variableDetail.ReturnValue" [ngModelOptions]="{standalone: true}">
+                                    <option *ngFor="let item of conceptTypeAttributes" value="{{item.AttributeID}}">{{item.AttributeName}}</option>
+                                </select>
+                                <select *ngIf="checkIsRelatedAttribute()" [(ngModel)]="variableDetail.RelatedReturnValue" [ngModelOptions]="{standalone: true}" class="form-control m-b">
+                                    <option *ngFor="let item of enumConceptDislpayList | enumKeyValues" value="{{item.key}}">{{item.value}}</option>
+                                </select>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="switch-table">
+                                <div class="ibox-content">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-bordered table-hover dataTable dataTables-example">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 5%;">序号</th>
+                                                    <th style="width: 35%;">中文选项值</th>
+                                                    <th style="width: 35%;">英文选项值</th>
+                                                    <th style="width: 20%;">动态/静态</th>
+                                                    <th style="width: 5%;">操作 </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let item of variableDetail.Options; let i = index;">
+                                                    <td>{{i+1}}</td>
+                                                    <td [title]="item.OptionValue"><div class="textshow">{{item.OptionValue}}</div></td>
+                                                    <td [title]="item.OptionValueEn"><div class="textshow">{{item.OptionValueEn}}</div></td>
+                                                    <td>{{enumFieldOptionType[item.OptionType]}}</td>
+                                                    <td class="deletes"><i class="icon iconfont" (click)="deleteOption(i)">&#xe60e;</i></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="buttons variableButton">
+                                <button type="button" class="btn btn-green" (click)="selectFromTerminology()">从术语中选择</button>
+                            </div>
+                        </div>
+                        <div *ngIf="currentEditorTab.key === 'synonym'" class="model-area" [ngStyle]="{display: 'block'}">
+                            <div class="switch-table">
+                                <div class="ibox-content">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-bordered table-hover dataTable dataTables-example">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 5%;">序号</th>
+                                                    <th style="width: 90%;">同义词域名</th>
+                                                    <th style="width: 5%;">操作</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let item of variableDetail.SynonymFields;let i = index;">
+                                                    <td>{{i+1}}</td>
+                                                    <td>
+                                                        <input type="text" [(ngModel)]="item.SynonymFieldName" [ngModelOptions]="{standalone: true}" placeholder="同义词域名" style="width: 95%;" required="required" />
+                                                    </td>
+                                                    <td class="deletes"><i class="icon iconfont" (click)="deleteSynonym(i)">&#xe60e;</i></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="buttons addButton">
+                                    <button type="button" class="btn btn-apply" (click)="addSynonym()"><i class="icon iconfont">&#xe616;</i>添加</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-blue-default" (click)="cancel()">取消</button>
+                    <button type="submit" class="btn btn-blue">确认</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

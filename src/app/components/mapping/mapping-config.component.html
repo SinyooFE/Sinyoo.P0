@@ -1,0 +1,89 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" (click)="cancel()"><span aria-hidden="true" class="icon iconfont">&#xe6cc;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">课题任务设置</h4>
+    </div>
+    <div class="modal-body">
+        <!--内容设置-->
+        <div class="settingContent clearfix">
+            <!--左侧-->
+            <div class="contents leftContents">
+                <!--筛选框-->
+                <div class="filterFrame">
+                    <select (change)="changeCurrentStandard($event.target.value)" name="standard">
+                        <option *ngFor="let item of standardList" [attr.value]="item.ID">{{item.StandardName}}</option>
+                    </select>
+                    <div class="searchArea clearfix">
+                        <input type="text" class="searchInput" placeholder="请搜索医院、科室、课题" *ngIf="searchPara.IsCust" [(ngModel)]="searchPara.custName">
+                        <input type="text" class="searchInput" placeholder="请搜索课题名" *ngIf="!searchPara.IsCust" [(ngModel)]="searchPara.studyName">
+                        <input type="text" class="searchInput" style="width: 150px; margin-right: 3px;" placeholder="请搜索医院" *ngIf="!searchPara.IsCust" [(ngModel)]="searchPara.custName">
+                        <input type="text" class="searchInput" style="width: 150px" placeholder="请搜索科室" *ngIf="!searchPara.IsCust" [(ngModel)]="searchPara.deptName">
+                        <button class="submitContent" (click)="searchStudyInfo()" title="确定">确定</button>
+                        <span class="seniorOption" (click)="changeSearchLevel()">{{searchPara.IsCust ? '高级' : '普通'}}</span>
+                    </div>
+                </div>
+                <!--列表选项-->
+                <div class="optionsList">
+                    <!--全选、排序操作-->
+                    <div class="operationPart clearfix">
+                        <input type="checkbox" class="checkBox floatLeft" [(ngModel)]="isSelectAll" (click)="selectAllStudy($event.target.checked)" /><label class="floatLeft">全选</label>
+                        <div class="orderSelect floatRight">
+                            <span class="orderName floatLeft">排序</span>
+                            <span class="up floatLeft icon iconfont" title="升序" (click)="changeSearchSortType(true)">&#xe93c;</span>
+                            <span class="down floatLeft icon iconfont" title="降序" (click)="changeSearchSortType(false)">&#xe93a;</span>
+                        </div>
+                    </div>
+                    <!--列表内容-->
+                    <div class="checkboxList">
+                        <div class="perCheckbox clearfix" *ngFor="let item of studyBriefPageInfo.studyInfo;let i = index;">
+                            <input type="checkbox"
+                                   class="checkBox floatLeft"
+                                   [attr.id]="'input_'+i"
+                                   [checked]="studyBriefCheckedInfo[i] !== 0"
+                                   [disabled]="studyBriefCheckedInfo[i] === 2"
+                                   (click)="studyBriefCheckedInfo[i] = (studyBriefCheckedInfo[i] === 0 ? 1 : 0)" />
+                            <label class="floatLeft" [attr.for]="'input_'+i"
+                                   [attr.title]="item.Customername + '-' + item.dept + '-' + item.Studyname">
+                                {{item.Customername}}-{{item.dept}}-{{item.Studyname}}
+                            </label>
+                            <span class="number floatRight"
+                                  [attr.title]="item.PatientCount">
+                                {{item.PatientCount > 10000 ? '10000+' : item.PatientCount}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="pagePart clearfix">
+                    <pagination class="pagination-sm"
+                                [totalItems]="studyBriefPageInfo.TotalItemCount"
+                                [itemsPerPage]="10"
+                                [ngModel]="searchPara.pageNum"
+                                [maxSize]="8"
+                                [boundaryLinks]="false"
+                                previousText="上一页"
+                                nextText="下一页"
+                                [rotate]="true"
+                                (pageChanged)="changePage($event.itemsPerPage,$event.page)"></pagination>
+                </div>
+                <!--添加至任务栏按钮-->
+                <div class="addItem" (click)="addMapping()">添加至任务栏</div>
+            </div>
+            <!--右侧-->
+            <div class="contents rightContents">
+                <div class="bgFrame">
+                    <div class="detailTitle">{{standardStudyInfo.StandardName}}</div>
+                    <div class="detailList">
+                        <div class="perList clearfix" *ngFor="let item of standardStudyInfo.StudyInfos;let i = index;">
+                            <span class="textContent floatLeft" [attr.title]="item.Customername + '-' + item.dept + '-' + item.Studyname">{{item.Customername}}-{{item.dept}}-{{item.Studyname}}</span>
+                            <span class="icon iconfont floatRight" title="删除" *ngIf="item.MappingStatus === enumMappingStatus['未设置']" (click)="deleteMapping(item.ID)">&#xe6cc;</span>
+                            <span class="icon iconfont floatRight" title="{{item.IsHiding ? '显示' : '隐藏'}}" *ngIf="item.MappingStatus !== enumMappingStatus['未设置']" (click)="hideMapping(item.ID,item.IsHiding)">{{item.IsHiding ? '&#xe661;' : '&#xe6a3;'}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

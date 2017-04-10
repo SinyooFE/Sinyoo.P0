@@ -1,0 +1,38 @@
+﻿/*重写表格*/
+.ibox-content table.dataTable {
+    margin-top: 0 !important;
+    margin-top: 0;
+}
+
+.ibox-content table.table-bordered.dataTable {
+    border: 2px solid #d2dbe9;
+    border-collapse: collapse !important;
+    border-collapse: collapse;
+}
+
+
+.ibox-content table tr {
+    cursor: pointer;
+    border-bottom: 2px solid #d2dbe9;
+    height: 54px;
+}
+
+    .ibox-content table tr th {
+        border: none;
+        vertical-align: middle;
+        text-align: center;
+        position: relative;
+    }
+
+    .ibox-content table tr td {
+        border: none;
+        vertical-align: middle;
+        text-align: center;
+    }
+
+i {
+    font-size: 15px;
+    color: #94b8e6; 
+    cursor: pointer;
+    margin-left: 5px;
+}

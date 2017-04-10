@@ -1,0 +1,77 @@
+﻿.listTitle{ color:#18aefb; font-size: 16px;text-indent: 20px;}
+.listMain{background-color: #fff;padding: 10px; width:100%; margin-top:15px;border-top:#b8c5da 8px solid; border-radius: 5px;}
+.listMain .table-box{ background: #fff; width: 100%; overflow-y: auto;overflow-x: hidden;}
+.listMain .buttons{ position: inherit;margin-bottom:15px;}
+
+.search{float: right;position: relative;right: 20px;top: -17px;width: 200px;border: #a2b0c2 1px solid;background-color: #fff;border-radius: 10px;}
+.search:hover i{ color:#06d1c6}
+.searchIco {top: 0;right: 10px;cursor: pointer;position: absolute;font-size: 18px;}
+.search select.form-control{background-color: #ebf2fa;}
+.search .form-control{ height:22px;padding:3px 12px;border-radius:10px; font-size:11px; background-color:#fff;}
+
+/*表头*/
+.variable_list_head {
+    height:34px;
+    color: #77879f;
+    background-color: #d9e1ed;
+}
+.variable_list_head li {
+    float: left;
+    display: inline;
+    line-height: 34px;
+    text-indent: 20px;
+}
+.variable_list_head li:nth-child(1){ width: 15%;}
+.variable_list_head li:nth-child(2){ width: 25%;}
+.variable_list_head li:nth-child(3){ width: 25%;}
+.variable_list_head li:nth-child(4){ width: 25%;}
+.variable_list_head li:nth-child(5){ width: 10%;}
+
+/*列表*/
+.variable_list {
+    position: relative;
+    height: 34px;
+    color: #77879f;
+    border-top: solid 1px #d9e1ed;
+}
+.variable_list li {
+    float: left;
+    display: inline;
+    line-height: 34px;
+    text-indent: 5px;
+    border-left: solid 1px #d9e1ed;
+}
+.variable_list li:nth-child(1){ width: 15%;}
+.variable_list li:nth-child(2){ width: 25%;}
+.variable_list li:nth-child(3){ width: 25%;}
+.variable_list li:nth-child(4){ width: 25%;}
+.variable_list li:nth-child(5){ width: 10%;border-right: solid 1px #d9e1ed;}
+
+.variable_list_body .variable_list:last-child {
+     border-bottom: solid 1px #d9e1ed;
+}
+.variable_list_body .variable_list:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+.variable_list_body .variable_list:hover {
+     background-color: #ebf2fb;
+}
+
+/*操作符*/
+.operation{right:10px;top:0;}
+.operation span{width:22px; height:22px;margin:0; padding: 0; background:none; border-radius:0;display:inline-block;text-align: center;}
+.operation i{ color: #bdcadd;height: 22px;line-height: 22px;} 
+.variable_list:hover .operation span {
+    background-color:#ffffff;
+    background-color:rgba(255,255,255,0.7);
+}
+.variable_list:hover .operation{display:block!important;visibility:visible!important;}
+
+/*文字显示*/
+.textshow {
+    width: 95%;
+    white-space: nowrap;
+    word-break: keep-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

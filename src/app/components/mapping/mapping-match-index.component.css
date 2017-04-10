@@ -1,0 +1,708 @@
+﻿/*
+	作者：李宏磊
+	页面：P0-Mapping模块-mappingMatch.html
+*/
+html{
+	height:100%;
+}
+body{
+	height:100%;
+}
+
+#main_page_mappingMatch{
+	width:96.875%;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top: 10px;
+	padding-top:22px;
+	padding-left:1%;
+	padding-right:1%;
+	background-color: #ffffff;
+	color:#51607e;
+	border-radius: 8px;
+    height:96%;
+    overflow-y:auto;
+    
+}
+/*--------------------------------------------------------------------------------------------------------------------------
+	顶部功能区域，后退，日志查询
+---------------------------------------------------------------------------------------------------------------------------*/
+.topContent{
+	overflow: hidden;
+	height:45px;
+	border-bottom:1px solid #e4ebf8;
+}
+.topContent span{
+	float:left;
+}
+.topContent .backPageButton{
+	float:left;
+	color:#18aefb;
+	cursor:pointer;
+	overflow: hidden;
+}
+.topContent .backPageButton .iconfont{
+	font-size: 20px;
+	margin-top: 2px;
+}
+.topContent .backPageButton .backText{
+	margin-top: 7px;
+	margin-left:8px;
+}
+.topContent .dialogContent{
+	float:right;
+	overflow: hidden;
+	margin-right: 15px;
+}
+.topContent .dialogContent .checkStatus{
+	margin-top: 6px;
+}
+.topContent .dialogContent .dialogButton{
+	width:76px;
+	line-height:33px;
+	text-align: center;
+	color:#ffffff;
+	border-radius:5px;
+	background-color: #4ebefb;
+	margin-left: 13px;
+}
+
+/*--------------------------------------------------------------------------------------------------------------------------
+	Mapping匹配主区域
+---------------------------------------------------------------------------------------------------------------------------*/
+.mappingMatchArea{
+	overflow: hidden;
+}
+/*-------------------------------------------------------------
+	左右树区域，通用
+---------------------------------------------------------------*/
+.mappingMatchTreeArea{
+	width:25%;
+	border-right:1px solid #e4ebf8;
+	float:left;
+}
+.mappingMatch_Right{
+	border-right:0;
+	border-left:1px solid #e4ebf8;
+}
+.mappingMatchTreeArea .dataTitle{
+	height:72px;
+	background-color:#ebf2fb;
+	text-align: center;
+}
+.mappingMatchTreeArea .dataTitle .typeTitle{
+	font-size: 16px;
+	color:#2d3747;
+	padding-top: 10px;
+}
+.mappingMatchTreeArea .dataTitle .detailTitle{
+	width:80%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	margin-left: auto;
+	margin-right:auto;
+	color:#51607e;
+	padding-top: 10px;
+}
+.mappingMatchTreeArea .variableFilter{
+	padding-left:2%;
+	padding-right:8%;
+	overflow: hidden;
+	margin-top:22px;
+}
+.mappingMatchTreeArea .variableFilter .search{
+	float:left;
+	width:76%;
+	position:relative;
+}
+.mappingMatchTreeArea .variableFilter input{
+	line-height:30px;
+	padding-left:10px;
+	padding-right:10px;
+	border:1px solid #b8c5da;
+	border-radius:6px;
+	display: block;
+	width:100%;
+}
+.mappingMatchTreeArea .variableFilter input::-webkit-input-placeholder { /* WebKit browsers */
+	font-size: 12px;
+    color:    #98a4b8;
+}
+.mappingMatchTreeArea .variableFilter input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    font-size: 12px;
+    color:    #98a4b8;
+}
+.mappingMatchTreeArea .variableFilter input::-moz-placeholder { /* Mozilla Firefox 19+ */
+    font-size: 12px;
+    color:    #98a4b8;
+}
+.mappingMatchTreeArea .variableFilter input:-ms-input-placeholder { /* Internet Explorer 10+ */
+    font-size: 12px;
+    color:    #98a4b8;
+}
+.mappingMatchTreeArea .variableFilter .searchLogo{
+	position:absolute;
+	right:10px;
+	top:5px;
+	font-size: 20px;
+    cursor:pointer;
+}
+.mappingMatchTreeArea .variableFilter .filterNoMappingRadio{
+	float:right;
+	margin-top: 8px;
+    cursor:pointer;
+    overflow:hidden;
+}
+.mappingMatchTreeArea .variableFilter .filterNoMappingRadio span{
+	display: inline-block;
+    float:left;
+    margin-top:2px;
+}
+.mappingMatchTreeArea .variableFilter .filterNoMappingRadio span.icon{
+	margin-right: 5px;
+    margin-right:5px;
+}
+
+.mappingMatchTreeArea .treeArea{
+	height: 72%;
+	overflow: auto;
+}
+
+#target_tree {
+    margin-left:10px;
+}
+
+/*-------------------------------------------------------------
+	中间区域
+---------------------------------------------------------------*/
+.mappingMatch_Middle{
+	width:50%;
+	padding-left:1%;
+	padding-right:1%;
+	float:left;
+}
+/*控制面板*/
+.mappingMatch_Middle .controlPanel{
+	height:52px;
+	overflow: hidden;
+	margin-top:20px;
+}
+.mappingMatch_Middle .controlPanel .addButtons{
+	float:left;
+	overflow: hidden;
+	color:#17adfb;
+}
+.mappingMatch_Middle .controlPanel .addButtons span{
+	float:left;
+}
+.mappingMatch_Middle .controlPanel .addButtons .addButton{
+	overflow: hidden;
+	border:1px solid #17adfb;
+	border-radius: 5px;
+	cursor:pointer;
+	display: inline-block;
+}
+.mappingMatch_Middle .controlPanel .addButtons .addGroup{
+	width:112px;
+	height:36px;
+	margin-right: 14px;	
+}
+.mappingMatch_Middle .controlPanel .addButtons .addGroup .icon{
+	margin-left:21px;
+	margin-top: 7px;
+}
+.mappingMatch_Middle .controlPanel .addButtons .addGroup .addGroupText{
+	margin-left:8px;
+	margin-top: 7px;
+}
+.mappingMatch_Middle .controlPanel .addButtons .addTemporaryGroup .icon{
+	margin-left:21px;
+	margin-top: 7px;
+}
+.mappingMatch_Middle .controlPanel .addButtons .addTemporaryGroup .addGroupTemporaryText{
+	margin-left:8px;
+	margin-top: 7px;
+}
+.mappingMatch_Middle .controlPanel .addButtons .addTemporaryGroup{
+	width:133px;
+	height:36px;
+}
+.mappingMatch_Middle .controlPanel .settings{
+	float:right;
+	overflow: hidden;
+    margin-right:12px;
+}
+.mappingMatch_Middle .controlPanel .settings .showRejected{
+	float:left;
+	cursor:pointer;
+	margin-right: 36px;
+	margin-top: 9px;
+}
+.mappingMatch_Middle .controlPanel .settings span{
+	float:left;
+	cursor:pointer;	
+	margin-right: 6px;
+}
+.mappingMatch_Middle .controlPanel .settings .yun{
+	margin-right: 20px;
+	font-size: 32px;
+}
+.isUpdatingData {
+    color:#e1e1e1;
+}
+.mappingMatch_Middle .controlPanel .settings .set{
+	margin-right: 10px;
+	font-size: 28px;
+}
+/*变量匹配区域*/
+.matchesTablesArea{
+	height: 70%;
+	overflow-y: auto;
+}
+.orderNum {
+    margin-top: 30px;
+    font-size:14px;
+    font-weight:bold;
+    text-align:center;
+}
+.perTableMatches{
+	width:100%;
+	margin-top: 5px;
+	border-top:9px solid #b8c5da;
+	border-left:1px solid #b8c5da;
+	border-right:1px solid #b8c5da;
+	border-bottom:1px solid #b8c5da;
+	border-radius: 5px;
+    padding-bottom:20px;
+}
+/*匹配区域列表控制面板*/
+.perTableMatches .perMatchesControlPannel{
+	overflow:hidden;
+	height:40px;
+}
+.perTableMatches .perMatchesControlPannel span{
+	margin-top:4px;
+	cursor:pointer;
+    font-size: 22px;
+}
+.perTableMatches .perMatchesControlPannel .dataSourceFilter{
+	position:relative;
+}
+.perTableMatches .perMatchesControlPannel .dataSourceFilter .statusTip{
+	position:absolute;
+	width:10px;
+	height:10px;
+	border-radius: 50%;
+	right:-2;
+	top:0;
+}
+.perTableMatches .perMatchesControlPannel .dataSourceFilter .tip_Green{
+	background-color: #25a05d;
+}
+.perTableMatches .perMatchesControlPannel .dataSourceFilter .tip_Yellow{
+	background-color: #ffb758;
+}
+.perTableMatches .perMatchesControlPannel .dataSourceFilter .tip_Red{
+	background-color: #cc0a12;
+}
+.perTableMatches .perMatchesControlPannel span:nth-child(1){
+	font-size: 18px;
+}
+.perTableMatches .perMatchesControlPannel span:nth-child(2){
+	font-size: 16px;
+    margin-top:8px;
+}
+.perTableMatches .perMatchesControlPannel span:nth-child(3){
+	font-size: 22px;
+    margin-top:3px;
+}
+.perTableMatches .perMatchesControlPannel .left{
+	float:left;
+	margin-left: 15px;
+}
+.perTableMatches .perMatchesControlPannel .right{
+	float: right;
+	margin-right: 10px;
+}
+/*----匹配区域列表-----*/
+/*表名*/
+.tableList .tableName{
+	width:95%;
+	margin-left: auto;
+	margin-right: auto;
+}
+.tableList .tableName .sourceTableName,.tableList .tableName .targetTableName{
+	float:left;
+	width:50%;
+	line-height:36px;
+	border-bottom:1px solid #b6c4db;
+	color:#4f5c79;
+	font-weight: bold;
+	font-size: 16px;
+    height:37px;
+}
+.tableList .tableName .sourceTableName{
+	padding-left:6%;
+}
+.tableList .tableName .targetTableName{
+	padding-left:4%;
+}
+.tableList .tableName .targetTableName .desTableName{
+	color:#4f5c79;
+	font-weight: bold;
+	font-size: 16px;
+}
+.tableList .tableName .targetTableName .selectPart {
+    color:#4f5c79;
+	font-weight: bold;
+	font-size: 16px;
+    height:37px;
+    position:relative;
+}
+.tableList .tableName .targetTableName .selectPart .selectTabNameButton {
+    cursor:pointer;
+    font-weight: bold;
+}
+.tableList .tableName .targetTableName .selectPart .desTableList {
+    width:110px;
+    height:100px;
+    background-color:#ffffff;
+    overflow-y:scroll;
+    position:relative;
+    top:2px;
+    z-index:100;
+    border:1px solid #98a4b8;
+    box-shadow:1px 1px 15px -3px#000000;
+}
+.tableList .tableName .targetTableName .selectPart .desTableList input{
+    width:110px;
+    height:20px;
+    border:1px solid #a1b2cc;
+    font-size:12px;
+}
+.tableList .tableName .targetTableName .selectPart .desTableList .perDesTableName {
+    float:none;
+    width:100%;
+    line-height:normal;
+    color:#000000;
+    font-weight:normal;
+    font-size:12px;
+    cursor:pointer;
+}
+.tableList .tableName .targetTableName .selectPart .desTableList .perDesTableName:hover {
+    background-color:#4e4e4e;
+    color:#ffffff;
+}
+.tableList .tableName .targetTableName select{
+    border:0;
+}
+.tableList .tableName .targetTableName .changeDesTableNameButton{
+    font-size:12px;
+    cursor:pointer;
+}
+/*表的字段变量*/
+.tableList table{
+	width:90%;
+	margin-left: auto;
+	margin-right: auto;
+	overflow: hidden;
+}
+.tableList table tr{
+	line-height:36px;
+}
+table tr .emptyTD {
+    color:#8eb0e3;
+}
+.tableList table tr .perVariable{
+	width:50%;
+	border-bottom:1px solid #b6c4db;
+	padding-top:2px;
+	padding-bottom:2px;
+    vertical-align:bottom;
+}
+.tableList table tr .perVariable div {
+    vertical-align:bottom;
+}
+.tableList table tr .sourcePerVariable{
+	border-right:1px dashed #a1b2cc;
+	padding-left:4%;
+}
+.tableList table tr .sourcePerVariable .leftTdOption .assign {
+    cursor:pointer;
+}
+/*指定、临时、扩展 input*/
+.tableList table tr input{
+    height:20px;
+    padding:5px;
+    border:0;
+    box-shadow:0px 0px 5px #8eb0e3;
+    margin-left:10px;
+}
+.tableList table tr .targetPerVariable .rightTdOption {
+    overflow:hidden;
+}
+.tableList table tr .targetPerVariable .targetVariableSettingModel{
+    float:left;
+    margin-right:10px;
+}
+/*选项值下拉*/
+.tableList table tr .sourcePerVariable .sourceOptionName{
+	margin-left: auto;
+	margin-right: auto;
+}
+.tableList table tr .sourcePerVariable .canBeClick{
+	cursor:pointer;
+}
+.tableList table tr .sourcePerVariable .sourceOptionName span{
+	float:left;
+}
+.tableList table tr .sourcePerVariable .sourceOptionsValue .perValue{
+	width:90%;
+	line-height: 30px;
+	border-top:1px dashed #a1b2cc;
+}
+.tableList table tr .sourcePerVariable .sourceOptionName .icon{
+	font-size: 10px;
+	margin-left: 4px;
+	-webkit-transition:all 0.3s;
+	transition:all 0.3s;
+	-webkit-transform: rotateZ(0deg);
+	-ms-transform: rotateZ(0deg);
+	transform: rotateZ(0deg);
+}
+.tableList table tr .sourcePerVariable .sourceOptionName .iconClicked{
+	-webkit-transform: rotateZ(180deg);
+	-ms-transform: rotateZ(180deg);
+	transform: rotateZ(180deg);
+}
+.tableList table tr .targetPerVariable{
+	padding-right:3%;
+	padding-left:4%;
+	position: relative;
+}
+.tableList table tr .targetPerVariable span{
+	cursor:pointer;
+}
+
+.tableList table tr .targetPerVariable .targetOptionsValue .perValue{
+	width:90%;
+	line-height: 30px;
+	border-top:1px dashed #a1b2cc;
+}
+.tableList table tr .targetPerVariable .giveUp span{
+	display: inline-block;
+}
+.tableList table tr .targetPerVariable .deleteLine{
+	display: none;
+	position: absolute;
+	right:0;
+	top:0;
+	font-size: 20px;
+	color:#8eb0e3;
+	cursor:pointer;
+}
+.tableList table tr:hover .targetPerVariable .deleteLine{
+	display: block;
+}
+.tableList table tr:hover .perVariable {
+	background-color: #f8fbfe;
+}
+
+
+/*变量已经删除 变量为灰色*/
+.varHasDeleted {
+    color:#bbbbbb;
+}
+/*映射次数被点击，对应变量行高亮*/
+.tableList table tr.highLightTr .perVariable{
+    color:#4e4e4e;
+    background-color:#b8c5da;
+}
+.tableList table tr.highLightTr:hover .perVariable{
+    background-color:#b8c5da;
+}
+/*更新数据 图标为灰色 class="highLightTr"*/
+.notUpdateData {
+    color:#bbbbbb;
+}
+
+
+/*临时表区域*/
+.tempTablesArea{
+	width:100%;
+    margin-top:5px;
+	min-height:90px;
+	border-top:9px solid #b8c5da;
+	border-left:1px solid #b8c5da;
+	border-right:1px solid #b8c5da;
+	border-bottom:1px solid #b8c5da;
+	border-radius: 5px;
+    padding-bottom:20px;
+    padding-left:3.15%;
+    padding-right:3.15%;
+}
+.tempTablesArea .icon{
+	cursor:pointer;
+}
+.tempTablesArea .tempTablesHead{
+	height:44px;
+	position: relative;
+	padding-top: 11px;
+}
+.tempTablesArea .tempTablesHead .addButton{
+	overflow: hidden;
+	border:1px solid #17adfb;
+	border-radius: 5px;
+	cursor:pointer;
+	font-size: 12px;
+	color:#17adfb;
+}
+.tempTablesArea .tempTablesHead .addButton span{
+	float:left;
+}
+.tempTablesArea .tempTablesHead .addTempGroup{
+	width:80px;
+	height:22px;
+
+}
+.tempTablesArea .tempTablesHead .icon{
+	margin-left:18px;
+	margin-top: 2px;
+	font-size: 12px;
+}
+.tempTablesArea .tempTablesHead .addTempGroupText{
+	margin-left:8px;
+	margin-top: 2px;
+}
+.tempTablesArea .tempTablesHead .deleteTempTable{
+	position:absolute;
+	right:-15px;
+	top:4px;
+	font-size: 22px;
+
+}
+.tempTablesArea .sGroupArea .tableLine{
+	position:relative;
+	line-height: 42px;
+	text-align: center;
+	border-right:1px solid #a1b2cc;
+	border-left:1px solid #a1b2cc;
+	border-top:1px solid #a1b2cc;
+	color:#5e6e8f;
+}
+.tempTablesArea .sGroupArea .tableLine .deleteThisLine{
+	position: absolute;
+	right:10px;
+	top:0;
+	font-size: 20px;
+	color:#8eb0e3;
+	cursor:pointer;
+}
+
+.tempTablesArea .sGroupArea .tableLine:hover{
+	background-color: #f8fbfe;
+}
+
+.tempTablesArea .sGroupArea .tableName{
+	color:#3c4a66;
+	font-weight: bold;
+}
+
+.tempTablesArea .sGroupArea .emptyLine{
+	line-height: 42px;
+	text-align: center;
+	border:1px solid #a1b2cc;
+	color:#a5abb9;
+}
+.tempTablesArea .sGroupArea .tempTableFilter{
+	width:88px;
+	height:26px;
+	cursor:pointer;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 16px;
+	margin-bottom: 16px;
+	color:#9dbbe7;
+	border:1px solid #9dbbe7;
+	border-radius: 5px;
+	overflow: hidden;
+}
+.tempTablesArea .sGroupArea .tempTableFilter .icon{
+	float:left;
+	margin-top:5px;
+	margin-left: 20px;
+	position:relative;
+	font-size: 12px;
+}
+.tempTablesArea .sGroupArea .tempTableFilter .icon .filterStatus{
+	width:5px;
+	height:5px;
+	position:absolute;
+	top:0px;
+	right:0px;
+	border-radius: 50%;
+}
+.tempTablesArea .sGroupArea .tempTableFilter .icon .red{
+	background-color: #cc0a12;
+}
+.tempTablesArea .sGroupArea .tempTableFilter .icon .yellow{
+	background-color: #ffb758;
+}
+.tempTablesArea .sGroupArea .tempTableFilter .icon .green{
+	background-color: #25a05d;
+}
+.tempTablesArea .sGroupArea .tempTableFilter .filterText{
+	float:left;
+	margin-top:3px;
+	margin-left: 5px;
+}
+
+/*提交按钮区域*/
+.submitArea{
+	overflow: hidden;
+}
+.submitArea button{
+	float:right;
+	margin-top: 30px;
+	width:131px;
+	line-height:38px;
+	text-align: center;
+	border-radius: 5px;
+	border:0px;
+	color:#ffffff;
+	background-color: #17adfb;
+}
+
+
+
+.apply-title{ margin-right: 30px; margin-top:5px; display: table;}
+.apply-title span{ color: #8493aa;display: table-cell; padding-right: 10px; vertical-align: middle;}
+.apply-title .btn{ display: inline-block;}
+.form-group{ text-align: left;}
+.form-group label{margin-bottom: 8px;}
+.form-control{ background-color: #ebf2fb;border:none;box-shadow: 0px 0px 0px -1px;transition: all 0.3s linear;}
+.model-fieldset{ padding: 0 25px;}
+.form-control:focus{background-color: #b8c5da;border:none;box-shadow: 0 0 0 0;}
+.form-control:focus::-moz-placeholder{color:#fff;}
+.form-control:focus:-ms-input-placeholder{color:#fff}
+.form-control:focus::-webkit-input-placeholder{color:#fff}
+select.form-control{color: #77879f;background-color: #b8c5da;}
+.text-muted{height: 18px;border:#9fdeff 1px solid; line-height: 18px;text-align: center; color: #9fdeff;background-color: #e6f7ff;
+font-size: 12px; padding: 0 8px;border-radius: 4px;}
+
+/*文本编辑器样式更新*/
+.note-editor .btn{ height:30px;}
+.note-editable{height: 100px;}
+.note-editor.note-frame{ width:100%;border-color:#a4b5d0}
+.panel-default>.panel-heading{background-image:none; background-color: #ebf2fb;border-color: #d9e1ed;}
+.modal-dialog kbd{ padding: 2px 4px; background-color: #333;}
+.note-editor.note-frame .note-statusbar{background-color: #ebf2fb;}
+.panel-default>.panel-heading .dropdown-menu{ left:0;}
+
+
+
+/*大型弹出框*/
+.big-modal-dialog { width:1376px; height:750px; }
+/*大型弹出框的一半宽*/
+.half-modal-dialog { width:888px; height:750px; }

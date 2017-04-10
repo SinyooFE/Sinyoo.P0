@@ -1,0 +1,10 @@
+﻿.bz-title{ margin-bottom:10px; font-weight:bold;}
+.table-box{background-color:#fff;border-radius:0; overflow:hidden;}
+.table-left{width:48%; float:left; margin:0 1%;}
+.table-right{width:48%; float:right; margin:0 1%;}
+i {
+    line-height: 30px;
+    padding-left: 8px;
+    color: #f00;
+    font-style: normal;
+}

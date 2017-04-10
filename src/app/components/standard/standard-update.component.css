@@ -1,0 +1,37 @@
+﻿.main{ padding:15px 20px; overflow:auto;}
+.return{font-size:16px; margin-bottom:15px; display:block; color:#00a3f8}
+.return:hover{ color:#00a3f8}
+.form-group{ text-align:left;overflow:hidden;}
+.form-group label{color:#4f5c79;}
+.variable-attr .form-group label,.gray-bg .form-group label{float:left; width:120px;text-align: right;line-height:30px; margin-right:10px; }
+.variable-attr .form-group .form-control,.gray-bg .form-group .form-control{float:left;width:70%;}
+.variable-attr .form-control{ background-color:#ebf2fb;border:none;box-shadow: 0 0 0 0;transition: all 0.3s linear;}
+.form-control:focus{background-color: #b8c5da;border:none;box-shadow: 0 0 0 0;}
+.form-control:focus::-moz-placeholder{color:#fff;}
+.form-control:focus:-ms-input-placeholder{color:#fff}
+.form-control:focus::-webkit-input-placeholder{color:#fff}
+
+@media screen and (max-width: 1200px) {
+  .col-lg-6{ float: left;width: 50%;}
+}
+
+.var-title{overflow:hidden; height:34px; background-color:#b8c5da; text-indent:20px; color:#fff; line-height:34px; border-radius:5px 5px 0 0}
+.var-title i{ margin-right: 15px;cursor: pointer;}
+.modle-content{background-color:#fff;border-radius:5px;overflow:hidden; padding:15px 25px 30px;}
+.switchsArea{ margin-top:20px;overflow:hidden;}
+.switch-table{ border-top:#b8c5da 8px solid; border-radius:5px;margin:10px 40px;}
+.variableButton{position:relative;right:auto; top:auto; bottom:auto; float:right; margin-right:35px;}
+.variableButton .btn-green{width:100px;}
+.modal-content .form-group label{ margin-bottom:8px;}
+/**基本设置*/
+.gray-bg{background-color:#f6f8fc; overflow:hidden; padding:5px 20px; margin:10px 0 20px;}
+.gray-bg h6{font-size:14px;color:#4f5c79; border-bottom:#b1c0d8 1px solid;line-height:35px;margin-bottom:15px;}
+.gray-bg .form-group label{ width:100px}
+.gray-bg .form-group .form-control{width:75%;}
+@media screen and (max-width: 1366px) {
+  .gray-bg .form-group .form-control{width:65%;}
+}
+.gray-bg .form-group i{ line-height:30px;padding-left:8px; color:#f00; font-style:normal;}
+.modal-footer{border:none;}
+.apply-title{ margin-bottom:10px;}
+.apply-title span{ color:#4f5c79; padding-right:10px;}

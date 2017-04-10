@@ -1,0 +1,284 @@
+﻿/*模态框宽度*/
+.variableDialog{
+	width:100%;
+}
+/*主体内容宽度*/
+.mainContents{
+	margin: 5px;
+}
+.mainContentModal{
+	float:left;
+}
+/*---------------------------------------左侧模块---------------------------------------*/
+.mainContentLeft{
+	width:27%;
+}
+.headTitle{
+	font-size: 14px;
+	color:#4f5c79;
+	padding-bottom:8px;
+	margin-bottom: 5px;
+}
+.listContent{
+	background-color:#ffffff;
+    border-radius:5px;
+}
+.variableList{
+    padding: 10px;
+	overflow-y: auto;
+	max-height: 450px;
+}
+.perList{
+	width:97%;
+	font-size: 14px;
+	color:#8094b4;
+	line-height: 50px;
+	background-color:#ffffff;
+	border-left:3px solid #ffffff;
+	padding-left:38px;
+	position: relative;
+	cursor:pointer;
+}
+.perList span{
+	position: absolute;
+	right:12px;
+	top:2px;
+    font-size:22px;
+}
+.perList .pass {
+    color:#5ed2ac;
+}
+.perList .noPass {
+    color:#d36161;
+}
+.perList:hover{
+	border-color:#61c0fc;
+	background-color:#ebf2fb;
+	color:#606b84;
+}
+.variableClicked{
+	border-color:#61c0fc;
+	background-color:#ebf2fb;
+	color:#606b84;
+}
+/*---------------------------------------右侧模块---------------------------------------*/
+.mainContentRight{
+	width:71.25%;
+	margin-left:1.37%;
+}
+.listFormContent{
+	background-color: #ffffff;
+    border-radius:5px;
+    max-height: 450px;
+    overflow-y: scroll;
+}
+
+.smallTitle{
+	background-color: #b8c5da;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+    height:32px;
+}
+.smallTitle span{
+	float:left;
+	width:50%;
+	line-height: 32px;
+	text-align: center;
+	color:#ffffff;
+}
+.smallTitle span:first-child{
+	border-right:1px solid #ffffff;
+}
+/*通用表单组模块*/
+.formModal{
+	border-radius: 5px;
+	background-color: #f6f8fc;
+    margin: 10px;
+	overflow-y: auto;
+}
+.grayHead{
+	background-color:#b8c5da;
+	height:8px;
+	border-bottom:1px solid #b1c0d8;
+}
+.formGroupContent{
+	width:94.48%;
+	margin-left: auto;
+	margin-right: auto;
+	color:#4f5c79;
+}
+.formGroupTitle{
+	line-height: 37px;
+	border-bottom:1px solid #b1c0d8;
+}
+.formGroup .group{
+	float:left;
+	width:50%;
+    padding: 15px 10px;
+}
+.leftGroup{
+	border-right:1px solid #b1c0d8;
+}
+
+.lineFrom{
+	overflow:hidden;
+	margin-bottom: 15px;
+}
+.lineFrom label{
+	float:left;
+	text-align: right;
+	width:35%;
+	margin-right: 5px;
+    padding-top: 6px;
+}
+.lineFrom input{
+	float:left;
+	border:1px solid #b1c0d8;
+	border-radius: 4px;
+	padding:6px 14px;
+	width:60%;
+}
+input:disabled{
+	background-color: #ffffff;
+}
+.lineFrom textarea{
+	float:left;
+	padding:6px 14px;
+	border:1px solid #b1c0d8;
+	border-radius: 4px;
+	width:60%;
+}
+textarea:disabled{
+	background-color: #ffffff;
+}
+
+/*
+	table,指的是页面中的第四部分，有表格的部分
+	通过leftGroupTable和rightGroupTable重写.group类，
+	目的是table左右对齐
+*/
+.formGroup .leftGroupTable{
+	padding-left:0;
+	padding-right:2%;
+}
+.formGroup .rightGroupTable{
+	padding-left:2%;
+	padding-right:0;
+}
+.group .returnValue input{
+	float:right;
+	font-size: 12px;
+	border:1px solid #b1c0d8;
+	border-radius: 4px;
+	padding:2px 14px;
+}
+.group .returnValue label{
+	float:right;
+	text-align: right;
+	margin-top: 2px;
+}
+.group table{
+	width:100%;
+	border:1px solid #b8c5da;
+	margin-top: 22px;
+}
+.group table tr{
+	height:30px;
+}
+.group table thead tr td{
+	background-color: #cedeef;
+	font-size: 14px;
+}
+.group table tbody{
+	background-color: #ffffff;
+}
+.group table tbody tr:nth-child(2n){
+	background-color: #ebf2fa;
+}
+.group table tr td:nth-child(1){
+	border-right:1px solid #b8c5da;
+}
+.group table tr td:nth-child(2){
+	border-right:1px solid #b8c5da;
+}
+.group table td{
+	font-size: 12px;
+	text-align: center;
+	width:33.3%;
+	vertical-align:middle;
+}
+.formGroup .comments{
+	height:126px;
+	width:100%;
+	margin-top: 20px;
+	border:1px solid #b8c5da;
+}
+.buttonGroup div{
+	width:101px;
+	line-height:38px;
+	text-align: center;
+	border-radius: 5px;
+	font-size: 14px;
+	display: inline-block;
+	border:1px solid #17adfb;
+	cursor:pointer;
+}
+.buttonGroup{
+	float:right;
+	margin-right: 4%;
+	margin-top: 30px;
+	padding-bottom: 30px;
+}
+.buttonGroup .agreed{
+	color:#ffffff;
+	background-color: #17adfb;
+	margin-right: 20px;
+}
+.buttonGroup .rejected{
+	color:#17adfb;
+}
+/*关闭弹窗按钮*/
+.closeDialog{
+	float:right;
+	color:#77879f;
+	width:101px;
+	margin-right: 2.85%;
+	margin-bottom: 55px;
+	line-height:38px;
+	text-align: center;
+	border-radius: 5px;
+	font-size: 14px;
+	display: inline-block;
+	border:1px solid #77879f;
+	cursor:pointer;
+	margin-top: 30px;
+}
+
+/*当只有新数据||旧数据的时候,模块以100%显示【若都有，新旧数据各占50%】*/
+.formGroup .singlelValue {
+    width:100%;
+}
+
+/*选项卡*/
+.var-title li{cursor:pointer; height:34px;line-height:33px;padding-left: 0px;padding-right:17px;font-size:14px; color:#fff; font-style:normal; float:left; position:relative}
+.var-title li.current b{color:#8a9cb9;}
+.var-title li.current span{background-color:#fff;}
+.var-title li b{ position:relative; z-index:0;}
+.var-title li:nth-child(1) span{background:none;}
+.var-title li:nth-child(2) span{background:#b1c0d8;}
+.var-title li:nth-child(3) span{background:#a1b2cc;}
+.var-title li:nth-child(4) span{background:#94a7c4;}
+.var-title li:first-child{ margin-left:-9px;padding-left:30px;padding-right:20px;}
+.var-title li:first-child.current span{background:#fff;}
+.var-title li.current span{background:#fff;}
+.var-title li span{transform:skew(20deg,0deg); content:"";position:absolute; left:0; top:0;right:0; bottom:0; width:100%; background-color:#a1b2cc}
+.var-title{overflow:hidden; height:34px; background-color:#b8c5da; text-indent:20px; color:#fff; line-height:34px; border-radius:5px 5px 0 0}
+
+
+/*审核意见*/
+.commentsContent textarea{
+	width:100%;
+	padding:4px 14px;
+	height:100px;
+	border-radius: 4px;
+}

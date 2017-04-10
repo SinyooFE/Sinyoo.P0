@@ -1,0 +1,246 @@
+﻿/*
+	作者：李宏磊
+	页面：P0-Mapping设置弹窗页面-mappingSettingDialog.html
+*/
+
+/*-------------------------------------------------------------------------------------------------------
+	设置的主体内容开始
+-------------------------------------------------------------------------------------------------------*/
+/*主体内容通用左浮动*/
+.settingContent .contents{
+	float:left;
+}
+/*全局的左右浮动类*/
+.settingContent .contents .floatLeft{
+	float:left;
+}
+.settingContent .contents .floatRight{
+	float:right;
+}
+
+/*-----------------------左侧内容--------------------------*/
+.leftContents{
+	width:486px;
+	height:700px;
+	/*padding-top:20px;*/
+	padding-right:20px;
+	border-right:1px solid #cdd5de;
+	border-bottom:1px solid #cdd5de;
+}
+.leftContents .filterFrame{
+	width:466px;
+	height:auto;
+	border-radius: 5px;
+	background-color: #ebf2fb;
+	padding:20px;
+}
+.filterFrame select{
+	width:425px;
+	height:44px;
+	cursor:pointer;
+	padding:10px;
+	background-color: #b8c5da;
+	border-radius: 5px;
+	border:0px;
+	color:#ffffff;
+}
+.filterFrame select option {
+	border:0px;
+}
+.filterFrame .searchArea .searchInput{
+	float:left;
+	display: inline;
+	width:305px;
+	height:42px;
+	padding:16px 12px;
+	margin-top: 10px;
+	border:1px solid #d9e1ed;
+	border-radius: 5px;
+	padding:;
+}
+.filterFrame .searchArea .submitContent{
+	float:left;
+	display: inline;
+	width:66px;
+	height:33px;
+	background-color: #4ebefb;
+	margin-top: 15px;
+	margin-left: 16px;
+	margin-right: 10px;
+	border-radius: 5px;
+	color:#ffffff;
+	border:0;
+}
+.filterFrame .searchArea .seniorOption{
+	float:left;
+	display: inline;
+	cursor:pointer;
+	color:#8493aa;
+	margin-top: 23px;
+}
+/*筛选*/
+.optionsList{
+	color:#62738b;
+}
+.optionsList .checkBox{
+	width:14px;
+	height:14px;
+	background-color: #fff;
+}
+.operationPart{
+	margin-top:20px;
+    padding: 0 10px;
+}
+.operationPart input{
+	margin-right:15px;
+}
+.operationPart label{
+	margin-top: 1px;
+	cursor:pointer;
+}
+.operationPart .orderSelect .icon{
+	cursor:pointer;
+}
+.operationPart .orderSelect .orderName{
+	margin-right:12px;
+}
+.operationPart .orderSelect .up{
+	margin-right:6px;
+}
+/*列表*/
+.checkboxList{
+	height:320px;
+    padding: 0 10px;
+}
+.checkboxList .perCheckbox{
+	margin-top: 12px;
+}
+.checkboxList .perCheckbox input {
+	margin-right:15px;
+}
+.checkboxList .perCheckbox label{
+	width:320px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	margin-top: 1px;
+	cursor:pointer;
+}
+/*翻页*/
+.pagePart{
+	margin: 5px 10px;
+}
+.singlePage {
+	color:#b8c5da;
+	width:280px;
+	margin-top: 4px;
+}
+.singlePage .numberList{
+	margin-left:20px;
+	margin-right:20px;
+}
+.singlePage .numberList i{
+	cursor:pointer;
+	font-style:normal;
+}
+.singlePage .icon{
+	cursor:pointer;
+}
+.singlePage .numberList .currentPageNum{
+	color:#4ebefb;
+}
+.singlePage .allPageNum{
+	margin-left: 32px;
+	color:#3a4458;
+}
+.singlePage .active{
+	color:#3a4458;
+}
+.inputNumberPage{
+	margin-left: 14px;
+	color:#3a4458;
+}.inputNumberPage span{
+	margin-top: 4px;
+}
+.inputNumberPage input{
+	margin-left: 8px;
+	margin-right:8px;
+	margin-top: 5px;
+	width:36px;
+	height:18px;
+	border:1px solid #a1b2cc;
+	border-radius: 2px;
+	padding:4px;
+}
+.inputNumberPage .submitPageNum{
+	width:56px;
+	height:28px;
+	color:#ffffff;
+	font-size: 14px;
+	background-color: #4ebefb;
+	border:0;
+	border-radius: 2px;
+	margin-left: 20px;
+}
+
+/*-----------------------右侧内容--------------------------*/
+.rightContents{
+	width:695px;
+	height:700px;
+	/*padding-top:20px;*/
+	padding-left: 20px;
+	border-bottom:1px solid #cdd5de;
+	overflow-y: auto;
+}
+.rightContents .bgFrame{
+	padding:0px 20px;
+	background-color: #f8fbfe;
+	color:#515e75;
+}
+.rightContents .bgFrame .detailTitle{
+	line-height: 50px;
+	border-bottom:1px solid #a1b2cc;
+}
+.rightContents .bgFrame .detailList{	
+	margin-top: 18px;
+}
+.rightContents .bgFrame .detailList .perList{
+	height:42px;
+	border-bottom:1px dashed #a1b2cc; 
+}
+.rightContents .bgFrame .detailList .perList:last-child{
+	border-bottom:0; 
+}
+.rightContents .bgFrame .detailList .perList .textContent{
+	width:420px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	margin-top: 12px;
+}
+.rightContents .bgFrame .detailList .perList .noEye{
+	color:#9dabc1;
+}
+.rightContents .bgFrame .detailList .perList .iconfont{
+	margin-top: 12px;
+	cursor:pointer;
+	color:#8192ad;
+}
+
+/*添加至任务栏按钮*/
+.addItem{
+	width:228px;
+	line-height:36px;
+	color:#17adfb;
+	border:1px solid #17adfb;
+	border-radius: 4px;
+	/*margin-top: 15px;*/
+	margin-left: 114px;
+	text-align: center;
+	cursor:pointer;
+}
+
+
+
+
+

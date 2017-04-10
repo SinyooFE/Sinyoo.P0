@@ -1,0 +1,30 @@
+﻿<h5 class="listTitle">标准列表</h5>
+<div class="listMain">
+    <div class="buttons dataButton">
+        <button type="button" class="btn btn-green" (click)="creatStandard()" title="新建标准"><i class="icon iconfont">&#xe616;</i>新建标准</button>
+        <button type="button" class="btn btn-green-default" (click)="copyStandard()" title="复制标准"><i class="icon iconfont">&#xe613;</i>复制标准</button>
+    </div>
+    <div class="table-box" [ngStyle]="{'height.px':editorHeight}">
+        <ul class="table-list">
+            <li class="active">
+                <div class="table-content" #standardListDiv>
+                    <div *ngFor="let item of standardList" (click)="selectStandard(item)" [ngClass]="{'t-row':true,'current':currentStandard?.ID === item.ID}" [attr.data-id]="item.ID" [attr.data-sort]="item.Sort">
+                        <p class="textshow" [title]="item.StandardName">
+                            <i class="iconfont" [innerHTML]="iconFontHtml(item.ApprovedStatus)" [attr.title]="enumApprovalStatus[item.ApprovedStatus]"></i>
+                            {{item.StandardName}}
+                        </p>
+                        <ng-container *ngIf="item.IsOwner">
+                            <div class="operation" *ngIf="item.DataStatus != enumDataStatus['删除']">
+                                <span (click)="editStandard(item.ID)" title="修改标准"><i class="icon iconfont edit">&#xe612;</i></span>
+                                <span (click)="deleteStandard(item.ID)" title="删除标准"><i class="icon iconfont delete">&#xe6cc;</i></span>
+                            </div>
+                            <div class="operation" *ngIf="item.DataStatus == enumDataStatus['删除']">
+                                <span (click)="undoDeleteStandard(item.ID)" title="取消删除"><i class="icon iconfont delete">&#xe6cc;</i></span>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,213 @@
+﻿
+<div class="modal-content review">
+    <div class="modal-header">
+        <button type="button" class="close" (click)="cancel()"><span aria-hidden="true" class="icon iconfont">&#xe6cc;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">{{Title}}</h4>
+    </div>
+    <div class="modal-body">
+        <div class="right-main" style="height: auto">
+            <div class="clearfix"></div>
+            <fieldset class="model-fieldset">
+                <div class="row">
+                    <div *ngIf="currentVal===null" class="col-xs-4 ztreeL" style="background-color: #ffffff; height: 400px; margin: 5px 0; overflow: auto; overflow-x: hidden;">
+                        <div class="tree">
+                            <ul id="treeCompareDemo" class="ztree"></ul>
+                        </div>
+                    </div>
+                    <div [ngClass]="{'myleft':true,'col-xs-8':currentVal === null,'col-xs-6':currentVal !== null}" *ngIf="originalVal" style="height: 400px; margin: 5px 0; overflow: auto; overflow-x: hidden;">
+                        <div class="col-lg-6">
+                            <div class="form-group ">
+                                <label>中文名称</label>
+                                <input type="text" class="form-control" [ngModel]="originalVal?.ConceptName"
+                                       [class.has-warning]="!(currentVal == null || originalVal == null || originalVal?.ConceptName == currentVal?.ConceptName)"
+                                       disabled />
+                            </div>
+                            <div class="form-group">
+                                <label>英文名称</label>
+                                <input type="text" class="form-control" [ngModel]="originalVal?.ConceptNameEn"
+                                       [class.has-warning]="!(currentVal == null || originalVal == null || originalVal?.ConceptNameEn == currentVal?.ConceptNameEn)"
+                                       disabled />
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>拼音首字母</label>
+                                <input type="text" class="form-control required" [ngModel]="originalVal?.ConceptNamePy"
+                                       [class.has-warning]="!(currentVal == null || originalVal == null || originalVal?.ConceptNamePy == currentVal?.ConceptNamePy)"
+                                       disabled />
+                            </div>
+                            <div class="form-group">
+                                <label>英文缩写</label>
+                                <input type="text" class="form-control" [ngModel]="originalVal?.ConceptNameAb"
+                                       [class.has-warning]="!(currentVal == null || originalVal == null || originalVal?.ConceptNameAb == currentVal?.ConceptNameAb)"
+                                       disabled />
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label>详细说明：</label>
+                                <div [class.has-warning]="!(currentVal == null || originalVal == null || originalVal?.ConceptDefinition == currentVal?.ConceptDefinition)"
+                                     style="height: 100px; overflow: auto;" innerHTML="{{originalVal?.ConceptDefinition}}">
+
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="form-group">
+                                <label>概念类型：</label>
+                                <select class="form-control m-b" disabled>
+                                    <option>{{originalConceptTypeName}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label>附加属性：</label>
+                                <div class="table-box">
+                                    <table class="table table-hover" [class.has-warning]="isAttrChanged">
+                                        <tbody>
+                                            <tr *ngFor="let attr of originalVal?.Attributes">
+                                                <td>{{attr.ConceptTypeAttribute.AttributeName}}</td>
+                                                <td>{{attr.AttributeValue}}</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr *ngIf="originalVal?.Attributes===null || originalVal?.Attributes.length === 0">
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label>同义词和正则表达式:</label>
+                                <div class="table-box ">
+                                    <table class="table table-hover" [class.has-warning]="isSynomChanged">
+                                        <tbody>
+                                            <tr *ngFor="let synm of originalVal?.Synonymes">
+                                                <td colspan="2">{{synm.SynonymName}}</td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr *ngIf="originalVal?.Synonymes===null || originalVal?.Synonymes.length === 0">
+                                                <td colspan="2"></td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div *ngIf="originalVal===null" class="col-xs-4 ztreeL" style="background-color: #ffffff; height: 400px; margin: 5px 0; overflow: auto; overflow-x: hidden;">
+                        <div class="tree">
+                            <ul id="treeCompareDemo2" class="ztree"></ul>
+                        </div>
+                    </div>
+                    <div [ngClass]="{'myleft':true,'col-xs-8':originalVal === null,'col-xs-6':originalVal !== null}" *ngIf="currentVal" style="height: 400px; margin: 5px 0; overflow: auto; overflow-x: hidden;">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>中文名称</label>
+                                <input type="text" class="form-control required" [ngModel]="currentVal?.ConceptName" disabled />
+                            </div>
+                            <div class="form-group">
+                                <label>英文名称</label>
+                                <input type="text" class="form-control" [ngModel]="currentVal?.ConceptNameEn" disabled />
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>拼音首字母</label>
+                                <input type="text" class="form-control" [ngModel]="currentVal?.ConceptNamePy" disabled />
+                            </div>
+                            <div class="form-group">
+                                <label>英文缩写</label>
+                                <input type="text" class="form-control" [ngModel]="currentVal?.ConceptNameAb" disabled />
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label>详细说明：</label>
+                                <div style="height: 100px; overflow: auto;" innerHTML="{{currentVal?.ConceptDefinition}}">
+
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="form-group">
+                                <label>概念类型：</label>
+                                <select class="form-control m-b">
+                                    <option>{{currentConceptTypeName}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label>附加属性：</label>
+                                <div class="table-box">
+                                    <table class="table table-hover">
+                                        <tbody>
+                                            <tr *ngFor="let attr of currentVal?.Attributes">
+                                                <td>{{attr.ConceptTypeAttribute.AttributeName}}</td>
+                                                <td>{{attr.AttributeValue}}</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr *ngIf="currentVal?.Attributes===null || currentVal?.Attributes.length === 0">
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label>同义词和正则表达式:</label>
+                                <div class="table-box">
+                                    <table class="table table-hover">
+                                        <tbody>
+                                            <tr *ngFor="let synm of currentVal?.Synonymes">
+                                                <td colspan="2">{{synm.SynonymName}}</td>
+
+                                                <td></td>
+                                            </tr>
+                                            <tr *ngIf="currentVal?.Synonymes===null || currentVal?.Synonymes.length === 0">
+                                                <td colspan="2"></td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="col-lg-12">
+            <div class="form-group commentsContent">
+                <label>审核意见：</label>
+                <textarea type="text" class="form-control" [(ngModel)]="Remark" [disabled]="!(context.forApproval && hasApprovePermission)"></textarea>
+            </div>
+        </div>
+        <button *ngIf="context.forApproval && hasApprovePermission" type="button" class="btn btn-blue" (click)="approve()"><i class="icon iconfont">&#xe611;</i>审核通过</button>
+        <button *ngIf="context.forApproval && hasApprovePermission" type="button" class="btn btn-blue-default" (click)="reject()"><i class="icon iconfont">&#xe6cc;</i>审核不通过</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="onclose(false)"><i class="icon iconfont">&#xe85c;</i> 关闭</button>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+﻿.form-group {
+    position:relative;
+}
+.form-group .tip_star {
+    position:absolute;
+    top:38px;
+    right:-1.5%;
+    color:red;
+}
+
+/*文字显示*/
+.textshow {
+    max-width: 315px;
+    white-space: nowrap;
+    word-break: keep-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

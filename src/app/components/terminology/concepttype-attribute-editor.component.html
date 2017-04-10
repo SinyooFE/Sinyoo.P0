@@ -1,0 +1,81 @@
+﻿
+<div class="modal-content">
+    <form (ngSubmit)="ok()">
+        <div class="modal-header">
+            <button type="button" class="close" (click)="cancel()"><span aria-hidden="true" class="icon iconfont">&#xe6cc;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title">{{context.isAdd ? '添加' : '修改'}}属性</h4>
+        </div>
+        <div class="modal-body">
+            <p class="shuxing-title">
+                <label>概念类型：</label>
+                {{context.conceptTypeName}}
+            </p>
+            <div class="form-group" style="padding-top: 45px">
+                <label>属性名称</label>
+                <input type="text" class="form-control required" [(ngModel)]="context.detail.AttributeName" [ngModelOptions]="{standalone: true}" required="required">
+            </div>
+            <div class="form-group">
+                <label>属性类型：</label>
+                <select class="form-control m-b" [(ngModel)]="context.detail.AttributeType" [ngModelOptions]="{standalone: true}" required="required">
+                    <option *ngFor="let key of enumAttributeTypeKeys" [value]="key">{{enumAttributeType[key]}}</option>
+                </select>
+            </div>
+            <div class="form-group" *ngIf="context.detail.AttributeType ==  enumAttributeType['普通属性']">
+                <label>控件类型：</label>
+                <select class="form-control m-b" [(ngModel)]="context.detail.ControlType" [ngModelOptions]="{standalone: true}" required="required">
+                    <option *ngFor="let key of enumControlTypeKeys" [value]="key">{{enumAttributeInputControlType[key]}}</option>
+                </select>
+            </div>
+            <div *ngIf="(context.detail.AttributeType ==  enumAttributeType['普通属性'])
+                     && (context.detail.ControlType == enumAttributeInputControlType['单选'] || context.detail.ControlType == enumAttributeInputControlType['多选'])">
+                <div class="form-group">
+                    <label>选项:</label>
+                    <!-- 单选或多选 -->
+                    <div class="table-box xuanxiang">
+                        <table class="table table-hover">
+                            <tbody>
+                                <tr *ngFor="let optionItem of context.detail.OptionItems; let i = index;">
+                                    <td><input style="display: block;" type="text" class="form-control" (blur)="context.detail.OptionItems[i] = $event.target.value" [ngModel]="context.detail.OptionItems[i]" [ngModelOptions]="{standalone: true}" required="required"></td>
+                                    <td>
+                                        <div class="operation">
+                                            <span><i class="icon iconfont delete" (click)="addDropDownOption(optionItem,false)">&#xe60e;</i></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><a style="font-size: 20px; display: block; cursor: pointer;" title="添加选项" (click)="addDropDownOption('',true)">+</a></td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div [ngStyle]="{'display': (context.detail.AttributeType ==  enumAttributeType['关系属性'] ? 'block':'none')}">
+                <div class="form-group">
+                    <label>页面显示内容(可多选)：</label>
+                    <select class="form-control m-b selectpicker" data-none-selected-text="请选择显示内容..." multiple [attr.required]="context.detail.AttributeType ==  enumAttributeType['关系属性'] ? 'required' : null">
+                        <option *ngFor="let item of enumConceptDislpayList | enumKeyValues" [value]="item.key">{{item.value}}</option>
+                    </select>
+                </div>
+                <!--<div class="form-group">
+                    <label>返回值(单选)：</label>
+                    <select class="form-control m-b" [(ngModel)]="context.detail.ReturnConceptProperty" [ngModelOptions]="{standalone: true}" [attr.required]="context.detail.AttributeType ==  enumAttributeType['关系属性'] ? 'required' : null">
+                        <option *ngFor="let item of enumConceptDislpayList | enumKeyValues" [value]="item.key">{{item.value}}</option>
+                    </select>
+                </div>-->
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" [(ngModel)]="context.detail.IsMulti" [ngModelOptions]="{standalone: true}" />多选
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-blue-default" (click)="cancel()">取消</button>
+            <button type="submit" class="btn btn-blue">确认</button>
+        </div>
+    </form>
+</div>

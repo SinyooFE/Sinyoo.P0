@@ -1,0 +1,19 @@
+﻿<div class="search">
+    <div class="searchInput">
+        <input type="text" class="form-control required" placeholder="搜索叙词" (keyup)="searchConcept($event.target.value)" />
+        <i class="icon iconfont searchIco">&#xe603;</i>
+    </div>
+    <i class="icon iconfont filter"
+       [ngStyle]="{'color': (selectedConceptType.length === 0 ? '#b8c5da' : '#18aefb')}"
+       (click)="showConceptTypeFilter()">&#xe60d;</i>
+</div>
+<div class="tree">
+    <ul [attr.id]="conceptTreeId" class="ztree" [ngStyle]="{'height.px':editorHeight}"></ul>
+</div>
+<div *ngIf="isSearch" class="number-search">
+    检索到<b>{{searchCount}}</b>条数据
+</div>
+<a *ngIf="authorizeInfo.P0_ConceptTypeMaintain" routerLink="/terminology/concepttype" class="assert" title="概念类型维护">概念类型维护</a>
+
+
+

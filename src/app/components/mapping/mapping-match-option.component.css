@@ -1,0 +1,435 @@
+﻿
+.topContent, .option_main, .operate {
+    color: #63758f;
+    font-size: 14px;
+}
+
+.btn-blue {
+    background-color: #4ebefb;
+}
+
+input[type="checkbox"] {
+    position: relative;
+    top: 2px;
+}
+
+.current {
+    color: #4ebefb;
+}
+
+/*顶部*/
+.topContent {
+    padding: 5px 20px;
+    overflow: hidden;
+}
+
+.option_main {
+    margin: 0 20px;
+    background-color: #ffffff;
+    color: #51607e;
+    border-radius: 8px;
+}
+
+.backPageButton {
+    float: left;
+    cursor: pointer;
+    margin: 6px 0;
+}
+
+    .backPageButton i {
+        font-size: 20px;
+        margin-top: 2px;
+        color: #18aefb;
+    }
+
+    .backPageButton span {
+        font-size: 16px;
+        margin-top: 7px;
+        color: #18aefb;
+    }
+
+.dialogContent {
+    float: right;
+    margin: 6px 0;
+}
+
+    .dialogContent .checkStatus {
+        float: left;
+        margin-top: 6px;
+    }
+
+    .dialogContent .dialogButton {
+        float: left;
+        width: 76px;
+        line-height: 33px;
+        text-align: center;
+        color: #ffffff;
+        border-radius: 5px;
+        background-color: #4ebefb;
+        margin-left: 13px;
+    }
+
+.var-title{overflow:hidden; height:34px; background-color:#b8c5da; text-indent:20px; color:#fff; line-height:34px; border-radius:5px 5px 0 0}
+.var-title li{cursor:pointer; height:34px;line-height:34px;padding: 0 50px;font-size:14px; color:#fff; font-style:normal; float:left; position:relative}
+.var-title li.current b{color:#8a9cb9;}
+.var-title li.current span{background-color:#fff;}
+.var-title li b{ position:relative; z-index:0;}
+.var-title li:first-child span{background:none;}
+.var-title li:first-child{ margin-left:-14px;}
+.var-title li:first-child.current span{background:#fff;}
+.var-title li span{transform:skew(30deg,0deg); content:"";position:absolute; left:0; top:0;right:0; bottom:0; width:100%; background-color:#a1b2cc}
+
+
+/*主体*/
+.mappingRule {
+    padding: 10px;
+    overflow: hidden;
+}
+
+.option {
+    width: 28%;
+    float: left;
+    padding: 0 10px 0 0;
+}
+
+/*区域顶部搜索*/
+.search {
+    width: 100%;
+    margin-bottom: 10px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.search label {
+    margin: 0 10px;
+}
+
+.option .search input {
+    width: 35%;
+}
+
+/*左边列表*/
+.tableList {
+    overflow-y: auto;
+}
+
+.treeContainer {
+    margin-right: 5px;
+    padding: 0 10px;
+}
+
+/*源区域*/
+.source {
+    width: 36%;
+    float: left;
+    padding: 0 10px;
+    border-left: 1px solid #e4ebf8;
+    border-right: 1px solid #e4ebf8;
+}
+
+.listContainer {
+    margin-right: 5px;
+}
+
+.listHead {
+    color: #63758f;
+    overflow: hidden;
+}
+
+.listHead li {
+    float: left;
+    height: 40px;
+    line-height: 40px;
+    text-align: left;
+    text-indent: 10px;
+    border-bottom: solid 1px #b8c5da;
+}
+
+.listHead li i {
+    cursor: pointer;
+}
+
+.listRow {
+    color: #415171;
+    overflow: hidden;
+    cursor: move;
+}
+
+.listRow li {
+    float: left;
+    height: 38px;
+    line-height: 38px;
+    text-align: left;
+    text-indent: 10px;
+}
+
+.listHead input, .listRow input {
+    margin: 5px;
+    width: 14px;
+    height: 14px;
+}
+
+.listHead li:nth-child(1), .listRow li:nth-child(1) {
+    width: 40%;
+}
+
+.listHead li:nth-child(2), .listRow li:nth-child(2) {
+    width: 30%;
+}
+
+.listHead li:nth-child(3), .listRow li:nth-child(3) {
+    width: 30%;
+}
+
+/*目标区域*/
+.target {
+    width: 36%;
+    float: left;
+    padding: 0 0 0 10px;
+}
+
+.fieldArea {
+    margin-bottom: 30px;
+    margin-right: 5px;
+    border-top: #b8c5da 8px solid;
+    border-radius: 5px;
+    background-color: #f6f8fc;
+    padding: 5px;
+}
+
+.fieldArea i {
+    color: #51607e;
+    cursor: pointer;
+}
+
+.fieldArea:last-child {
+    margin-bottom: 0;
+}
+
+    .fieldArea .title {
+        height: 28px;
+        line-height: 28px;
+        border-bottom: #b8c5da 1px solid;
+        position: relative;
+    }
+
+    .fieldArea .drop {
+        text-align: center;
+    }
+
+    .fieldArea .title span {
+        margin-left: 10px;
+    }
+
+    .fieldArea .drop span {
+        padding: 0 10px;
+        border: solid 1px #FF0000;
+        border-radius: 3px;
+    }
+
+    .fieldArea .title i:last-child {
+        position: absolute;
+        right: 36px;
+    }
+
+    .fieldArea .title i:nth-child(2) {
+        position: absolute;
+        right: 10px;
+    }
+
+    .fieldArea .drag {
+        color: #b1b7c3; 
+    }
+
+    .fieldArea .item {
+        min-height: 34px;
+        line-height: 34px;
+        border: 1px solid #f6f8fc;
+        margin: 5px 10px;
+        text-align: center;
+        overflow: hidden;
+    }
+
+    .fieldArea .currentTarget {
+        border: 1px dashed #4ebefb;
+    }
+
+        .fieldArea .item li {
+            float: left;
+            height: 26px;
+            line-height: 26px;
+            border: 1px solid #61c0fc;
+            border-radius: 3px;
+            background-color: #edfaff;
+            margin: 5px;
+            padding: 0 5px;
+        }
+
+.dropField {
+    margin-bottom: 30px;
+}
+
+.dropField .item {
+    height: 100px;
+    line-height: 100px;
+}
+
+.itemDelete {
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+/*按钮操作*/
+.operate {
+    padding: 15px 0;
+    text-align: right;
+    border-top: solid 1px #b8c5da;
+}
+
+.optsubmit {
+    border-top: none;
+}
+
+    .operate button {
+        width: 134px;
+    }
+
+    .operate i {
+        margin-right: 10px;
+    }
+
+
+
+.btnsave {
+    margin-right: 20px;
+    color: #18aefb;
+}
+
+.btnsubmit {
+    margin-right: 40px;
+    color: #ffffff;
+}
+
+/*关联表*/
+.relateSummary {
+    float: left;
+    width: 30%;
+    padding: 0 15px;
+    border-right: solid 1px #e4ebf8;
+}
+
+.relateDetail {
+    float: left;
+    width: 70%;
+    padding: 0 15px;
+}
+
+    .relateSummary .tableList, .relateDetail .tableList {
+        border: 1px solid #b8c5da;
+        border-top: 8px solid #b8c5da;
+        border-radius: 5px;
+        max-height: 100%;
+    }
+
+.relateHead {
+    overflow: hidden;
+    font-weight: bold;
+}
+
+.relateHead li {
+    float: left;
+    height: 50px;
+    line-height: 50px;
+    text-align: left;
+    text-indent: 10px;
+    border-bottom: solid 1px #b8c5da;
+}
+
+.relateRow {
+    overflow: hidden;
+}
+
+    .relateRow .currentTarget {
+        border: 1px dashed #4ebefb;
+    }
+
+.relateSummary .relateRow {
+    cursor: move;
+}
+
+.addRow {
+    color: #4ebefb;
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.noContent {
+    color: #b1b7c3;
+}
+
+.relateRow li{
+    float: left;
+    height: 45px;
+    line-height: 45px;
+    text-align: left;
+    text-indent: 10px;
+    border-bottom: 1px solid #b8c5da;
+}
+
+.relateRow i {
+    cursor: pointer;
+}
+
+.relateRow:last-child li {
+    border-bottom: none;
+}
+
+.relateRow .form-control {
+    width: 90%;
+    margin-left: 5px;
+    margin-top: 5px;
+}
+
+.relateSummary .relateHead li:nth-child(1),.relateSummary .relateRow li:nth-child(1) {
+     width: 50%; 
+     border-right:1px solid #b8c5da;
+}
+.relateSummary .relateHead li:nth-child(2),.relateSummary .relateRow li:nth-child(2) {
+     width: 50%;
+     border-right:none;
+}
+
+.relateDetail .relateHead li:nth-child(1),.relateDetail .relateRow li:nth-child(1) {
+     width: 20%;
+     border-right:1px solid #b8c5da;
+}
+.relateDetail .relateHead li:nth-child(2),.relateDetail .relateRow li:nth-child(2) {
+     width: 25%;
+     border-right:1px solid #b8c5da;
+}
+.relateDetail .relateHead li:nth-child(3),.relateDetail .relateRow li:nth-child(3) {
+     width: 20%;
+     border-right:1px solid #b8c5da;
+}
+.relateDetail .relateHead li:nth-child(4),.relateDetail .relateRow li:nth-child(4) {
+     width: 25%;
+     border-right:1px solid #b8c5da;
+}
+.relateDetail .relateHead li:nth-child(5),.relateDetail .relateRow li:nth-child(5) {
+     width: 10%;
+     border-right:none;
+}
+
+.relateDrop {
+    margin: 5px;
+    height: 35px;
+    line-height: 35px;
+    border: 1px solid #ffffff;
+}
+
+.disable {
+    color: #b1b7c3;
+    cursor: default;
+}

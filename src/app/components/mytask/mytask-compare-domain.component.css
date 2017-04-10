@@ -1,0 +1,133 @@
+﻿/*弹窗外层框架*/
+.domainDialog{
+	width:100%;
+    max-height: 500px;
+    overflow-y: scroll;
+	color:#4f5c79;
+	background-color: #ffffff;
+}
+.domainDialog label{
+	display: block;
+	line-height: 40px;
+}
+/*弹窗标题、新增，修改，删除*/
+.statusClass{
+	border-bottom:1px solid #cdd5de;
+	line-height: 40px;
+	padding-left:2%;
+}
+/*内容类别，基本设置还是同义词设置*/
+.middleTitle{
+	font-size: 16px;
+	font-weight: bold;
+	padding-top:15px;
+}
+.detailContent{
+	float:left;
+	width:50%;
+	padding-left:2%;
+}
+/*当只有新数据||旧数据的时候,模块以100%显示【若都有，新旧数据各占50%】*/
+.domainDialogMainContent .singlelValue {
+    width:100%;
+}
+/*表单设置*/
+.domainDialogMainContent input{
+	width:96%;
+	border-radius: 4px;
+	padding:6px 14px;
+	background-color: #ffffff;
+	border:1px solid #b1c0d8;
+}
+.completeGuide{
+	width:96%;
+	padding:4px 14px;
+	height:100px;
+	background-color: #ffffff;
+	border-radius: 4px;
+    border: 1px solid #b1c0d8;
+}
+/*审核意见*/
+.commentsContent textarea{
+	width:100%;
+	padding:4px 14px;
+	height:100px;
+	border-radius: 4px;
+}
+/*同义词表格*/
+.synonymsPart{
+	width:96%;
+	border:1px solid #b8c5da;
+	margin-top: 22px;
+}
+.synonymsPart tr{
+	height:30px;
+}
+.synonymsPart thead tr td{
+	background-color: #cedeef;
+	font-size: 14px;
+}
+.synonymsPart tbody{
+	background-color: #ffffff;
+}
+.synonymsPart tbody tr:nth-child(2n){
+	background-color: #ebf2fa;
+}
+.synonymsPart tr td:nth-child(1){
+	border-right:1px solid #b8c5da;
+}
+.synonymsPart tr td:nth-child(2){
+	border-right:1px solid #b8c5da;
+}
+.synonymsPart td{
+	font-size: 12px;
+	text-align: center;
+	width:50%;
+	vertical-align:middle;
+}
+
+/*审核通过、驳回按钮*/
+.firmButtons{
+	border-bottom:1px solid #cdd5de;
+}
+.buttonGroup{
+	float:right;
+	margin-right: 2%;
+	margin-top: 30px;
+	padding-bottom: 10px;
+	overflow:hidden;
+}
+.buttonGroup div{
+	width:101px;
+	line-height:38px;
+	text-align: center;
+	border-radius: 5px;
+	font-size: 14px;
+	display: inline-block;
+	border:1px solid #17adfb;
+	cursor:pointer;
+}
+.buttonGroup .agreed{
+	color:#ffffff;
+	background-color: #17adfb;
+	margin-right: 20px;
+}
+.buttonGroup .rejected{
+	color:#17adfb;
+}
+/*关闭按钮*/
+.closeDialog{
+	float:right;
+	color:#77879f;
+	width:101px;
+	margin-right: 2%;
+	margin-bottom: 55px;
+	line-height:38px;
+	text-align: center;
+	border-radius: 5px;
+	font-size: 14px;
+	display: inline-block;
+	border:1px solid #77879f;
+	cursor:pointer;
+	margin-top: 30px;
+}

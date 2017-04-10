@@ -1,0 +1,133 @@
+﻿
+<div class="modal-header">
+    <button type="button" class="close" (click)="cancel()"><span aria-hidden="true" class="icon iconfont">&#xe6cc;</span><span class="sr-only">Close</span></button>
+    <h4 class="modal-title">域审核日志</h4>
+</div>
+<div class="modal-body clearfix">
+    <div class="col-xs-6">
+        <div class="ibox-content">
+            <div class="table-responsive">
+                <div class="domain_log_list">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th class="sorting">操作时间</th>
+                                <th>操作人员</th>
+                                <th style="position:relative;">操作类型<!--<i class="icon iconfont" style="position:absolute; right:10px; top:8px;">&#xe6a7;</i>--></th>
+                                <th style="position:relative;">审核状态<!--<i class="icon iconfont" style="position:absolute; right:10px; top:8px;">&#xe6a7;</i>--></th>
+                            </tr>
+                        </thead>
+                        <tbody style="height: 340px;">
+                            <tr *ngFor="let item of domainLogList" [ngClass]="{'current': (item.ID === selectedDomainLog.selectedLog.ID)}" (click)="setSelectedLog(item)">
+                                <td>{{item.ProcTime | date:'y/M/d HH:mm:ss'}}</td>
+                                <td>{{item.SubmitterName}}</td>
+                                <td>{{enumLogAction[item.LogAction]}}</td>
+                                <td>{{enumLogAuditAction[item.AuditAction]}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-6">
+        <div class="clearfix">
+            <div class="filed">
+                <label class="textbold">域名称：</label>
+                <span class="textbold">{{context.domainName}}</span>
+            </div>
+            <div class="filed-list">
+                <div class="filed">
+                    <label>操作时间：</label>
+                    <span>{{selectedDomainLog.selectedLog.ProcTime | date:'y/M/d HH:mm:ss'}}</span>
+                </div>
+                <div class="filed">
+                    <label>审核状态：</label>
+                    <span>{{enumLogAction[selectedDomainLog.selectedLog.LogAction]}}</span>
+                </div>
+                <div class="filed">
+                    <label>操作类型：</label>
+                    <span>{{enumLogAuditAction[selectedDomainLog.selectedLog.AuditAction]}}</span>
+                </div>
+                <div class="filed">
+                    <label>操作人员：</label>
+                    <span>{{selectedDomainLog.selectedLog.SubmitterName}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="domain_log_detail">
+            <table class="table able-striped table-bordered table-hover ">
+                <thead>
+                    <tr>
+                        <th style="width: 10%">&nbsp;</th>
+                        <th style="width: 20%">修改项</th>
+                        <th style="width: 35%">修改前</th>
+                        <th style="width: 35%">修改后</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="width: 10%;" rowspan="6" style="vertical-align: middle; text-align: center;">基本设置</td>
+                        <td style="width: 20%">域中文名称</td>
+                        <td style="width: 35%">{{selectedDomainLog.originalDetail.DomainName}}</td>
+                        <td style="width: 35%">{{selectedDomainLog.currentDetail.DomainName}}</td>
+                    </tr>
+                    <tr>
+                        <td>域缩写</td>
+                        <td>{{selectedDomainLog.originalDetail.DomainAbb}}</td>
+                        <td>{{selectedDomainLog.currentDetail.DomainAbb}}</td>
+                    </tr>
+                    <tr>
+                        <td>域代码</td>
+                        <td>{{selectedDomainLog.originalDetail.DomainCode}}</td>
+                        <td>{{selectedDomainLog.currentDetail.DomainCode}}</td>
+                    </tr>
+                    <tr>
+                        <td>域描述</td>
+                        <td>{{selectedDomainLog.originalDetail.DomainDesc}}</td>
+                        <td>{{selectedDomainLog.currentDetail.DomainDesc}}</td>
+                    </tr>
+                    <tr>
+                        <td>域观测类别</td>
+                        <td>{{enumDomainObservationType[selectedDomainLog.originalDetail.DomainType]}}</td>
+                        <td>{{enumDomainObservationType[selectedDomainLog.currentDetail.DomainType]}}</td>
+                    </tr>
+                    <tr>
+                        <td>域填写指南</td>
+                        <td>{{selectedDomainLog.originalDetail.DomainGuide}}</td>
+                        <td>{{selectedDomainLog.currentDetail.DomainGuide}}</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="4" style="vertical-align: middle; text-align: center;">Primary Configuration</td>
+                        <td>Domain</td>
+                        <td>{{selectedDomainLog.originalDetail.DomainNameEn}}</td>
+                        <td>{{selectedDomainLog.currentDetail.DomainNameEn}}</td>
+                    </tr>
+                    <tr>
+                        <td>Describe</td>
+                        <td>{{selectedDomainLog.originalDetail.DomainDescEn}}</td>
+                        <td>{{selectedDomainLog.currentDetail.DomainDescEn}}</td>
+                    </tr>
+                    <tr>
+                        <td>Observation Classes</td>
+                        <td>{{enumDomainObservationTypeEn[selectedDomainLog.originalDetail.DomainType]}}</td>
+                        <td>{{enumDomainObservationTypeEn[selectedDomainLog.currentDetail.DomainType]}}</td>
+                    </tr>
+                    <tr>
+                        <td>Complete Guide</td>
+                        <td>{{selectedDomainLog.originalDetail.DomainGuideEn}}</td>
+                        <td>{{selectedDomainLog.currentDetail.DomainGuideEn}}</td>
+                    </tr>
+                    <tr *ngFor="let item of selectedDomainLog.synonyms;let i = index;">
+                        <td [attr.rowspan]="selectedDomainLog.synonyms.length" style="vertical-align: middle; text-align: center;">同义词设置</td>
+                        <td>{{i+1}}</td>
+                        <td>{{item.key}}</td>
+                        <td>{{item.value}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+

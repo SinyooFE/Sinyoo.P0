@@ -1,0 +1,61 @@
+﻿<!--全部任务-->
+<div *ngIf="myTask">
+    <div class="ibox-content">
+        <div class="table-responsive">
+            <table class="table table-striped  table-bordered table-hover dataTable">
+                <thead>
+                    <!--筛选按钮添加筛选后状态变高亮 color:#18aefb;-->
+                    <tr>
+                        <th>
+                            概念名称
+                        </th>
+                        <th class="curor">
+                            任务类型<i class="icon iconfont" (click)="myTaskTypeFilter()">&#xe6a7;</i>
+                        </th>
+                        <th class="curor">
+                            提交日期<i class="icon iconfont" (click)="changeMyTaskSort()">{{MyTaskListFilter.MyTaskAsc?'&#xe93a;':'&#xe93c;'}}</i>
+                        </th>
+                        <th>提交人</th>
+                        <th class="curor">
+                            当前状态
+                            <i (click)="myTaskStatusFilter()" *ngIf="myJobStatusNum!==2" class="icon iconfont" data-toggle="modal">&#xe6a7;</i>
+                        </th>
+                        <th (click)="myApproverFilter()" class="curor" *ngIf="MyTaskListFilter.MyTaskListType == 1">
+                            审核人员<i class="icon iconfont" data-toggle="modal" data-target="#task">&#xe6a7;</i>
+                        </th>
+                        <th>审核意见</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!--
+                        task是每一条数据
+                        task.TargetID
+                        task.LogId
+                        task.TargetType：类型名：概念/术语/mapping
+                        task.TaskOperateType：操作类型——（新增/修改/删除）
+                        task.TaskStatus：状态——（待审核/已审核/审核未通过）
+                        MyTaskListFilter.MyTaskListType：审核人员是否显示
+                    -->
+                    <tr (click)="conceptCompare(task.TargetID,task.LogId, task.TargetType, task.TaskOperateType,task.TaskStatus, MyTaskListFilter.MyTaskListType == 2,task.Grouper,task.GroupID,task.TaskID)" *ngFor="let task of myTask.Tasks">
+                        <td [title]="task.TaskName">{{task.TaskName}}</td>
+                        <td>{{TaskOperateType[task.TaskOperateType]}}{{TargetType[task.TargetType]}}</td>
+                        <td>{{task.SubmitTime |  date:'y/M/d HH:mm:ss'}}</td>
+                        <td>{{task.SubmitterName}}</td>
+                        <td>{{ApprovalStatus[task.TaskStatus]}}</td>
+                        <td *ngIf="MyTaskListFilter.MyTaskListType == 1">{{task.ApproverName}}</td>
+                        <td>{{task.Remark}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="dataTables_paginate paging_simple_numbers" style="text-align: right;">
+        <ul class="pagination">
+            <li class="paginate_button previous" [class.disabled]="!myTask.HasPreviousPage"><a (click)="navigatorPrePage()">上一页</a></li>
+
+            <li *ngFor="let count of myTask.PageCount | numToArray " class="paginate_button active" [class.active]="count==myTask.PageNumber"><a (click)="navigatorPage(count)">{{count}}</a></li>
+
+            <li class="paginate_button next" [class.disabled]="!myTask.HasNextPage"><a (click)="navigatorNextPage()">下一页</a></li>
+        </ul>
+    </div>
+</div>

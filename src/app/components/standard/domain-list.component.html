@@ -1,0 +1,36 @@
+﻿<h5 class="listTitle">域</h5>
+<div class="listMain">
+    <div class="buttons dataButton" *ngIf="!(standard.ApprovedStatus == enumApprovalStatus['待审核'] && standard.DataStatus == enumDataStatus['删除'])">
+        <button type="button" class="btn btn-green" (click)="createDomain()" title="新建域"><i class="icon iconfont">&#xe616;</i>新建域</button>
+        <button *ngIf="standard.IsOwner" type="button" class="btn btn-green-default" (click)="copyDomain()" title="复制域"><i class="icon iconfont">&#xe613;</i>复制域</button>
+    </div>
+    <div class="table-box" [ngStyle]="{'height.px':editorHeight}">
+        <ul class="table-list">
+            <li class="active">
+                <div [ngClass]="{'table-title':true,'current': !currentDomain }" (click)="changeDomain(null)">
+                    <p>所有域</p>
+                </div>
+                <div class="table-content" #domainListDiv>
+                    <div *ngFor="let item of domainList;" [ngClass]="{'t-row':true,'current': currentDomain?.ID === item.ID}" (click)="changeDomain(item)" [attr.data-id]="item.ID" [attr.data-sort]="item.Sort">
+                        <p class="textshow" [title]="item.DomainName">
+                            <i class="iconfont" [innerHTML]="iconFontHtml(item.ApprovedStatus)" [attr.title]="enumApprovalStatus[item.ApprovedStatus]"></i>
+                            {{item.DomainName}}
+                        </p>
+                        <ng-container *ngIf="item.IsOwner">
+                            <div class="operation" *ngIf="item.DataStatus !== enumDataStatus['删除']">
+                                <span (click)="createVariable(item.ID)" title="新建变量"><i class="icon iconfont add">&#xe616;</i></span>
+                                <span (click)="copyVariable(item.ID,item.DomainName)" title="复制变量"><i class="icon iconfont copy">&#xe613;</i></span>
+                                <span (click)="editDomain(item.ID)" title="编辑域"><i class="icon iconfont edit">&#xe612;</i></span>
+                                <span (click)="deleteDomain(item.ID)" title="删除域"><i class="icon iconfont delete">&#xe6cc;</i></span>
+                            </div>
+                            <div class="operation" *ngIf="item.DataStatus == enumDataStatus['删除']">
+                                <span (click)="undoDeleteDomain(item.ID)" title="取消删除"><i class="icon iconfont delete">&#xe6cc;</i></span>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+

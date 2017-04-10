@@ -1,0 +1,134 @@
+<!--<div class="main">
+    <div class="myJob">-->
+<div class="concept">
+    <div class="con-list">
+        <!--选项卡模块-->
+        <div class="switchsArea">
+            <!--3个选项卡标题-->
+            <div class="var-title">
+                <ul>
+                    <li (click)="SwitchTapHandle(1)" [class.current]="thisTypeNum===1" title="肿瘤叙词表"><span></span><b>肿瘤叙词表</b></li>
+                    <li (click)="SwitchTapHandle(2)" [class.current]="thisTypeNum===2" title="数据模板"><span></span><b>数据模板</b></li>
+                    <li (click)="SwitchTapHandle(3)" [class.current]="thisTypeNum===3" title="Mapping"><span></span><b>Mapping</b></li>
+                </ul>
+            </div>
+            <!--3个选项卡标题，结束-->
+            <!--选项卡详细内容-->
+            <div class="modle-content">
+                <!--大选项卡1内容：叙词表-->
+                <div *ngIf="thisTypeNum===1" class="model-area">
+                    <!--列表状态筛选按钮-->
+                    <div class="buttons reviewed">
+                        <button type="button" (click)="SwitchConceptToBeHandle(1)" [class.btn-green]="thisConceptListTypeNum===1" class="btn btn-green-default" title="我的提交">我的提交</button>
+                        <button type="button" (click)="SwitchConceptToBeHandle(2)" [class.btn-green]="thisConceptListTypeNum===2" class="btn btn-green-default" title="待审核">待审核</button>
+                        <button type="button" (click)="SwitchConceptToBeHandle(3)" [class.btn-green]="thisConceptListTypeNum===3" class="btn btn-green-default" title="我的审核">我的审核</button>
+                    </div>
+                    <div class="task">
+                        <div *ngIf="thisConceptListTypeNum===1">
+                            <my-task-list [myJobStatusNum]="thisConceptListTypeNum" [MyTaskListFilter]="myConceptTaskList" [CurrTaskCategory]="1"></my-task-list>
+                        </div>
+                        <div *ngIf="thisConceptListTypeNum===2">
+                            <my-task-list [myJobStatusNum]="thisConceptListTypeNum" [MyTaskListFilter]="toBeHandleConceptTaskList" [CurrTaskCategory]="1"></my-task-list>
+                        </div>
+                        <div *ngIf="thisConceptListTypeNum===3">
+                            <my-task-list [myJobStatusNum]="thisConceptListTypeNum" [MyTaskListFilter]="myHandledConceptTaskList" [CurrTaskCategory]="1"></my-task-list>
+                        </div>
+                    </div>
+                </div>
+
+                <!--大选项卡2内容：数据模板-->
+                <div *ngIf="thisTypeNum===2" class="model-area" style="display:block">
+                    <!--列表状态筛选按钮-->
+                    <div class="buttons secondFilter">
+                        <button type="button" (click)="SwitchStandardToBeHandle(1)" [class.btn-green]="thisStandardListTypeNum===1" class="btn btn-green-default" title="我的提交">我的提交</button>
+                        <button type="button" (click)="SwitchStandardToBeHandle(2)" [class.btn-green]="thisStandardListTypeNum===2" class="btn btn-green-default" title="待审核">待审核</button>
+                        <button type="button" (click)="SwitchStandardToBeHandle(3)" [class.btn-green]="thisStandardListTypeNum===3" class="btn btn-green-default" title="我的审核">我的审核</button>
+                    </div>
+                    <!--列表类别筛选按钮-->
+                    <div class="buttons thirdFilter">
+                        <button type="button" (click)="SwitchStandardType(0)" [class.btn-green]="thisStandardTypeNum===0" class="btn btn-green-default" title="全部">全部</button>
+                        <button type="button" (click)="SwitchStandardType(1)" [class.btn-green]="thisStandardTypeNum===1" class="btn btn-green-default" title="标准">标准</button>
+                        <button type="button" (click)="SwitchStandardType(2)" [class.btn-green]="thisStandardTypeNum===2" class="btn btn-green-default" title="域">域</button>
+                        <button type="button" (click)="SwitchStandardType(3)" [class.btn-green]="thisStandardTypeNum===3" class="btn btn-green-default" title="变量">变量</button>
+                    </div>
+                    <div class="task">
+                        <!--全部状态+全部类型-->
+                        <div *ngIf="thisStandardListTypeNum===1 && thisStandardTypeNum===0">
+                            <my-task-list [MyTaskListFilter]="myStandardTaskList_all" [CurrTaskCategory]="2"></my-task-list>
+                        </div>
+                        <!--全部状态+标准-->
+                        <div *ngIf="thisStandardListTypeNum===1 && thisStandardTypeNum===1">
+                            <my-task-list [MyTaskListFilter]="myStandardTaskList_standard" [CurrTaskCategory]="2"></my-task-list>
+                        </div>
+                        <!--全部状态+域-->
+                        <div *ngIf="thisStandardListTypeNum===1 && thisStandardTypeNum===2">
+                            <my-task-list [MyTaskListFilter]="myStandardTaskList_domain" [CurrTaskCategory]="2"></my-task-list>
+                        </div>
+                        <!--全部状态+变量-->
+                        <div *ngIf="thisStandardListTypeNum===1 && thisStandardTypeNum===3">
+                            <my-task-list [MyTaskListFilter]="myStandardTaskList_variable" [CurrTaskCategory]="2"></my-task-list>
+                        </div>
+
+                        <!--待审核+全部类型-->
+                        <div *ngIf="thisStandardListTypeNum===2 && thisStandardTypeNum===0">
+                            <my-task-list [MyTaskListFilter]="toBeHandleStandardTaskList_all" [CurrTaskCategory]="2"></my-task-list>
+                        </div>
+                        <!--待审核+标准-->
+                        <div *ngIf="thisStandardListTypeNum===2 && thisStandardTypeNum===1">
+                            <my-task-list [MyTaskListFilter]="toBeHandleStandardTaskList_standard" [CurrTaskCategory]="2"></my-task-list>
+                        </div>
+                        <!--待审核+域-->
+                        <div *ngIf="thisStandardListTypeNum===2 && thisStandardTypeNum===2">
+                            <my-task-list [MyTaskListFilter]="toBeHandleStandardTaskList_domain" [CurrTaskCategory]="2"></my-task-list>
+                        </div>
+                        <!--待审核+变量-->
+                        <div *ngIf="thisStandardListTypeNum===2 && thisStandardTypeNum===3">
+                            <my-task-list [MyTaskListFilter]="toBeHandleStandardTaskList_variable" [CurrTaskCategory]="2"></my-task-list>
+                        </div>
+
+                        <!--我的审核+全部类型-->
+                        <div *ngIf="thisStandardListTypeNum===3 && thisStandardTypeNum===0">
+                            <my-task-list [MyTaskListFilter]="myHandledStandardTaskList_all" [CurrTaskCategory]="2"></my-task-list>
+                        </div>
+                        <!--我的审核+标准-->
+                        <div *ngIf="thisStandardListTypeNum===3 && thisStandardTypeNum===1">
+                            <my-task-list [MyTaskListFilter]="myHandledStandardTaskList_standard" [CurrTaskCategory]="2"></my-task-list>
+                        </div>
+                        <!--我的审核+域-->
+                        <div *ngIf="thisStandardListTypeNum===3 && thisStandardTypeNum===2">
+                            <my-task-list [MyTaskListFilter]="myHandledStandardTaskList_domain" [CurrTaskCategory]="2"></my-task-list>
+                        </div>
+                        <!--我的审核+变量-->
+                        <div *ngIf="thisStandardListTypeNum===3 && thisStandardTypeNum===3">
+                            <my-task-list [MyTaskListFilter]="myHandledStandardTaskList_variable" [CurrTaskCategory]="2"></my-task-list>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!--大选项卡3内容：Mapping-->
+                <div *ngIf="thisTypeNum===3" class="model-area" style="display:block">
+                    <!--列表状态筛选按钮-->
+                    <div class="buttons reviewed">
+                        <button type="button" (click)="SwitchMappingToBeHandle(1)" [class.btn-green]="thisMappingListTypeNum===1" class="btn btn-green-default" title="我的提交">我的提交</button>
+                        <button type="button" (click)="SwitchMappingToBeHandle(2)" [class.btn-green]="thisMappingListTypeNum===2" class="btn btn-green-default" title="待审核">待审核</button>
+                        <button type="button" (click)="SwitchMappingToBeHandle(3)" [class.btn-green]="thisMappingListTypeNum===3" class="btn btn-green-default" title="我的审核">我的审核</button>
+                    </div>
+                    <div class="task">
+                        <div *ngIf="thisConceptListTypeNum===1">
+                            <my-task-list [MyTaskListFilter]="myMappingTaskList" [CurrTaskCategory]="3"></my-task-list>
+                        </div>
+                        <div *ngIf="thisConceptListTypeNum===2">
+                            <my-task-list [MyTaskListFilter]="toBeHandleMappingTaskList" [CurrTaskCategory]="3"></my-task-list>
+                        </div>
+                        <div *ngIf="thisConceptListTypeNum===3">
+                            <my-task-list [MyTaskListFilter]="myHandledMappingTaskList" [CurrTaskCategory]="3"></my-task-list>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--</div>
+</div>-->

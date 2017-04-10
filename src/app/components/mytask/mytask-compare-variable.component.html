@@ -1,0 +1,444 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" (click)="onclose(false)"><span aria-hidden="true" class="icon iconfont">&#xe6cc;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">{{Title}}</h4>
+    </div>
+    <div class="modal-body">
+        <!--弹窗开始-->
+        <div class="variableDialog clearfix">
+            <!--主体内容-->
+            <div class="mainContents clearfix">
+                <!--左侧变量列表-->
+                <div class="mainContentLeft mainContentModal">
+                    <div class="headTitle">变量列表</div>
+                    <div class="listContent">
+                        <!--选项卡-->
+                        <!--4个选项卡标题-->
+                        <div class="var-title">
+                            <ul>
+                                <li [class.current]="tapNum===1" (click)="tapSwitch(1)"><span></span><b>全部</b></li>
+                                <li [class.current]="tapNum===2" (click)="tapSwitch(2)"><span></span><b>未审核</b></li>
+                                <li [class.current]="tapNum===3" (click)="tapSwitch(3)"><span></span><b>已通过</b></li>
+                                <li [class.current]="tapNum===4" (click)="tapSwitch(4)"><span></span><b>已驳回</b></li>
+                            </ul>
+                        </div>
+                        <!--变量列表-->
+                        <div class="variableList">
+                            <div *ngIf="tapNum===1">
+                                <!--[class.variableClicked]当点击某个变量的时候增加高亮显示类-->
+                                <div (click)="getVariableLog(perVariable.TargetID,perVariable.LogId,perVariable.TaskStatus)" [class.variableClicked]="thisVariableClickedId===perVariable.TargetID" *ngFor="let perVariable of variablesData" class="perList">{{perVariable.TaskName}}<span *ngIf="perVariable.TaskStatus===4" class="icon iconfont status pass">&#xe6a9;</span><span *ngIf="perVariable.TaskStatus===3" class="icon iconfont status noPass">&#xe71d;</span></div>
+                            </div>
+                            <div *ngIf="tapNum===2">
+                                <div (click)="getVariableLog(perVariable_noApprove.TargetID,perVariable_noApprove.LogId,perVariable_noApprove.TaskStatus)" [class.variableClicked]="thisVariableClickedId===perVariable_noApprove.TargetID" *ngFor="let perVariable_noApprove of variablesData_noApprove" class="perList">{{perVariable_noApprove.TaskName}}</div>
+                            </div>
+                            <div *ngIf="tapNum===3">
+                                <div (click)="getVariableLog(perVariable_approved.TargetID,perVariable_approved.LogId,perVariable_approved.TaskStatus)" [class.variableClicked]="thisVariableClickedId===perVariable_approved.TargetID" *ngFor="let perVariable_approved of variablesData_approved" class="perList">{{perVariable_approved.TaskName}}<span class="icon iconfont status pass">&#xe6a9;</span></div>
+                            </div>
+                            <div *ngIf="tapNum===4">
+                                <div (click)="getVariableLog(perVariable_rejected.TargetID,perVariable_rejected.LogId,perVariable_rejected.TaskStatus)" [class.variableClicked]="thisVariableClickedId===perVariable_rejected.TargetID" *ngFor="let perVariable_rejected of variablesData_rejected" class="perList">{{perVariable_rejected.TaskName}}<span class="icon iconfont status noPass">&#xe71d;</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--右侧详细内容-->
+                <div class="mainContentRight mainContentModal">
+                    <div class="headTitle">{{Title}}</div>
+                    <!--二级标题-->
+                    <div class="smallTitle clearfix">
+                        <span *ngIf="originalVal && currentVal">修改前</span>
+                        <span *ngIf="originalVal && currentVal">修改后</span>
+                    </div>
+                    <div class="listFormContent clearfix">
+
+                        <!--通用表单组模块1-->
+                        <div class="formModal">
+                            <!--灰色条-->
+                            <div class="grayHead"></div>
+                            <!--表单组内容-->
+                            <div class="formGroupContent">
+                                <!--表单组标题-->
+                                <div class="formGroupTitle">基本设置</div>
+                                <!--表单组-->
+                                <div class="formGroup">
+                                    <!--左侧-->
+                                    <div *ngIf="originalVal" [class.singlelValue]="!(originalVal && currentVal)" class="leftGroup group">
+                                        <div class="lineFrom">
+                                            <label>变量名称：</label>
+                                            <input type="text" class="form-control" [ngModel]="originalVal.FieldName" disabled>
+                                        </div>
+                                        <div class="lineFrom">
+                                            <label>变量标签：</label>
+                                            <input type="text" class="form-control" [ngModel]="originalVal.FieldLabel" disabled>
+                                        </div>
+                                        <div class="lineFrom">
+                                            <label>核心类型：</label>
+                                            <input type="text" class="form-control" [ngModel]="fieldCoreCategory[originalVal.FieldCategory]" disabled>
+                                        </div>
+                                        <div class="lineFrom">
+                                            <label>变量角色：</label>
+                                            <input class="form-control" type="text" [ngModel]="fieldRole[originalVal.FieldRole]" disabled>
+                                        </div>
+                                        <div class="lineFrom">
+                                            <label>变量定义：</label>
+                                            <textarea class="form-control" cols="30" rows="4" disabled>{{originalVal.FieldDefinition}}</textarea>
+                                        </div>
+                                        <div class="lineFrom">
+                                            <label>CRF填写指南：</label>
+                                            <textarea class="form-control" cols="30" rows="4" disabled>{{originalVal.FieldGuide}}</textarea>
+                                        </div>
+                                        <div class="lineFrom">
+                                            <label>问题描述：</label>
+                                            <textarea class="form-control" cols="30" rows="4" disabled>{{originalVal.QuestionText}}</textarea>
+                                        </div>
+                                        <div class="lineFrom">
+                                            <label>其它说明</label>
+                                            <textarea class="form-control" cols="30" rows="4" disabled>{{originalVal.FieldRemark}}</textarea>
+                                        </div>
+                                    </div>
+                                    <!--右侧-->
+                                    <div *ngIf="currentVal" [class.singlelValue]="!(originalVal && currentVal)" class="rightGroup group">
+                                        <div class="lineFrom">
+                                            <label>变量名称：</label>
+                                            <input class="form-control" type="text" [ngModel]="currentVal.FieldName" disabled>
+                                        </div>
+                                        <div class="lineFrom">
+                                            <label>变量标签：</label>
+                                            <input class="form-control" type="text" [ngModel]="currentVal.FieldLabel" disabled>
+                                        </div>
+                                        <div class="lineFrom">
+                                            <label>核心类型：</label>
+                                            <input class="form-control" type="text" [ngModel]="fieldCoreCategory[currentVal.FieldCategory]" disabled>
+                                        </div>
+                                        <div class="lineFrom">
+                                            <label>变量角色：</label>
+                                            <input class="form-control" type="text" [ngModel]="fieldRole[currentVal.FieldRole]" disabled>
+                                        </div>
+
+                                        <div class="lineFrom">
+                                            <label>变量定义：</label>
+                                            <textarea class="form-control" cols="30" rows="4" disabled>{{currentVal.FieldDefinition}}</textarea>
+                                        </div>
+                                        <div class="lineFrom">
+                                            <label>CRF填写指南：</label>
+                                            <textarea class="form-control" cols="30" rows="4" disabled>{{currentVal.FieldGuide}}</textarea>
+                                        </div>
+                                        <div class="lineFrom">
+                                            <label>问题描述：</label>
+                                            <textarea class="form-control" cols="30" rows="4" disabled>{{currentVal.QuestionText}}</textarea>
+                                        </div>
+                                        <div class="lineFrom">
+                                            <label>其它说明</label>
+                                            <textarea class="form-control" cols="30" rows="4" disabled>{{currentVal.FieldRemark}}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!--通用表单组模块2，英文-->
+                        <div class="formModal">
+                            <!--灰色条-->
+                            <div class="grayHead"></div>
+                            <!--表单组内容-->
+                            <div class="formGroupContent">
+                                <!--表单组标题-->
+                                <div class="formGroupTitle">Primary Configuration</div>
+                                <!--表单组-->
+                                <div class="formGroup">
+                                    <!--左侧-->
+                                    <div *ngIf="originalVal" [class.singlelValue]="!(originalVal && currentVal)" class="leftGroup group">
+                                        <div class="lineFrom">
+                                            <label>Variable Label：</label>
+                                            <input type="text" class="form-control" [ngModel]="originalVal.FieldLabelEn" disabled>
+                                        </div>
+                                        <div class="lineFrom">
+                                            <label>Core：</label>
+                                            <input type="text" class="form-control" [ngModel]="fieldCoreCategoryEn[originalVal.FieldCategory]" disabled>
+                                        </div>
+                                        <div class="lineFrom">
+                                            <label>Roles：</label>
+                                            <input type="text" class="form-control" [ngModel]="fieldRoleEn[originalVal.FieldRole]" disabled>
+                                        </div>
+                                        <div class="lineFrom">
+                                            <label>Variable Defintion：</label>
+                                            <input type="text" class="form-control" [ngModel]="originalVal.FieldDefinitionEn" disabled>
+                                        </div>
+                                        <div class="lineFrom">
+                                            <label>CRF Complete Guide：</label>
+                                            <textarea class="form-control" cols="30" rows="4" disabled>{{originalVal.FieldGuideEn}}</textarea>
+                                        </div>
+                                        <div class="lineFrom">
+                                            <label>Question Text：</label>
+                                            <textarea class="form-control" cols="30" rows="4" disabled>{{originalVal.QuestionTextEn}}</textarea>
+                                        </div>
+                                        <div class="lineFrom">
+                                            <label>Bridg：</label>
+                                            <textarea class="form-control" cols="30" rows="4" disabled>{{originalVal.Bridg}}</textarea>
+                                        </div>
+                                    </div>
+                                    <!--右侧-->
+                                    <div *ngIf="currentVal" [class.singlelValue]="!(originalVal && currentVal)" class="rightGroup group">
+                                        <div class="lineFrom">
+                                            <label>Variable Label：</label>
+                                            <input type="text" class="form-control" [ngModel]="currentVal.FieldLabelEn" disabled>
+                                        </div>
+                                        <div class="lineFrom">
+                                            <label>Core：</label>
+                                            <input type="text" class="form-control" [ngModel]="fieldCoreCategoryEn[currentVal.FieldCategory]" disabled>
+                                        </div>
+                                        <div class="lineFrom">
+                                            <label>Roles：</label>
+                                            <input type="text" class="form-control" [ngModel]="fieldRoleEn[currentVal.FieldRole]" disabled>
+                                        </div>
+                                        <div class="lineFrom">
+                                            <label>Variable Defintion：</label>
+                                            <input type="text" class="form-control" [ngModel]="currentVal.FieldDefinitionEn" disabled>
+                                        </div>
+                                        <div class="lineFrom">
+                                            <label>CRF Complete Guide：</label>
+                                            <textarea class="form-control" cols="30" rows="4" disabled>{{currentVal.FieldGuideEn}}</textarea>
+                                        </div>
+                                        <div class="lineFrom">
+                                            <label>Question Text：</label>
+                                            <textarea class="form-control" cols="30" rows="4" disabled>{{currentVal.QuestionTextEn}}</textarea>
+                                        </div>
+                                        <div class="lineFrom">
+                                            <label>Bridg：</label>
+                                            <textarea class="form-control" cols="30" rows="4" disabled>{{currentVal.Bridg}}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--通用表单组模块3-->
+                        <div class="formModal">
+                            <!--灰色条-->
+                            <div class="grayHead"></div>
+                            <!--表单组内容-->
+                            <div class="formGroupContent">
+                                <!--表单组标题-->
+                                <div class="formGroupTitle">属性设置</div>
+                                <!--表单组-->
+                                <div class="formGroup">
+                                    <!--左侧-->
+                                    <div *ngIf="originalVal" [class.singlelValue]="!(originalVal && currentVal)" class="leftGroup group">
+                                        <div class="lineFrom">
+                                            <label>数据类型：</label>
+                                            <input type="text" class="form-control" [ngModel]="fieldDataType[originalVal.FieldDataType]" disabled>
+                                        </div>
+                                        <div class="lineFrom">
+                                            <label>统计分类：</label>
+                                            <input type="text" class="form-control" [ngModel]="fieldStatisticType[originalVal.StatCategory]" disabled>
+                                        </div>
+                                        <div class="lineFrom">
+                                            <label>是否隐私变量：</label>
+                                            <input type="text" class="form-control" [ngModel]="fieldIsPrivate[originalVal.IsPrivate]" disabled>
+                                        </div>
+                                        <div class="lineFrom">
+                                            <label>数据分级：</label>
+                                            <input type="text" class="form-control" [ngModel]="fieldDataLevel[originalVal.Level]" disabled>
+                                        </div>
+                                        <!--3种变量的类型之一-->
+                                        <ng-container *ngIf="originalVal.FieldDataType">
+                                            <div class="lineFrom" *ngIf="originalVal.FieldDataType == fieldDataType['字符']">
+                                                <label>字符长度：</label>
+                                                <input type="text" class="form-control" [ngModel]="originalVal.FieldLength" disabled>
+                                            </div>
+                                            <div class="lineFrom" *ngIf="originalVal.FieldDataType == fieldDataType['日期']">
+                                                <label>日期显示：</label>
+                                                <input type="text" class="form-control" [ngModel]="originalVal.DateFormat" disabled>
+                                            </div>
+                                            <div class="lineFrom" *ngIf="originalVal.FieldDataType == fieldDataType['数值']">
+                                                <label>数值长度：</label>
+                                                <div class="FieldTypeText">整数部分：{{originalVal.IntegerPart}} 小数部分：{{originalVal.DecimalPart}}</div>
+                                            </div>
+                                        </ng-container>
+                                        <div class="lineFrom">
+                                            <label>控件类型：</label>
+                                            <input type="text" class="form-control" [ngModel]="fieldControlType[originalVal.ControlType]" disabled>
+                                        </div>
+                                        <div class="lineFrom">
+                                            <label>受控术语格式：</label>
+                                            <input type="text" [ngModel]="fieldControlTermFormat[originalVal.ControlTermFormat]" disabled>
+                                        </div>
+                                        <div class="lineFrom">
+                                            <label>变量类别：</label>
+                                            <input type="text" [ngModel]="fieldType[originalVal.FieldType]" disabled>
+                                        </div>
+                                    </div>
+                                    <!--右侧-->
+                                    <div *ngIf="currentVal" [class.singlelValue]="!(originalVal && currentVal)" class="rightGroup group">
+                                        <div class="lineFrom">
+                                            <label>数据类型：</label>
+                                            <input type="text" class="form-control" [ngModel]="fieldDataType[currentVal.FieldDataType]" disabled>
+                                        </div>
+                                        <div class="lineFrom">
+                                            <label>统计分类：</label>
+                                            <input type="text" class="form-control" [ngModel]="fieldStatisticType[currentVal.StatCategory]" disabled>
+                                        </div>
+                                        <div class="lineFrom">
+                                            <label>是否隐私变量：</label>
+                                            <input type="text" class="form-control" [ngModel]="fieldIsPrivate[currentVal.IsPrivate]" disabled>
+                                        </div>
+                                        <div class="lineFrom">
+                                            <label>数据分级：</label>
+                                            <input type="text" class="form-control" [ngModel]="fieldDataLevel[currentVal.Level]" disabled>
+                                        </div>
+                                        <!--3种变量的类型之一-->
+                                        <ng-container *ngIf="currentVal.FieldDataType">
+                                            <div class="lineFrom" *ngIf="currentVal.FieldDataType == fieldDataType['字符']">
+                                                <label>字符长度：</label>
+                                                <input type="text" class="form-control" [ngModel]="currentVal.FieldLength" disabled>
+                                            </div>
+                                            <div class="lineFrom" *ngIf="currentVal.FieldDataType == fieldDataType['日期']">
+                                                <label>日期显示：</label>
+                                                <input type="text" class="form-control" [ngModel]="currentVal.DateFormat" disabled>
+                                            </div>
+                                            <div class="lineFrom" *ngIf="currentVal.FieldDataType == fieldDataType['数值']">
+                                                <label>数值长度：</label>
+                                                <div class="FieldTypeText">整数部分：{{currentVal.IntegerPart}} 小数部分：{{currentVal.DecimalPart}}</div>
+                                            </div>
+                                        </ng-container>
+                                        <div class="lineFrom">
+                                            <label>控件类型：</label>
+                                            <input type="text" class="form-control" [ngModel]="fieldControlType[currentVal.ControlType]" disabled>
+                                        </div>
+                                        <div class="lineFrom">
+                                            <label>受控术语格式：</label>
+                                            <input type="text" class="form-control" [ngModel]="fieldControlTermFormat[currentVal.ControlTermFormat]" disabled>
+                                        </div>
+                                        <div class="lineFrom">
+                                            <label>变量类别：</label>
+                                            <input type="text" [ngModel]="fieldType[currentVal.FieldType]" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--通用表单组模块4，选项设置-->
+                        <div class="formModal">
+                            <!--灰色条-->
+                            <div class="grayHead"></div>
+                            <!--表单组内容-->
+                            <div class="formGroupContent">
+                                <!--表单组标题-->
+                                <div class="formGroupTitle">选项设置</div>
+                                <!--表单组-->
+                                <div class="formGroup">
+                                    <!--左侧-->
+                                    <div *ngIf="originalVal" [class.singlelValue]="!(originalVal && currentVal)" class="leftGroup group leftGroupTable">
+                                        <div *ngIf="returnValueType_old" class="returnValue clearfix">
+                                            <input type="text" [ngModel]="returnValueType_old" disabled><label>返回值：</label>
+                                        </div>
+                                        <table *ngIf="originalVal.Options">
+                                            <thead>
+                                                <tr>
+                                                    <td>序号</td>
+                                                    <td>中文选项值</td>
+                                                    <td>英文选项值</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody *ngIf="originalVal.Options">
+                                                <tr *ngFor="let perOption of originalVal.Options">
+                                                    <td>{{perOption.ID}}</td>
+                                                    <td>{{perOption.OptionValue}}</td>
+                                                    <td>{{perOption.OptionValueEn}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!--右侧-->
+                                    <div *ngIf="currentVal" [class.singlelValue]="!(originalVal && currentVal)" class="rightGroup group rightGroupTable">
+                                        <div *ngIf="returnValueType_new" class="returnValue clearfix">
+                                            <input type="text" [ngModel]="returnValueType_new" disabled><label>返回值：</label>
+                                        </div>
+                                        <table *ngIf="currentVal.Options">
+                                            <thead>
+                                                <tr>
+                                                    <td>序号</td>
+                                                    <td>中文选项值</td>
+                                                    <td>英文选项值</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody *ngIf="currentVal.Options">
+                                                <tr *ngFor="let perOption of currentVal.Options">
+                                                    <td>{{perOption.ID}}</td>
+                                                    <td>{{perOption.OptionValue}}</td>
+                                                    <td>{{perOption.OptionValueEn}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--通用表单组模块5,同义词设置-->
+                        <div class="formModal">
+                            <!--灰色条-->
+                            <div class="grayHead"></div>
+                            <!--表单组内容-->
+                            <div class="formGroupContent">
+                                <!--表单组标题-->
+                                <div class="formGroupTitle">同义词设置</div>
+                                <!--表单组-->
+                                <div class="formGroup">
+                                    <!--左侧-->
+                                    <div *ngIf="originalVal" [class.singlelValue]="!(originalVal && currentVal)" class="leftGroup group leftGroupTable">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td>中文选项值</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody *ngIf="originalVal.SynonymFields!==[]">
+                                                <tr *ngFor="let perSynonymField of originalVal.SynonymFields">
+                                                    <td>{{perSynonymField.SynonymFieldName}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!--右侧-->
+                                    <div *ngIf="currentVal" [class.singlelValue]="!(originalVal && currentVal)" class="rightGroup group rightGroupTable">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td>中文选项值</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody *ngIf="currentVal.SynonymFields!==[]">
+                                                <tr *ngFor="let perSynonymField of currentVal.SynonymFields">
+                                                    <td>{{perSynonymField.SynonymFieldName}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <div class="col-lg-12">
+            <div class="form-group commentsContent">
+                <label>审核意见：</label>
+                <textarea type="text" class="form-control" [(ngModel)]="Remark" [disabled]="!((!(variableStatus===approvalStatus[4] || variableStatus===approvalStatus[3])) && hasApprovePermission)"></textarea>
+            </div>
+        </div>
+        <ng-container *ngIf="!isChecked">
+            <button *ngIf="(!(variableStatus===approvalStatus[4] || variableStatus===approvalStatus[3])) && hasApprovePermission" type="button" class="btn btn-blue" (click)="approve()"><i class="icon iconfont">&#xe611;</i>审核通过</button>
+            <button *ngIf="(!(variableStatus===approvalStatus[4] || variableStatus===approvalStatus[3])) && hasApprovePermission" type="button" class="btn btn-blue-default" (click)="reject()"><i class="icon iconfont">&#xe6cc;</i>驳回</button>
+        </ng-container>
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="onclose(false)"><i class="icon iconfont">&#xe85c;</i> 关闭</button>
+    </div>
+
+</div>
+
+

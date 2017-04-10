@@ -1,0 +1,86 @@
+/*
+	作者：李宏磊
+	页面：P0-肿瘤叙词表页面
+	修改时间：2016-12-14
+*/
+.apply-title{ margin-right: 30px; margin-top:5px; display: table;}
+.apply-title span{ color: #8493aa;display: table-cell; padding-right: 10px; vertical-align: middle;}
+.apply-title .btn{ display: inline-block;}
+.form-group{ text-align: left;}
+.form-group label{margin-bottom: 8px;}
+.form-control{ background-color: #ebf2fb;border:none;box-shadow: 0px 0px 0px -1px;transition: all 0.3s linear;}
+.model-fieldset{ padding: 0 25px;}
+.form-control:focus{background-color: #b8c5da;border:none;box-shadow: 0 0 0 0;}
+.form-control:focus::-moz-placeholder{color:#fff;}
+.form-control:focus:-ms-input-placeholder{color:#fff}
+.form-control:focus::-webkit-input-placeholder{color:#fff}
+/*select.form-control{color: #77879f;background-color: #b8c5da;}*/
+.text-muted{height: 18px;border:#9fdeff 1px solid; line-height: 18px;text-align: center; color: #9fdeff;background-color: #e6f7ff;
+font-size: 12px; padding: 0 8px;border-radius: 4px;}
+
+/*文本编辑器样式更新*/
+.note-editor .btn{ height:30px;}
+.note-editable{height: 100px;}
+.note-editor.note-frame{ width:100%;border-color:#a4b5d0}
+.panel-default>.panel-heading{background-image:none; background-color: #ebf2fb;border-color: #d9e1ed;}
+.modal-dialog kbd{ padding: 2px 4px; background-color: #333;}
+.note-editor.note-frame .note-statusbar{background-color: #ebf2fb;}
+.panel-default>.panel-heading .dropdown-menu{ left:0;}
+
+
+/*--------------------------------------------------------------------------------------------------------------------------------------------------
+    以下的div为默认弹窗组件的父级div，这层div不会在组件中写入，而是通过bootstrap动态添加的，所以如果以下代码写在弹窗组件的css中则无效【因为ng会动态
+    添加对应组建的特性名：如_ngcontent-vhv-4】！所以目前只能仔仔外置引用文件中，即“dialog.context.dialogClass = "big-modal-dialog half-modal-dialog";”
+    这样的代码中的类都要放在此文件下，用来保证宽度，否则弹窗宽度无法设置！
+----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*大型弹出框*/
+.big-modal-dialog { width:1376px; height:750px; }
+/*大型弹出框的一半宽*/
+.half-modal-dialog { width:888px; height:750px; }
+/*标准弹出框*/
+.standard-modal-dialog{ width: 1200px;}
+/*Mapping设置弹出框*/
+.mapping-modal-dialog{ width: 1220px;}
+/*Mapping筛选器弹出框*/
+.mapping-filter-dialog{ width: 1200px;}
+/*概念日志弹出框*/
+.concept-modal-dialog { width: 1200px;}
+
+/*变量审核——大弹窗*/
+.variable_full_dialog { 
+    width:80%; 
+}
+/*变量审核——小弹窗*/
+.variable_half_dialog {
+    width:72%; 
+}
+/*--------------------------------------------------------------------------------------------------------------------------------------------------
+    mappingMatch页面的树，左侧的状态tip
+----------------------------------------------------------------------------------------------------------------------------------------------------*/
+.mappingMatch_Tip {
+    font-size:10px;
+    display:inline-block;
+    background-color:#8eb0e3;
+    border-radius:3px;
+    color:#ffffff;
+    padding:1px 2px;
+}
+.mappingMatch_TimesTip {
+    position:absolute;
+    right:25px;
+    top:0;
+    width:35px;
+    text-align:center;
+    border:1px solid #63758f;
+    border-radius:3px;
+    color:#63758f;
+}
+.mappingMatch_TimesTipHide {
+    display:none;
+}
+.treeArea li a.forbiddenDrag {
+    cursor:not-allowed;
+}
+.treeArea li a.forbiddenDrag .node_name {
+    color:#e8e8e8;
+}

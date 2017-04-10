@@ -1,0 +1,101 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" (click)="cancel()"><span aria-hidden="true" class="icon iconfont">&#xe6cc;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">{{context.isCopyDomain ? '复制域':'复制变量'}}</h4>
+    </div>
+    <div class="modal-body">
+        <div class="table-box" style="overflow:hidden;">
+            <div style="width:20%;float:left;" class="copyYuTable">
+                <div class="table_title">
+                    <table class="table table-bordered" style="margin-bottom:0;">
+                        <thead>
+                            <tr>
+                                <th>标准名</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="mCustomScrollbar" style="height:400px; overflow:auto; overflow-x:hidden;">
+                    <table class="table table-striped table-bordered table-hover">
+                        <tbody>
+                            <tr [ngClass]="{'current':(currStandardId === item.ID)}" *ngFor="let item of standardList" (click)="changeStandard(item.ID,item.StandardName)" [title]="item.StandardName">
+                                <td><span></span>{{item.StandardName}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div style="width:24%;float:left; margin-left:1%;" class="copyYuTable">
+                <div class="table_title">
+                    <table class="table table-bordered" style="margin-bottom:0;">
+                        <thead>
+                            <tr>
+                                <th>域名</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="mCustomScrollbar" style="height:400px; overflow:auto; overflow-x:hidden;">
+                    <table class="table table-striped table-bordered  table-hover">
+                        <tbody>
+                            <tr *ngFor="let item of domainList" [title]="item.DomainName">
+                                <td>
+                                    <div [ngClass]="{'icheckbox_square-green':true,'checked':item.SelectedStatus == 2,'hover':item.SelectedStatus == 1}" style="position: relative;" (click)="toggleSelectedAll(item)"></div>
+                                </td>
+                                <td (click)="changeDomain(item.ID,item.DomainName)">{{item.DomainName}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div style="width:24%;float:left; margin-left:1%;" class="copyYuTable">
+                <div class="table_title">
+                    <table class="table table-bordered" style="margin-bottom:0;">
+                        <thead>
+                            <tr>
+                                <th>变量名</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="mCustomScrollbar" style="height:400px; overflow:auto; overflow-x:hidden;">
+                    <table class="table table-striped table-bordered  table-hover">
+                        <tbody>
+                            <tr *ngFor="let item of vairableList;" (click)="changeVariable(item)" [title]="item.FieldName">
+                                <td>
+                                    <div [ngClass]="{'icheckbox_square-green':true,'checked':item.IsSelected}" style="position: relative;"></div>
+                                </td>
+                                <td>{{item.FieldName}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div style="width:29%;float:left; margin-left:1%;" class="copyYuTable">
+                <div class="table_title">
+                    <table class="table table-bordered" style="margin-bottom:0;">
+                        <thead>
+                            <tr>
+                                <th>已选变量名</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="mCustomScrollbar" style="height:400px; overflow:auto; overflow-x:hidden;">
+                    <table class="table table-striped table-bordered table-hover">
+                        <tbody>
+                            <tr *ngFor="let item of selectedFieldList;" (click)="removeSelectedFieldList(item.variableId,item.domainId)">
+                                <td><span></span>{{item.standardName}}_{{item.domainName}}_{{item.variableName}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="cli"></div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-blue-default" (click)="cancel()">取消</button>
+        <button type="button" class="btn btn-blue" (click)="ok()">确认</button>
+    </div>
+</div>

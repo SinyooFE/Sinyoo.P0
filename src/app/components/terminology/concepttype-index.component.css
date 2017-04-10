@@ -1,0 +1,24 @@
+﻿.conceptMain{ height:100%;}
+.form-group label{margin-bottom: 8px;text-indent: 2px; color: #515e75;}
+.form-control{ background-color: #ebf2fb;border:none;box-shadow: 0 0 0 0;transition: all 0.3s linear;}
+.form-control::-webkit-input-placeholder{color:#77879f;}
+.form-control:focus{background-color: #b8c5da;border:none;box-shadow: 0 0 0 0;}
+.form-control:focus::-moz-placeholder{color:#fff;}
+.form-control:focus:-ms-input-placeholder{color:#fff}
+.form-control:focus::-webkit-input-placeholder{color:#fff}
+.concept.col-xs-5,.concept.col-xs-7{height:90%; padding:0 10px;}
+.con-list{background-color: #fff;padding: 10px; width:100%; height:100%; margin:20px 0;border-top:#b8c5da 8px solid; border-radius: 5px;}
+.concept-title{ color:#18aefb; font-size: 16px;margin-top:20px;text-indent: 20px;}
+.con-list .table-box{ background: #fff;}
+.con-list .table-hover tr:hover td{ background-color: #ebf2fb; color: #77879f;}
+.con-list .buttons{ left:25px;bottom:0;}
+select.form-control{background-color: #ebf2fa;}
+.operation{right:10px;top:6px;}
+.operation span{width:22px; height:22px;margin:0; padding: 0; background:none; border-radius:0;display:inline-block;text-align: center;}
+.table-hover tr:hover td .operation span{ background-color:rgba(255,255,255,0.7);}
+.modal-body .table-hover tr td .operation{ display: none!important;visibility:hidden!important;}
+.modal-body .table-hover tr:hover td .operation{ display: block!important;visibility:visible!important;}
+
+@media (max-width: 1208px){
+	.con-list .buttons{bottom:0;}
+}

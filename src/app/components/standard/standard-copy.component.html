@@ -1,0 +1,36 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" (click)="cancel()"><span aria-hidden="true" class="icon iconfont">&#xe6cc;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">复制标准</h4>
+    </div>
+    <div class="modal-body">
+        <div class="mCustomScrollbar table-box">
+            <div class="ibox-content">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover dataTable dataTables-example">
+                        <thead>
+                            <tr>
+                                <th>标准名称</th>
+                                <th>创建时间</th>
+                                <th>创始人</th>
+                                <th>标准用途</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of stanards" [ngClass]="{'current': selectId === item.ID}" (click)="selectStandard(item.ID)">
+                                <td>{{item.StandardName}}</td>
+                                <td>{{item.UpdateTime | date:'y/M/d HH:mm:ss'}}</td>
+                                <td>{{item.UpdateName}}</td>
+                                <td>{{item.StandardPurpose}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-blue-default" (click)="cancel()">取消</button>
+        <button type="button" class="btn btn-blue" (click)="ok()">确认</button>
+    </div>
+</div>

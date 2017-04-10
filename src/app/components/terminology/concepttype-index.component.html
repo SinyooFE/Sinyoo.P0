@@ -1,0 +1,39 @@
+﻿<div class="conceptMain">
+    <h5 class="concept-title">概念维护类型</h5>
+    <div class="concept col-xs-5">
+        <div class="con-list">
+            <div class="table-box" style="height:90%; overflow:auto; overflow-x:hidden;">
+                <div class="tree">
+                    <ul [attr.id]="conceptTypeTreeId" class="ztree"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="concept col-xs-7">
+        <div class="con-list">
+            <div class="table-box mCustomScrollbar" style="height:90%; overflow:auto; overflow-x:hidden;">
+                <table class="table table-hover">
+                    <tbody>
+                        <tr *ngFor="let itemAttr of currentConceptTypeAttributes;let i = index;">
+                            <td>{{itemAttr.AttributeName}}</td>
+                            <td>{{enumAttributeType[itemAttr.AttributeType]}}</td>
+                            <td>&nbsp;</td>
+                            <td>
+                                <div class="operation">
+                                    <span><i class="icon iconfont delete" (click)="deleteConceptTypeAttribute(itemAttr)">&#xe6cc;</i></span>
+                                    <span><i class="icon iconfont edit" (click)="operateConceptTypeAttribute(false,itemAttr)">&#xe612;</i></span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="buttons">
+                <button type="button" class="btn btn-blue-default" (click)="operateConceptTypeAttribute(true)">新增属性</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

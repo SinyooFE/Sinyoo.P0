@@ -1,0 +1,28 @@
+﻿.bz-title{ margin-bottom:10px; font-weight:bold;}
+.table-box{background-color:#fff;border-radius:0; overflow:hidden;}
+.table-left{width:48%; float:left; margin:0 1%;}
+.table-right{width:48%; float:right; margin:0 1%;}
+i {
+    line-height: 30px;
+    padding-left: 8px;
+    color: #f00;
+    font-style: normal;
+}
+/**编辑域弹出层*/
+.var-title{ border:#b8c5da 1px solid; border-bottom:none;}
+.var-title li{cursor:pointer; height:34px;line-height:34px;padding: 0 50px;font-size:14px; color:#fff; font-style:normal; float:left; position:relative}
+.var-title li.current b{color:#8a9cb9;}
+.var-title li.current span{background-color:#fff;}
+.var-title li b{ position:relative; z-index:0;}
+.var-title li:first-child span{background:none;}
+.var-title li:first-child{ margin-left:-14px;}
+.var-title li:first-child.current span{background:#fff;}
+.var-title li span{transform:skew(30deg,0deg); content:"";position:absolute; left:0; top:0;right:0; bottom:0; width:100%; background-color:#a1b2cc}
+.var-title{overflow:hidden;height:34px; background-color:#b8c5da; text-indent:20px; color:#fff; line-height:34px; border-radius:5px 5px 0 0}
+.modle-content{border:#b8c5da 1px solid;border-top:none; overflow:hidden; padding:10px 20px; border-radius:4px;}
+.model-area{display:none; overflow:auto; overflow-x:hidden; height:300px;}
+
+/**同义词设置*/
+.addButton{position:relative; right:auto; top:auto; bottom:auto; float:right; margin-right:0; margin-top:20px;}
+.model-area td input{ color:#4f5c79}
+

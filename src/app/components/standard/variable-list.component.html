@@ -1,0 +1,67 @@
+﻿<h5 class="listTitle">变量名</h5>
+<div class="search">
+    <input class="form-control" (keyup)="searchVariable($event.target.value)" placeholder="搜索变量" type="text">
+    <i class="icon iconfont searchIco"></i>
+</div>
+<div class="listMain">
+    <div class="table-box" [ngStyle]="{'height.px':editorHeight}">
+        <ul class="table-list">
+            <li class="active">
+                <div class="table-content" #vairableListDiv>
+                    <div class="variable_list_head">
+                        <ul>
+                            <li>
+                                域名
+                            </li>
+                            <li>
+                                变量名称
+                            </li>
+                            <li>
+                                变量标签
+                            </li>
+                            <li>
+                                变量英文标签
+                            </li>
+                            <li>
+                                操作
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="variable_list_body">
+                        <div class="variable_list" *ngFor="let item of vairableList;" [attr.data-id]="item.ID" [attr.data-sort]="item.Sort">
+                            <ul>
+                                <li class="textshow" [title]="item.DomainName">
+                                    {{item.DomainName}}
+                                </li>
+                                <li class="textshow" [title]="item.FieldName">
+                                    <i class="iconfont" [innerHTML]="iconFontHtml(item.ApprovedStatus)" [attr.title]="enumApprovalStatus[item.ApprovedStatus]"></i>
+                                    {{item.FieldName}}
+                                </li>
+                                <li class="textshow" [title]="item.FieldLabel">
+                                    {{item.FieldLabel}}
+                                </li>
+                                <li class="textshow" [title]="item.FieldLabelEn">
+                                    {{item.FieldLabelEn}}
+                                </li>
+                                <li>
+                                    <ng-container *ngIf="item.IsOwner">
+                                        <div class="operation" *ngIf="item.DataStatus !== enumDataStatus['删除']">
+                                            <span (click)="editVariable(item.ID)"><i class="icon iconfont edit">&#xe612;</i></span>
+                                            <span (click)="deleteVariable(item.ID)"><i class="icon iconfont delete">&#xe6cc;</i></span>
+                                        </div>
+                                        <div class="operation" *ngIf="item.DataStatus == enumDataStatus['删除']">
+                                            <span (click)="undoDeleteVariable(item.ID)" title="取消删除"><i class="icon iconfont delete">&#xe6cc;</i></span>
+                                        </div>
+                                    </ng-container>
+                                    <ng-container *ngIf="!item.IsOwner">
+                                        &nbsp;
+                                    </ng-container>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

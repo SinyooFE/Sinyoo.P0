@@ -1,0 +1,158 @@
+﻿<div class="model-box">
+    <div class="apply-title pull-right">
+        <span>{{enumApprovalStatus[context.currentDetail.ConceptStatus]}}</span>
+        <button type="button" class="btn btn-blue" (click)="loadConceptLog()" title="日志审核">日志审核</button>
+    </div>
+    <ol class="breadcrumb">
+        <li><a>{{enumConceptOperateType[context.operateType]}}</a></li>
+        <li class="active">{{context.currentDetail.ConceptName}}</li>
+    </ol>
+    <div class="concept-content" [ngStyle]="{'height.px':editorHeight}">
+        <div class="clearfix"></div>
+        <fieldset class="concept-fieldset">
+            <!-- 基本信息 -->
+            <div class="row">
+                <form id="conceptForm" (ngSubmit)="ok()">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>中文名称</label>
+                            <input type="text" class="form-control" [disabled]="context.isView" name="ConceptName" [(ngModel)]="context.currentDetail.ConceptName" [ngModelOptions]="{standalone: true}" (change)="setPinyin($event.target.value)" required="required" maxlength="50" />
+                            <i class="tip_star">*</i>
+                        </div>
+                        <div class="form-group">
+                            <label>英文名称</label>
+                            <input type="text" class="form-control" [disabled]="context.isView" name="ConceptNameEn" [(ngModel)]="context.currentDetail.ConceptNameEn" [ngModelOptions]="{standalone: true}" maxlength="100" />
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>拼音首字母</label>
+                            <input type="text" class="form-control" disabled="disabled" name="ConceptNamePy" [(ngModel)]="context.currentDetail.ConceptNamePy" [ngModelOptions]="{standalone: true}" required="required" />
+                        </div>
+                        <div class="form-group">
+                            <label>缩写</label>
+                            <input type="text" class="form-control" [disabled]="context.isView" name="ConceptNameAb" [(ngModel)]="context.currentDetail.ConceptNameAb" [ngModelOptions]="{standalone: true}" maxlength="50" />
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>编码</label>
+                            <input type="text" class="form-control" [disabled]="context.isView" name="ConceptCode" [(ngModel)]="context.currentDetail.ConceptCode" [ngModelOptions]="{standalone: true}" maxlength="50" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label>详细说明：</label>
+                        <div class="summernote">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 附加属性 -->
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="form-group">
+                        <label>概念类型：</label>
+                        <div class="selectArea">
+                            <div class="dropdown">
+                                <p class="s-text" aria-haspopup="true" aria-expanded="false" #dropDownTrigger>
+                                    {{context.currentDetail.ConceptTypeName}}<i class="icon iconfont" style="cursor: pointer;">&#xe6b6;</i>
+                                </p>
+                                <div class="dropdown-menu" role="menu" style="width: 100%; max-height: 180px; overflow-y: scroll; overflow-x: hidden;">
+                                    <div class="tree">
+                                        <ul class="ztree" id="conceptEditorConceptTypeTree"></ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <i class="tip_star">*</i>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label>附加属性：</label>
+                        <div class="table-box">
+                            <table class="table table-hover">
+                                <tbody>
+                                    <tr *ngFor="let attrItem of context.currentDetail.Attributes;let i = index;">
+                                        <td><div class="textshow" [title]="attrItem.AttributeName">{{attrItem.AttributeName}}</div></td>
+                                        <td><div class="textshow" [title]="attrItem.AttributeValue">{{attrItem.AttributeValue}}</div></td>
+                                        <td>
+                                            <div class="operation" *ngIf="!context.isView">
+                                                <span><i class="icon iconfont edit" *ngIf="(authorizeInfo.P0_AddConcept || authorizeInfo.P0_ModifyConcept)" (click)="operateConceptAttribute(i)">&#xe612;</i></span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 同义词和正则表达式 -->
+            <div class="row">
+                <div class="clearfix"></div>
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label>同义词和正则表达式:</label>
+                        <div class="table-box">
+                            <table class="table table-hover">
+                                <tbody>
+                                    <tr *ngFor="let item of context.currentDetail.Synonymes;let i = index;">
+                                        <td><div class="textshow" [title]="item.SynonymName">{{item.SynonymName}}</div></td>
+                                        <td><div class="textshow">{{enumSynonymType[item.SynonymType]}}</div></td>
+                                        <td>
+                                            <div class="operation" *ngIf="!context.isView">
+                                                <span><i class="icon iconfont delete" *ngIf="(authorizeInfo.P0_AddConcept || authorizeInfo.P0_ModifyConcept)" (click)="operateConceptSynonym(false,item.SynonymType,i,true)">&#xe6cc;</i></span>
+                                                <span><i class="icon iconfont edit" *ngIf="(authorizeInfo.P0_AddConcept || authorizeInfo.P0_ModifyConcept)" (click)="operateConceptSynonym(false,item.SynonymType,i)">&#xe612;</i></span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-lg-12 buttons newAppend" *ngIf="!context.isView">
+                    <button type="button" 
+                            class="btn btn-blue-default" 
+                            *ngIf="(authorizeInfo.P0_AddConcept || authorizeInfo.P0_ModifyConcept)" 
+                            (click)="operateConceptSynonym(true,enumSynonymType['同义词'])">新增同义词</button>
+                    <button type="button"  
+                            class="btn btn-blue-default" 
+                            *ngIf="(authorizeInfo.P0_AddConcept || authorizeInfo.P0_ModifyConcept)" 
+                            (click)="operateConceptSynonym(true,enumSynonymType['正则表达式'])">新增正则表达式</button>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</div>
+<div class="buttons" *ngIf="!context.isView">
+    <button *ngIf="(context.operateType == enumConceptOperateType['新增'] 
+            || context.operateType == enumConceptOperateType['在下级新增概念'] 
+            || context.operateType == enumConceptOperateType['在同级新增概念'] 
+            || context.operateType == enumConceptOperateType['编辑']) && 
+            (authorizeInfo.P0_AddConcept || authorizeInfo.P0_ModifyConcept)" 
+            type="submit" form="conceptForm" 
+            class="btn btn-cave" 
+            title="保存"><i class="icon iconfont">&#xe60c;</i>保存</button>
+    <button *ngIf="context.operateType == enumConceptOperateType['编辑'] && 
+            context.currentDetail.DataStatus == enumDataStatus['完成'] && 
+            authorizeInfo.P0_DeleteConcept" 
+            type="button" 
+            class="btn btn-default" 
+            (click)="deleteConcept()" 
+            title="删除"><i class="icon iconfont">&#xe605;</i>删除</button>
+    <button *ngIf="context.operateType == enumConceptOperateType['编辑'] && 
+            context.currentDetail.DataStatus == enumDataStatus['删除'] && 
+            authorizeInfo.P0_DeleteConcept" 
+            type="button" class="btn btn-default" 
+            (click)="cancelDeleteConcept()" 
+            title="取消删除"><i class="icon iconfont">&#xe605;</i>取消删除</button>
+</div>
+

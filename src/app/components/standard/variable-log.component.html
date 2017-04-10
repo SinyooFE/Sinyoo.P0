@@ -1,0 +1,245 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" (click)="cancel()"><span aria-hidden="true" class="icon iconfont">&#xe6cc;</span><span class="sr-only">Close</span></button>
+    <h4 class="modal-title">变量审核日志</h4>
+</div>
+<div class="modal-body clearfix">
+    <div class="col-xs-5">
+        <div class="ibox-content">
+            <div class="table-responsive">
+                <div class="variable_log_list">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th class="sorting">操作时间</th>
+                                <th>操作人员</th>
+                                <th style="position:relative;">操作类型<!--<i class="icon iconfont" style="position:absolute; right:10px; top:8px;">&#xe6a7;</i>--></th>
+                                <th style="position:relative;">审核状态<!--<i class="icon iconfont" style="position:absolute; right:10px; top:8px;">&#xe6a7;</i>--></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of variableLogList" [ngClass]="{'current': (item.ID === selectedVariableLog.selectedLog.ID)}" (click)="setSelectedLog(item)">
+                                <td>{{item.ProcTime | date:'y/M/d HH:mm:ss'}}</td>
+                                <td>{{item.SubmitterName}}</td>
+                                <td>{{enumLogAction[item.LogAction]}}</td>
+                                <td>{{enumLogAuditAction[item.AuditAction]}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-7">
+        <div class="clearfix">
+            <div class="filed">
+                <label class="textbold">变量名称：</label>
+                <span class="textbold">{{context.variableName}}</span>
+            </div>
+            <div class="filed-list">
+                <div class="filed">
+                    <label>操作时间：</label>
+                    <span>{{selectedVariableLog.selectedLog.ProcTime | date:'y/M/d HH:mm:ss'}}</span>
+                </div>
+                <div class="filed">
+                    <label>审核状态：</label>
+                    <span>{{enumLogAction[selectedVariableLog.selectedLog.LogAction]}}</span>
+                </div>
+                <div class="filed">
+                    <label>操作类型：</label>
+                    <span>{{enumLogAuditAction[selectedVariableLog.selectedLog.AuditAction]}}</span>
+                </div>
+                <div class="filed">
+                    <label>操作人员：</label>
+                    <span>{{selectedVariableLog.selectedLog.SubmitterName}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="variable_log_detail">
+            <div style="padding:0 0 15px;">
+                <table class="table able-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th style="width:1%">&nbsp;</th>
+                            <th colspan="2" style="width:33%">修改项</th>
+                            <th colspan="2" style="width:33%">修改前</th>
+                            <th colspan="2" style="width:33%">修改后</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td rowspan="8" style="vertical-align: middle; text-align: center;">基本设置</td>
+                            <td colspan="2">变量名称</td>
+                            <td colspan="2">{{selectedVariableLog.originalDetail.FieldName}}</td>
+                            <td colspan="2">{{selectedVariableLog.currentDetail.FieldName}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">变量标签</td>
+                            <td colspan="2">{{selectedVariableLog.originalDetail.FieldLabel}}</td>
+                            <td colspan="2">{{selectedVariableLog.currentDetail.FieldLabel}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">核心类别</td>
+                            <td colspan="2">{{enumFieldCoreCategory[selectedVariableLog.originalDetail.FieldCategory]}}</td>
+                            <td colspan="2">{{enumFieldCoreCategory[selectedVariableLog.currentDetail.FieldCategory]}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">变量角色</td>
+                            <td colspan="2">{{enumFieldRole[selectedVariableLog.originalDetail.FieldRole]}}</td>
+                            <td colspan="2">{{enumFieldRole[selectedVariableLog.currentDetail.FieldRole]}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">变量定义</td>
+                            <td colspan="2">{{selectedVariableLog.originalDetail.FieldDefinition}}</td>
+                            <td colspan="2">{{selectedVariableLog.currentDetail.FieldDefinition}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">CRF填写指南</td>
+                            <td colspan="2">{{selectedVariableLog.originalDetail.FieldGuide}}</td>
+                            <td colspan="2">{{selectedVariableLog.currentDetail.FieldGuide}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">问题描述</td>
+                            <td colspan="2">{{selectedVariableLog.originalDetail.QuestionText}}</td>
+                            <td colspan="2">{{selectedVariableLog.currentDetail.QuestionText}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">其他说明</td>
+                            <td colspan="2">{{selectedVariableLog.originalDetail.FieldRemark}}</td>
+                            <td colspan="2">{{selectedVariableLog.currentDetail.FieldRemark}}</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="7" style="vertical-align: middle; text-align: center;">Primary Configuration</td>
+                            <td colspan="2">Variable Label</td>
+                            <td colspan="2">{{selectedVariableLog.originalDetail.FieldLabelEn}}</td>
+                            <td colspan="2">{{selectedVariableLog.currentDetail.FieldLabelEn}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Core</td>
+                            <td colspan="2">{{enumFieldCoreCategoryEn[selectedVariableLog.originalDetail.FieldCategory]}}</td>
+                            <td colspan="2">{{enumFieldCoreCategoryEn[selectedVariableLog.currentDetail.FieldCategory]}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Roles</td>
+                            <td colspan="2">{{enumFieldRoleEn[selectedVariableLog.originalDetail.FieldRole]}}</td>
+                            <td colspan="2">{{enumFieldRoleEn[selectedVariableLog.currentDetail.FieldRole]}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Variable Definition</td>
+                            <td colspan="2">{{selectedVariableLog.originalDetail.FieldDefinitionEn}}</td>
+                            <td colspan="2">{{selectedVariableLog.currentDetail.FieldDefinitionEn}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">CRF Complete Guide</td>
+                            <td colspan="2">{{selectedVariableLog.originalDetail.FieldGuideEn}}</td>
+                            <td colspan="2">{{selectedVariableLog.currentDetail.FieldGuideEn}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Question Text</td>
+                            <td colspan="2">{{selectedVariableLog.originalDetail.QuestionTextEn}}</td>
+                            <td colspan="2">{{selectedVariableLog.currentDetail.QuestionTextEn}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Bridg</td>
+                            <td colspan="2">{{selectedVariableLog.originalDetail.Bridg}}</td>
+                            <td colspan="2">{{selectedVariableLog.currentDetail.Bridg}}</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="8" style="vertical-align: middle; text-align: center;">属性设置</td>
+                            <td colspan="2">数据类型</td>
+                            <td colspan="2">{{enumFieldDataType[selectedVariableLog.originalDetail.FieldDataType]}}</td>
+                            <td colspan="2">{{enumFieldDataType[selectedVariableLog.currentDetail.FieldDataType]}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">数据属性</td>
+                            <!-- 原始值 -->
+                            <!-- 字符 -->
+                            <ng-container *ngIf="selectedVariableLog.originalDetail.FieldDataType === enumFieldDataType['字符']">
+                                <td colspan="2">字符长度：{{selectedVariableLog.originalDetail.FieldLength}}</td>
+                            </ng-container>
+                            <!-- 数值 -->
+                            <ng-container *ngIf="selectedVariableLog.originalDetail.FieldDataType === enumFieldDataType['数值']">
+                                <td colspan="2">整数部分：{{selectedVariableLog.originalDetail.IntegerPart}}；小数部分：{{selectedVariableLog.originalDetail.DecimalPart}}；</td>
+                            </ng-container>
+                            <!-- 日期 -->
+                            <ng-container *ngIf="selectedVariableLog.originalDetail.FieldDataType === enumFieldDataType['日期']">
+                                <td colspan="2">日期显示：{{fieldCannotEnumOptions[selectedVariableLog.originalDetail.DateFormat]}}</td>
+                            </ng-container>
+                            <!-- 没有值时占位 -->
+                            <ng-container *ngIf="selectedVariableLog.originalDetail.FieldDataType === undefined">
+                                <td colspan="2"></td>
+                            </ng-container>
+
+                            <!-- 当前值 -->
+                            <!-- 字符 -->
+                            <ng-container *ngIf="selectedVariableLog.currentDetail.FieldDataType === enumFieldDataType['字符']">
+                                <td colspan="2">字符长度：{{selectedVariableLog.currentDetail.FieldLength}}</td>
+                            </ng-container>
+                            <!-- 数值 -->
+                            <ng-container *ngIf="selectedVariableLog.currentDetail.FieldDataType === enumFieldDataType['数值']">
+                                <td colspan="2">整数部分：{{selectedVariableLog.currentDetail.IntegerPart}}；小数部分：{{selectedVariableLog.originalDetail.DecimalPart}}；</td>
+                            </ng-container>
+                            <!-- 日期 -->
+                            <ng-container *ngIf="selectedVariableLog.currentDetail.FieldDataType === enumFieldDataType['日期']">
+                                <td colspan="2">日期显示：{{fieldCannotEnumOptions[selectedVariableLog.currentDetail.DateFormat]}}</td>
+                            </ng-container>
+                            <!-- 没有值时占位 -->
+                            <ng-container *ngIf="selectedVariableLog.currentDetail.FieldDataType === undefined">
+                                <td colspan="2"></td>
+                            </ng-container>
+                        </tr>
+                        <tr>
+                            <td colspan="2">统计分类</td>
+                            <td colspan="2">{{enumFieldStatisticType[selectedVariableLog.originalDetail.StatCategory]}}</td>
+                            <td colspan="2">{{enumFieldStatisticType[selectedVariableLog.currentDetail.StatCategory]}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">是否隐私变量</td>
+                            <td colspan="2">{{enumFieldIsPrivate[selectedVariableLog.originalDetail.IsPrivate]}}</td>
+                            <td colspan="2">{{enumFieldIsPrivate[selectedVariableLog.currentDetail.IsPrivate]}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">数据分级</td>
+                            <td colspan="2">{{enumFieldDataLevel[selectedVariableLog.originalDetail.Level]}}</td>
+                            <td colspan="2">{{enumFieldDataLevel[selectedVariableLog.currentDetail.Level]}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">控件类型</td>
+                            <td colspan="2">{{enumFieldControlType[selectedVariableLog.originalDetail.ControlType]}}</td>
+                            <td colspan="2">{{enumFieldControlType[selectedVariableLog.currentDetail.ControlType]}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">受控术语格式</td>
+                            <td colspan="2">{{enumFieldControlTermFormat[selectedVariableLog.originalDetail.ControlTermFormat]}}</td>
+                            <td colspan="2">{{enumFieldControlTermFormat[selectedVariableLog.currentDetail.ControlTermFormat]}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">变量类别</td>
+                            <td colspan="2">{{enumFieldType[selectedVariableLog.originalDetail.FieldType]}}</td>
+                            <td colspan="2">{{enumFieldType[selectedVariableLog.currentDetail.FieldType]}}</td>
+                        </tr>
+                        <!-- 同义词 -->
+                        <tr *ngFor="let item of selectedVariableLog.synonyms;let i = index;">
+                            <td *ngIf="i == 0" [attr.rowspan]="selectedVariableLog.synonyms.length" style="vertical-align: middle; text-align: center;">同义词设置</td>
+                            <td colspan="2">{{i+1}}</td>
+                            <td colspan="2">{{item.key}}</td>
+                            <td colspan="2">{{item.value}}</td>
+                        </tr>
+                        <!-- 选项开始 -->
+                        <tr *ngIf="selectedVariableLog.options.length > 0">
+                            <td [attr.rowspan]="selectedVariableLog.options.length + 1" style="vertical-align: middle; text-align: center;">选项设置</td>
+                            <td colspan="2">概念返回值</td>
+                            <td colspan="2">{{selectedVariableLog.originalReturnValue}}</td>
+                            <td colspan="2">{{selectedVariableLog.currentReurnValue}}</td>
+                        </tr>
+                        <tr *ngFor="let item of selectedVariableLog.options;let i = index;">
+                            <td colspan="2">{{i+1}}</td>
+                            <td colspan="2">{{item.key}}</td>
+                            <td colspan="2">{{item.value}}</td>
+                        </tr>
+                        <!-- 选项结束 -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

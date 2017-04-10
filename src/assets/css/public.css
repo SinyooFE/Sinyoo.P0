@@ -1,0 +1,218 @@
+body {background-color: #ebf2fb;overflow-y: hidden;overflow-x: auto;min-width: 1200px;}
+
+
+/*logo 导航*/
+header{height: 80px;position: relative;}
+.logo{height:80px;width: 250px;display: inline-block;background: #18aefb url(../img/logo.jpg) no-repeat center center; }
+.top {height: 80px;border: none;margin-bottom: 0px;}
+.top .collapse{background-color: #fff;}
+.top .container-fluid{ padding: 0;}
+.top .container-fluid .navbar-header{ margin: 0;}
+.nav li{font-size: 16px;padding: 0 20px;background: url(../img/border.png) no-repeat right center;}
+.nav li:last-child{ background: none;}
+.nav li i.iconfont{padding-right: 5px;font-size: 18px;}
+.nav li.e i,.nav li.e a,.nav a:hover i,.nav a:hover{ color: #4f5c76;}
+.nav li a {position:relative; display: block;height: 80px; line-height: 80px;padding: 0;cursor: pointer;}
+.nav li.e a em,.nav a:hover em{border-bottom: #515e78 2px solid; position: absolute;left: 0;bottom: 0;width:100%;}
+
+/*当前用户下拉*/
+.admins{ position: absolute; right:20px;top:25px;}
+.admins .dropdown{ margin:6px 15px 0 0;}
+.admins .dropdown,.admins .userImg{float: left;}
+.admins .userImg{ color: #afc6f0; font-size: 25px;}
+.admins .dropdown-menu a{ cursor: pointer;}
+ 
+/*page公用的 start*/
+.main-container{ width: 100%; overflow: hidden;}
+.main-left{float: left;width: 250px;height: 100%;padding: 10px;background-color: #FFF;}
+.main-right{ height: 100%;position: relative;overflow:hidden;}
+
+/*概念编辑*/
+.model-box{margin: 10px;padding: 10px;border-radius: 5px;background-color: #fff;}
+/*面包屑*/
+.breadcrumb{ background:none;border-radius: 0;text-align: left;border-bottom: #e4ebf8 1px solid; padding:15px;}
+.breadcrumb a{color: #18aefb;}
+.concept-content{ overflow:auto;background-color: #fff}
+.concept-fieldset{ padding: 0 15px;}
+
+/*按钮*/
+.buttons{ position: absolute;right:50px; bottom: 10px;}
+.btn,.btn:hover,.btn:active,.btn:focus{color:#fff; }
+.buttons button i{font-size: 16px;padding-right: 6px;}
+.btn-blue,.btn-primary{ background: #4ebefb;}
+.btn-primary{ border:none;}
+.btn-blue:hover,.btn-primary:hover,.btn-blue:active,.btn-primary:active,.btn-blue:focus,.btn-primary:focus{ background: #17adfb;}
+.btn-apply{background-color: #17adfb;}
+.btn-apply:hover,.btn-apply:active,.btn-apply:focus{background-color:#0097e6;}
+.btn-cave{ background-color: #06d1c6;}
+.btn-cave:hover,.btn-cave:active,.btn-cave:focus{background-color:#03aaa1;}
+.btn-default{ color: #77879f; background: #fff;}
+.btn-default:hover,.btn-default:active,.btn-default:focus{background-color:#aeb7c6;}
+.btn-apply,.btn-cave,.btn-blue-default{ width:115px;overflow: hidden; margin-left:6px; text-shadow: none;}
+.btn-blue-default{ color: #17adfb; background: #fff; border-color: #17adfb;}
+.btn-blue-default:hover,.btn-blue-default:active,.btn-blue-default:focus{background-color:#17adfb;}
+.btn-green-default{ color: #06d1c6; background: #fff; border-color: #06d1c6;}
+.btn-green-default:hover,.btn-green-default:active,.btn-green-default:focus{background-color:#06d1c6;}
+.btn-green{ background-color: #06d1c6; margin-right: 6px;}
+.btn-green,.btn-green-default{ width:88px;}
+
+/*树状体修饰*/
+.ztree li span{ color: #677c9c;font-size: 14px; margin-left: 5px;transition: color 0.3s linear;-webkit-transition: color 0.3s linear;}
+.ztree li span:hover{color:#40526d;}
+.ztree li{ margin: 10px 0; position: relative;}
+.ztree li a.curSelectedNode{ background:none;border: none;padding-top: 1px;}
+.ztree li a.curSelectedNode span{font-weight: bold;}
+.ztree li i{ position: absolute;right:14px;top:0;color:#77879f;cursor: pointer;}
+.ztree li a{ width:95%;font-size: 14px; position: relative;}
+/**树高亮*/
+.ztree li a.curSelectedNode2{ background-color:#515e75;padding:3px;height: 20px;}
+.ztree li a.curSelectedNode2 span{color:#fff;font-weight:normal;}
+.ztree li a:hover,.ztree li a:hover span{ text-decoration:none;}
+/**树操作图标*/
+.operationIco{ position:absolute; right:8px; top:2px;}
+
+
+.modal-footer .btn-blue,.modal-footer .btn-primary,.modal-footer .btn-blue-default{ width:115px;}
+.note-editor .btn-default,.note-editor .btn{width:auto}
+
+.form-control{color:#515e75}
+/*表格*/
+th,td{ font-size: 14px;}
+.table-box{background-color: #ebf2fb;border-radius: 4px;padding:  0;}
+.table{ margin-bottom: 0;}
+.table > thead > tr > th,.table > tbody > tr > td{border-color: #d9e1ed; color: #77879f;}
+.table > thead > tr > th{border-bottom-width: 1px;}
+.table-hover tr:hover td{background: #c7d4e6;color: #fff;}
+.newAppend{ position:initial; text-align: left;margin:0; margin-bottom: 5px;}
+.shenhe{color:#06d1c6;}
+.xinjian{color:#18aefb;}
+.shanchu{color:#fb7c7e;}
+.table > tbody > tr > td{ position: relative;}
+.operation{ position:absolute;right:15px;top:6px;width:100px; text-align: right; display: none!important;visibility:hidden!important;}
+.table-hover tr:hover td .operation{ display: block!important;visibility:visible!important;}
+.operation span{width:22px; height:22px;margin:0; padding: 0; background-color: #fff; border-radius:2px;display:inline-block;text-align: center;}
+.operation span i{cursor: pointer; text-align: center;text-indent: 0; font-size: 15px; font-weight: normal;display: block;}
+.operation .delete{color:#bdcadd;}
+.operation .edit{color:#bdcadd;}
+.operation span i:hover{color:#7c9fce}
+.table > tbody > tr:nth-child(1) > td{ border-top:none; }
+/*表格选中高亮*/
+.table tr.current td, .table tr.current:hover td{ background-color:#c7d4e6; color:#515e75}
+/*弹出层样式*/
+.modal-header{ border-top:#17adfb 6px solid; border-radius: 5px 5px 0 0;}
+.modal-title{ color: #17adfb;font-weight: normal;}
+button.close{ position: absolute; right:-28px; top:0; opacity: 1;}
+button.close:hover{opacity: 1;}
+button.close span{color:#fff;font-size: 24px;}
+.gainian-edit div{color: #515e75;font-size: 14px;margin:10px 0;}
+.gainian-edit .textarea-edit{color: #77879f; font-size: 12px;width:95%}
+.modal-body .rz-form { border-radius: 0;}
+.modal-body .rz-form th{color: #515e75;}
+.modal-body .rz-form td{color: #77879f; background-color: #fff;}
+.modal-body .checks{ color: #83cdf3;}
+.modal-body .checks:hover{ color: #41b8f6;}
+.modal-body .rz-form .table-hover tr:hover td{ background:none;color:initial;}
+.yitianjia{height:176px; overflow: hidden; background-color: #ebf2fa;position: absolute;right:0;top:0; border-left: #cdd5de 1px solid; }
+.tongyici .modal-footer{margin-top:25px;}
+.gainian-edit textarea{ height:34px; overflow: hidden;}
+.tongyici{height:146px; position: relative;}
+.modal-body .table-hover tr td .operation{ display: block!important;visibility:visible!important;}
+
+/*添加属性*/
+.shuxing-title{ height:38px; background-color: #e4eafa; line-height: 38px; text-indent: 10px; color: #394257; margin-bottom: 10px;}
+.shuxing-title label{ color: #1badf8;}
+.xuanxiang .table>tbody>tr>td{border:none}
+.xuanxiang td em{ font-style:normal;}
+.xuanxiang input{ width:100%;height:20px;padding:0px 12px; border-radius: 0;}
+.addAttr .modal-body{ padding-top: 0;}
+.shuxing-title{ position: absolute;left:0; top:0; width:100%;}
+/*下拉组建*/
+.selectArea{ position: relative; z-index: 9;}
+.selectArea .s-text{ height:34px; padding: 6px 12px; background-color: #ebf2fa;border-radius: 5px; position:relative}
+.s-text{ height:34px; padding: 6px 12px; background-color: #ebf2fa;border-radius: 5px; position:relative}
+.s-text i{ position: absolute; right:10px;top:5px; font-size:18px; color: #b8c5da;}
+.selectArea .s-text i{ position: absolute; right:10px;top:5px; font-size:18px; color: #b8c5da;}
+.selectMain{ position: absolute;left: 0;top:38px; border-radius: 3px; border:#e1ecfa 1px solid; width:100%; background-color: #fff;}
+.selectMain{ max-height:300px; background-color: #ebf2fa; overflow:hidden;}
+.selectMain .ztree li a.curSelectedNode span{color: #77879f;}
+
+.tree{ /*color: #fff;*/ overflow-x:auto; /*margin-right:-10px;*/}
+
+ /* 滚动条的滑轨背景颜色 */
+.tree::-webkit-scrollbar-track {
+      -webkit-box-shadow: none;  
+      box-shadow: none;
+      background-color: #ffffff;
+      border:none;
+}
+/* 滑块颜色 */
+.tree::-webkit-scrollbar-thumb {
+      -webkit-box-shadow: none;  
+      box-shadow: none;
+      background-color: #b8c5da; 
+} 
+/* 滑轨两头的监听按钮颜色 */
+.tree::-webkit-scrollbar-button {
+      background-color: #ffffff;
+} 
+/* 横向滚动条和纵向滚动条相交处尖角的颜色 */
+.tree::-webkit-scrollbar-corner {
+      background-color: #ffffff;
+} 
+
+
+
+
+.t-row.current{background-color:#c7d4e6;color:#515e75}
+.table-box .ztree li span,.layui-layer-wrap .ztree li span{ color:#515e75;}
+.table-box .ztree li a.curSelectedNode span,.layui-layer-wrap .ztree li a.curSelectedNode span{ color:#000;}
+/*page公用的 end*/
+
+/***/
+.dropdown-menu2 > li > a {
+    clear: both;
+    color: #a4b5d0;
+    display: block;
+    font-weight: 400;
+    line-height: 1.42857;
+    padding: 3px 20px;
+    white-space: nowrap;
+}
+.dropdown-menu2 > li > a:hover{color: #4f5c76;}
+.dropdown-menu2 i{ padding-right:4px;}
+
+/*滚动条 start*/
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background-color: #b8c5da;
+}
+/*定义滚动条轨道 内阴影+圆角*/
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px #FFF;
+    background: #FFF;
+}
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: #a1b2cc;
+} 
+
+/*浮动*/
+.fl{
+	float:left;
+}
+.fr{
+	float:right;
+}
+/*querybuilder*/
+.query-builder .form-control {
+    max-width: 150px;
+}
+
+.modal-open {
+    overflow: hidden;
+}
+
+ 
+

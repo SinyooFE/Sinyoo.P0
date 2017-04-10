@@ -1,0 +1,58 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" (click)="cancel()"><span aria-hidden="true" class="icon iconfont">&#xe6cc;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">{{Title}}</h4>
+    </div>
+    <div class="modal-body">
+        <!--标准审核弹窗-->
+        <!--弹窗开始-->
+        <div class="standardDialog clearfix">
+            <!--主体内容-->
+            <!--标准的对比，或者单一展示：新、旧-->
+            <div class="standardDialogMainContent clearfix">
+                <div class="detailContent new" *ngIf="originalVal" [ngStyle]="{'width': (currentVal ? '50%' : '100%')}">
+                    <label>标准名称</label>
+                    <input class="form-control" type="text" disabled [ngModel]="originalVal.StandardName">
+                    <label>标准用途</label>
+                    <input class="form-control" disabled [ngModel]="originalVal.StandardPurpose">
+                    <label>标准描述</label>
+                    <input class="form-control" type="text" disabled [ngModel]="originalVal.StandardDesc">
+                    <label>Name</label>
+                    <input class="form-control" type="text" disabled [ngModel]="originalVal.StandardNameEn">
+                    <label>Purpose</label>
+                    <input class="form-control" type="text" disabled [ngModel]="originalVal.StandardPurposeEn">
+                    <label>Describe</label>
+                    <textarea class="form-control" type="text" rows="3" disabled [ngModel]="originalVal.StandardDescEn"></textarea>
+                </div>
+                <div class="detailContent old" *ngIf="currentVal" [ngStyle]="{'width': (originalVal ? '50%' : '100%')}">
+                    <label>标准名称</label>
+                    <input class="form-control" type="text" disabled [ngModel]="currentVal.StandardName">
+                    <label>标准用途</label>
+                    <input class="form-control" type="text" disabled [ngModel]="currentVal.StandardPurpose">
+                    <label>标准描述</label>
+                    <input class="form-control" type="text" disabled [ngModel]="currentVal.StandardDesc">
+                    <label>Name</label>
+                    <input class="form-control" type="text" disabled [ngModel]="currentVal.StandardNameEn">
+                    <label>Purpose</label>
+                    <input class="form-control" type="text" disabled [ngModel]="currentVal.StandardPurposeEn">
+                    <label>Describe</label>
+                    <textarea class="form-control" type="text" rows="3" disabled [ngModel]="currentVal.StandardDescEn"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <!--审核意见-->
+        <div class="col-lg-12">
+            <div class="form-group commentsContent">
+                <label>审核意见：</label>
+                <textarea [(ngModel)]="Remark" [disabled]="!(context.forApproval && hasApprovePermission)"></textarea>
+            </div>
+        </div>
+        <button *ngIf="context.forApproval && hasApprovePermission" type="button" class="btn btn-blue" (click)="approve()"><i class="icon iconfont">&#xe611;</i>审核通过</button>
+        <button *ngIf="context.forApproval && hasApprovePermission" type="button" class="btn btn-blue-default" (click)="reject()"><i class="icon iconfont">&#xe6cc;</i>驳回</button>
+        <button type="button" class="btn btn-default" (click)="onclose(false)"><i class="icon iconfont">&#xe85c;</i> 关闭</button>
+    </div>
+</div>
+
+

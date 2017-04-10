@@ -1,0 +1,81 @@
+﻿<div class="row" style="padding:15px 20px;">
+    <div class="col-xs-12">
+        <div class="variableSetting">
+            <a class="return" (click)="cancel()"><i class="icon iconfont">&#xe614;</i>返回</a>
+            <div class="variable-attr">
+                <div class="var-title">标准属性<i class="icon iconfont fr" (click)="isShowAttribute = !isShowAttribute" innerHTML="{{isShowAttribute ? '&#xe65d;' : '&#xe6b6;'}}">&#xe6b6;</i></div>
+                <div [ngClass]="{'modle-content':true,'hidden': !isShowAttribute}">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>创建人</label>
+                            <input type="text" class="form-control required" [ngModel]="standardDetail.CreateUserName" />
+                        </div>
+                        <div class="form-group">
+                            <label>最后修改人</label>
+                            <input type="text" class="form-control" [ngModel]="standardDetail.UpdateUserName" />
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>创建时间</label>
+                            <input type="text" class="form-control required" [ngModel]="standardDetail.CreateTime | date:'y年M月d日 HH:mm:ss'" />
+                        </div>
+                        <div class="form-group">
+                            <label>最后修改时间</label>
+                            <input type="text" class="form-control" [ngModel]="standardDetail.UpdateTime | date:'y年M月d日 HH:mm:ss'" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <form (ngSubmit)="ok()">
+                <div class="switchsArea">
+                    <div class="modle-content">
+                        <div *ngIf="!context.isAdd" class="apply-title pull-right">
+                            <span>{{enumApprovalStatus[standardDetail.ApprovedStatus]}}</span>
+                            <button type="button" class="btn btn-green" (click)="showStandardLog()">审核日志</button>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="switch-table gray-bg" style="width:49%; float:left;margin:0 1% 0 0">
+                            <h6>基本设置</h6>
+                            <div class="form-group">
+                                <label>标准名称</label>
+                                <input type="text" class="form-control required" name="StandardName" [(ngModel)]="standardDetail.StandardName" [ngModelOptions]="{standalone: true}" required="required" />
+                                <i>*</i>
+                            </div>
+                            <div class="form-group">
+                                <label>标准用途</label>
+                                <input type="text" class="form-control" name="StandardPurpose" [(ngModel)]="standardDetail.StandardPurpose" [ngModelOptions]="{standalone: true}" />
+                            </div>
+                            <div class="form-group">
+                                <label>标准描述</label>
+                                <textarea class="form-control ng-pristine ng-valid ng-touched" name="StandardDesc" style="height:60px;" [(ngModel)]="standardDetail.StandardDesc" [ngModelOptions]="{standalone: true}"></textarea>
+                            </div>
+                        </div>
+                        <div class="switch-table gray-bg" style="width:49%; float:right; margin:0  0 0 1%">
+                            <h6>Primary Configuration</h6>
+                            <div class="form-group">
+                                <label>Name:</label>
+                                <input type="text" class="form-control required" name="StandardNameEn" [(ngModel)]="standardDetail.StandardNameEn" [ngModelOptions]="{standalone: true}" required="required" />
+                                <i>*</i>
+                            </div>
+                            <div class="form-group">
+                                <label>Purpose:</label>
+                                <input type="text" class="form-control" name="StandardPurposeEn" [(ngModel)]="standardDetail.StandardPurposeEn" [ngModelOptions]="{standalone: true}" />
+                            </div>
+                            <div class="form-group">
+                                <label>Describe</label>
+                                <textarea class="form-control ng-pristine ng-valid ng-touched" name="StandardDescEn" style="height:60px;" [(ngModel)]="standardDetail.StandardDescEn" [ngModelOptions]="{standalone: true}"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-blue-default" (click)="cancel()">取消</button>
+                    <button type="submit" class="btn btn-blue">确认</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

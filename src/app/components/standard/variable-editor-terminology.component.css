@@ -1,0 +1,7 @@
+﻿/*文字显示*/
+.textshow {
+    white-space: nowrap;
+    word-break: keep-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

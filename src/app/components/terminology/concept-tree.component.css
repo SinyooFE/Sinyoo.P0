@@ -1,0 +1,20 @@
+﻿/*输入框*/
+.search{position: relative;}
+.search .searchInput{width: 85%;position: relative;}
+.search input{background-color: #ebf2fb; border-radius: 4px;color:#515e75;}
+.search input:focus{background-color: #b8c5da;border-radius: 4px;box-shadow: 0px 0px 0px -1px;}
+.search input::-webkit-input-placeholder{color:#677c9c;}
+.search input:focus::-webkit-input-placeholder{color:#ebf2fb;}
+.search input::-moz-placeholder{color:#677c9c;}
+.search input:-moz-placeholder{color:#677c9c;}
+.search input:-ms-input-placeholder{color:#677c9c;}
+.search .searchIco{ position: absolute; right:10px;top:5px;color:#77879f;font-size: 18px;}
+.search .filter{ position: absolute;right:0;top:4px;font-size:20px;color: #b8c5da;cursor: pointer;}
+/*搜索结果*/
+.number-search{ height:30px;line-height: 30px; width:100%; text-align:center; color:#677c9c;margin-top: 10px;}
+.number-search b{ color:red; padding:0 4px;}
+/*概念类型维护*/
+.assert{ height:30px; margin:10px auto;background-color: #b8c5da;width:50%; color: #677c9c; line-height: 30px;  display:block; text-align: center;border-radius:5px;}
+.assert:hover{ color: #ffffff;background-color:#818fa5;}
+
+.ztree {overflow: auto;padding: 0;}

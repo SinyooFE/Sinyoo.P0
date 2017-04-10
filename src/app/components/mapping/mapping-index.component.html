@@ -1,0 +1,42 @@
+﻿<div class="main-left">
+    <div class="leftHead commonHead">
+        <div class="filterText">标准筛选</div>
+    </div>
+    <div class="leftList" [ngStyle]="{'height.px':editorHeight}">
+        <div *ngFor="let item of mappingList;let i = index;" [ngClass]="{'buttonListModel':true,'clicked':currentIndex === i}" (click)="locateRightContent($event,i)" [title]="item.StandardName">
+            {{item.StandardName}}
+        </div>
+    </div>
+</div>
+<div class="main-right">
+    <div class="rightContent">
+        <div class="rightHead commonHead">
+            <span class="icon iconfont settingIcon" title="点击筛选" (click)="showAdminSetting()">&#xe60d;</span>
+        </div>
+        <div class="rightList" [ngStyle]="{'height.px':editorHeight-10}" #rightList>
+            <div *ngFor="let item of mappingList;let i = index;" [attr.id]="'standard' + item.StandardID" [ngClass]="{'detailListModel':true,'detailListModelSelected':currentIndex === i}">
+                <div class="detailHead"></div>
+                <div class="detailStandardName">
+                    <span class="name">{{item.StandardName}}</span>
+                    <span class="icon iconfont getAllButton" (click)="toggleShowStudy($event,i)" [attr.title]="!mappingListShowState[i] ? '展开' : '收起'" [innerHTML]="!mappingListShowState[i] ? '&#xe61a;' : '&#xe7ff;'"></span>
+                </div>
+                <div *ngFor="let itemStudy of item.StudyInfos;let j = index;" [ngClass]="{'detailStandardContent':true,'hide':(j >= 5 && !mappingListShowState[i])}">
+                    <span class="name">
+                        <span (click)="showMappingSetting(itemStudy.ID)"
+                              [title]="itemStudy.Customername + '-' + itemStudy.dept + '-' + itemStudy.Studyname">{{itemStudy.Customername}}-{{itemStudy.dept}}-{{itemStudy.Studyname}}</span>
+                    </span>
+                    <span class="status">{{enumMappingStatus[itemStudy.MappingStatus]}}</span>
+                    <span class="numberName">病例数</span>
+                    <span class="number">{{itemStudy.PatientCount}}</span>
+                    <span class="messageTip icon iconfont">
+                        &#xe60d;
+                        <em [ngStyle]="{'color':(itemStudy.SettingChanges || itemStudy.DataChanges) ? '' : '#b8c5da'}"></em>
+                        <i *ngIf="!itemStudy.SettingChanges && itemStudy.DataChanges">数据有更新</i>
+                        <i *ngIf="itemStudy.SettingChanges && !itemStudy.DataChanges">设置有更新</i>
+                        <i *ngIf="itemStudy.SettingChanges && itemStudy.DataChanges">数据有更新<br />设置有更新</i>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

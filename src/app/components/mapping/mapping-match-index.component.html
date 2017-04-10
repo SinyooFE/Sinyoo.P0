@@ -1,0 +1,294 @@
+﻿<!--mappingMatch主体部分-->
+<div class="main clearfix" id="main_page_mappingMatch">
+    <!--返回和日志-->
+    <div class="topContent">
+        <!--返回-->
+        <div class="backPageButton" (click)="getBack()"><span class="icon iconfont">&#xe614;</span><span class="backText">返回</span></div>
+        <!--日志-->
+        <div class="dialogContent"><span class="checkStatus">待审核</span><span class="dialogButton">日志</span></div>
+    </div>
+    <div class="mappingMatchArea">
+        <!--mappingMatch左侧，源树-->
+        <div class="mappingMatchTreeArea mappingMatch_Left">
+            <!--标题-->
+            <div class="dataTitle sourceDataTitle">
+                <p class="typeTitle">源数据</p>
+                <p class="detailTitle">{{studyName}}</p>
+            </div>
+            <!--过滤-->
+            <div class="variableFilter sourceFilter">
+                <!--搜索-->
+                <div class="search">
+                    <input (keyup)="searchTreeField('left',$event.target.value)" id="source_search" type="text" placeholder="搜索源变量" name="source_srarch"><span title="搜索源字段" class="icon iconfont searchLogo">&#xe603;</span>
+                </div>
+                <div class="filterNoMappingRadio" (click)="isCheckedNotMappingOption(mappingMatchStatus.is_left_tree_not_mapping,'position_leftTree')">
+                    <span [innerHTML]="mappingMatchStatus.is_left_tree_not_mapping?'&#xe625;':'&#xe628;'" class="icon iconfont"></span>
+                    <span>未映射项</span>
+                </div>
+            </div>
+            <!--树-->
+            <div class="treeArea sourceTree">
+                <!--树遍历开始-->
+                <div id="source_tree" class="ztree">
+
+                </div>
+            </div>
+        </div>
+        <!--mappingMatch中间，匹配区域-->
+        <div class="mappingMatch_Middle">
+            <!--操作面板区域-->
+            <div class="controlPanel">
+                <div class="addButtons">
+                    <!--添加组-->
+                    <div class="addButton addGroup" (click)="createGroup()"><span class="icon iconfont">&#xe616;</span><span class="addGroupText">添加组</span></div>
+                    <!--添加临时表-->
+                    <div (click)="addTempTable()" class="addButton addTemporaryGroup"><span class="icon iconfont">&#xe616;</span><span class="addGroupTemporaryText">添加临时表</span></div>
+                </div>
+                <div class="settings">
+                    <div class="showRejected" (click)="switchRejectedGroupStatus(mappingMatchStatus.is_show_rejected_group)">
+                        <span [innerHTML]="mappingMatchStatus.is_show_rejected_group?'&#xe625;':'&#xe628;'" class="icon iconfont"></span>显示驳回分组
+                    </div>
+                    <span (click)="updateAllGroups(taskStatus_isUpdate)" [class.isUpdatingData]="taskStatus_isUpdate" class="icon iconfont yun" [attr.title]="taskStatus_isUpdate?'更新数据中…':'更新数据'">&#xe61d;</span>
+                    <span (click)="routeSettingPage()" class="icon iconfont set" title="选项值及关联表设置">&#xe621;</span>
+                </div>
+            </div>
+            <!--表匹配区域-->
+            <div class="matchesTablesArea" #matches_tablesArea>
+                <!--每一个匹配表区域-->
+                <div class="checkData" *ngIf="allGroupData.length>0">
+                    <!--遍历Section-->
+                    <div *ngFor="let perGroup of allGroupData;let groupIndex = index;">
+                        <div class="orderNum">分组({{groupIndex+1}})</div>
+                        <div class="perTableMatches">
+                            <!--控制面板-->
+                            <div class="perMatchesControlPannel">
+                                <span (click)="filterData(perGroup.MappingSectionID,groupIndex)" class="left dataSourceFilter icon iconfont" title="源数据筛选">
+                                    &#xe6b1;
+                                    <i *ngIf="perGroup.DataFilterType===Enum_DataFilterType['有筛选有更新']" class="statusTip tip_Green" title="有更新"></i>
+                                    <i *ngIf="perGroup.DataFilterType===Enum_DataFilterType['有筛选无更新']" class="statusTip tip_Yellow" title="无更新"></i>
+                                    <i *ngIf="perGroup.DataFilterType===Enum_DataFilterType['无筛选']" class="statusTip tip_Red" title="未筛选"></i>
+                                </span>
+                                <span (click)="autoMappingSection(perGroup.MappingSectionID,groupIndex)" class="left autoMtach icon iconfont" title="自动匹配">&#xe61c;</span>
+                                <span (click)="deleteTargetGroup(groupIndex,perGroup.MappingSectionID)" class="left deleteTargetGroup icon iconfont" title="清空目标组">&#xe619;</span>
+                                <span (click)="deleteGroup(groupIndex,perGroup.MappingSectionID)" class="right deleteMatchGroup icon iconfont" title="删除此分组">&#xe6cc;</span>
+                            </div>
+                            <!--表匹配列表-->
+                            <div class="tableList">
+                                <div class="repeatGroups" *ngFor="let perTable of perGroup.Tables;let tableIndex=index">
+                                    <!--表名-->
+                                    <div class="tableName">
+                                        <div class="sourceTableName">{{perTable.SourceTableName}}</div>
+                                        <div class="targetTableName">
+                                            <span class="desTableName" *ngIf="perGroup.DestinationTableName!==''">{{tableIndex===0?perGroup.DestinationTableName:""}}</span>
+                                            <div class="selectPart" *ngIf="perGroup.DestinationTableName===''">
+                                                <div class="selectTabNameButton" (click)="isShowSelectOption(isShowSelectOption_flag,groupIndex)">点击选择目标表</div>
+                                                <div *ngIf="isShowSelectOption_flag && thisGroupIndex===groupIndex" class="desTableList">
+                                                    <input (keyup)="searchDesTableName($event.target.value)" type="text" placeholder="请输入表名关键字" />
+                                                    <div (click)="selectTableName(perTableNodeData.FieldName,perTableNodeData.FieldID,perGroup)" *ngFor="let perTableNodeData of desTableNodeData" class="perDesTableName">{{perTableNodeData.FieldName}}</div>
+                                                </div>                                                
+                                            </div>
+                                            <span class="changeDesTableNameButton" *ngIf="perGroup.DestinationTableName!=='' && perGroup.CanChangeTable"(click)="changeDesTableName(perGroup)">更换目标表名</span>
+                                        </div>
+                                    </div>
+                                    <table>
+                                        <tbody class="checkData" *ngIf="perTable.Rules">
+                                            <!--遍历Rule-->
+                                            <tr class="perMappingTR" [attr.sourceVarID]="rule.SourceFieldID" [attr.desVarID]="rule.DestinationFieldID" *ngFor="let rule of perTable.Rules;let ruleIndex=index;">
+                                                <!--源变量-字段-->
+                                                <td *ngIf="rule.DataStatus!==1" class="perVariable sourcePerVariable leftTD droppabled" [attr.data-mappingRuleID]="rule.MappingRuleID" [attr.data-mappingSourceTableID]="rule.SourceTableID">
+                                                    <!--源变量为空 且 目标不为空，显示“指定”-->
+                                                    <div class="leftTdOption assignVariable" *ngIf="rule.SourceFieldName==='' && rule.DestinationFieldName!==''">
+                                                        <span *ngIf="rule.SourceMappingType===Enum_SourceMappingType['无'] && rule.DestinationFieldName!==''" class="sourceVariableSetting assign" (click)="switch_Assign(rule)">指定</span>
+                                                        <span *ngIf="rule.SourceMappingType===Enum_SourceMappingType['指定']" class="sourceVariableSetting assign" (click)="switch_Assign(rule)">取消指定</span>
+                                                        <input *ngIf="rule.SourceMappingType===Enum_SourceMappingType['指定']" (keyup.enter)="submitAssignVariable($event.target.value,rule)" type="text" placeholder="请输入指定变量" />
+                                                    </div>
+                                                    <!--如果左边不是空值-->
+                                                    <div *ngIf="rule.SourceFieldName!==''">
+                                                        <!--如果是选项值-->
+                                                        <div (click)="switch_ShowMultipleValues(rule)" [class.canBeClick]="rule.IsMultiple" [class.varHasDeleted]="rule.tobedel" class="sourceOptionName clearfix">
+                                                            <span>{{rule.SourceFieldName}}</span><span *ngIf="rule.IsMultiple" class="iconfont icon">&#xe6b6;</span>
+                                                        </div>
+                                                        <div *ngIf="rule.OptionValues.length>0" class="sourceOptionsValue">
+                                                            <div [class.varHasDeleted]="perMultipleValueJSON.tobedel" class="perValue perSourceValue" *ngFor="let perMultipleValueJSON of rule.OptionValues">{{perMultipleValueJSON.SourceFieldName}}</div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <!--目标变量-字段-->
+                                                <td *ngIf="rule.DataStatus!==1" class="perVariable targetPerVariable rightTD droppabled" [attr.data-mappingRuleID]="rule.MappingRuleID" [attr.data-mappingSourceTableID]="rule.SourceTableID" [attr.data-mappingDestinationTableID]="perGroup.DestinationTableID">
+                                                    <!--右边普通变量-->
+                                                    <div class="targetOptionName clearfix">
+                                                        <div [class.varHasDeleted]="rule.tobedel" *ngIf="rule.DestinationFieldName!=='' && !rule.isEdit">
+                                                            {{rule.DestinationFieldName}}<span (click)="deleteGroupVariable(groupIndex,tableIndex,ruleIndex,rule.MappingSectionID,rule.MappingRuleID,false,-1)" class="deleteThisTargetVariable icon iconfont" title="删除此目标变量">&#xe6cc;</span>
+                                                            <span *ngIf="rule.DestinationMappingType===Enum_DestinationMappingType['扩展'] || rule.DestinationMappingType===Enum_DestinationMappingType['临时']" class="editVar" (click)="editVariable(rule)">编辑变量</span>
+                                                        </div>
+                                                        <!--编辑目标变量-->
+                                                        <div *ngIf="rule.isEdit">
+                                                            <span class="editVar" (click)="editVariable(rule)">取消编辑</span>
+                                                            <input (keyup.enter)="submitEditedVariable($event.target.value,rule)" value="{{rule.DestinationFieldName}}" type="text" name="editVariable" placeholder="请输入变量" />
+                                                        </div>
+                                                        <!--如果目标为空，source不为空，显示三个状态-->
+                                                        <div *ngIf="rule.SourceFieldName!=='' && rule.DestinationFieldName===''&& !rule.isEdit">
+                                                            <div class="rightTdOption">
+                                                                <!--放弃模块-->
+                                                                <div class="targetVariableSettingModel">
+                                                                    <span *ngIf="rule.DestinationMappingType===Enum_DestinationMappingType['无']" class="targetVariableSetting giveUp" (click)="switch_GiveUp(rule,groupIndex)">放弃</span>
+                                                                    <span *ngIf="rule.DestinationMappingType===Enum_DestinationMappingType['放弃']" class="targetVariableSetting giveUp" (click)="switch_GiveUp(rule,groupIndex)">取消放弃</span>
+                                                                </div>
+                                                                <!--扩展模块-->
+                                                                <div class="targetVariableSettingModel">
+                                                                    <span *ngIf="rule.DestinationMappingType===Enum_DestinationMappingType['无']" class="targetVariableSetting extendsVariable" (click)="switch_Extends(rule,perGroup)">扩展</span>
+                                                                    <span *ngIf="rule.DestinationMappingType===Enum_DestinationMappingType['扩展']" class="targetVariableSetting extendsVariable" (click)="switch_Extends(rule,perGroup)">取消扩展</span>
+                                                                    <input *ngIf="rule.DestinationMappingType===Enum_DestinationMappingType['扩展']" (keyup.enter)="submitExtendsVariable($event.target.value,rule,groupIndex,tableIndex,ruleIndex,-1,false)" type="text" name="extendsVariable" placeholder="请输入扩展变量" />
+                                                                </div>
+                                                                <!--临时模块-->
+                                                                <div class="targetVariableSettingModel">
+                                                                    <span *ngIf="rule.DestinationMappingType===Enum_DestinationMappingType['无']" class="targetVariableSetting tempVariable" (click)="switch_Temp(rule,perGroup)">临时</span>
+                                                                    <span *ngIf="rule.DestinationMappingType===Enum_DestinationMappingType['临时']" class="targetVariableSetting tempVariable" (click)="switch_Temp(rule,perGroup)">取消临时</span>
+                                                                    <input *ngIf="rule.DestinationMappingType===Enum_DestinationMappingType['临时']" (keyup.enter)="submitTempVariable($event.target.value,rule,groupIndex,tableIndex,ruleIndex,-1,false)" type="text" name="tempVariable" placeholder="请输入临时变量" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!--右边多选项-->
+                                                    <div *ngIf="rule.OptionValues.length>0" class="targetOptionsValue">
+                                                        <div class="perValue perTargetValue droppabled" [attr.data-mappingOptionRuleID]="perMultipleValueJSON.MappingRuleID" *ngFor="let perMultipleValueJSON of rule.OptionValues;let multipleIndex=index">
+                                                            <div [class.varHasDeleted]="perMultipleValueJSON.tobedel" *ngIf="perMultipleValueJSON.DestinationFieldName!=='' && !perMultipleValueJSON.isEdit">
+                                                                {{perMultipleValueJSON.DestinationFieldName}}<span (click)="deleteGroupVariable(groupIndex,tableIndex,ruleIndex,rule.MappingSectionID,perMultipleValueJSON.MappingRuleID,true,multipleIndex)" class="deleteThisTargetVariable icon iconfont" title="删除此目标变量">&#xe6cc;</span>
+                                                                <span *ngIf="perMultipleValueJSON.DestinationMappingType===Enum_DestinationMappingType['扩展'] || perMultipleValueJSON.DestinationMappingType===Enum_DestinationMappingType['临时']" class="editVar" (click)="editVariable(perMultipleValueJSON)">编辑变量</span>
+                                                            </div>
+                                                            <!--编辑目标变量-->
+                                                            <div *ngIf="perMultipleValueJSON.isEdit">
+                                                                <span class="editVar" (click)="editVariable(perMultipleValueJSON)">取消编辑</span>
+                                                                <input (keyup.enter)="submitEditedVariable($event.target.value,perMultipleValueJSON)" value="{{perMultipleValueJSON.DestinationFieldName}}"  type="text" name="editVariable" placeholder="请输入变量" />
+                                                            </div>
+                                                            <!--如果目标为空，source不为空，显示三个状态-->
+                                                            <div *ngIf="perMultipleValueJSON.DestinationFieldName==='' && !perMultipleValueJSON.isEdit">
+                                                                <div class="rightTdOption">
+                                                                    <!--放弃模块-->
+                                                                    <div class="targetVariableSettingModel">
+                                                                        <span *ngIf="perMultipleValueJSON.DestinationMappingType===Enum_DestinationMappingType['无']" class="targetVariableSetting giveUp" (click)="switch_GiveUp(perMultipleValueJSON,groupIndex)">放弃</span>
+                                                                        <span *ngIf="perMultipleValueJSON.DestinationMappingType===Enum_DestinationMappingType['放弃']" class="targetVariableSetting giveUp" (click)="switch_GiveUp(perMultipleValueJSON,groupIndex)">取消放弃</span>
+                                                                    </div>
+                                                                    <!--扩展模块-->
+                                                                    <div class="targetVariableSettingModel">
+                                                                        <span *ngIf="perMultipleValueJSON.DestinationMappingType===Enum_DestinationMappingType['无']" class="targetVariableSetting extendsVariable" (click)="switch_Extends(perMultipleValueJSON,perGroup)">扩展</span>
+                                                                        <span *ngIf="perMultipleValueJSON.DestinationMappingType===Enum_DestinationMappingType['扩展']" class="targetVariableSetting extendsVariable" (click)="switch_Extends(perMultipleValueJSON,perGroup)">取消扩展</span>
+                                                                        <input *ngIf="perMultipleValueJSON.DestinationMappingType===Enum_DestinationMappingType['扩展']" (keyup.enter)="submitExtendsVariable($event.target.value,perMultipleValueJSON,groupIndex,tableIndex,ruleIndex,multipleIndex,true)" type="text" name="extendsVariable" placeholder="请输入扩展变量" />
+                                                                    </div>
+                                                                    <!--临时模块-->
+                                                                    <div class="targetVariableSettingModel">
+                                                                        <span *ngIf="perMultipleValueJSON.DestinationMappingType===Enum_DestinationMappingType['无']" class="targetVariableSetting tempVariable" (click)="switch_Temp(perMultipleValueJSON,perGroup)">临时</span>
+                                                                        <span *ngIf="perMultipleValueJSON.DestinationMappingType===Enum_DestinationMappingType['临时']" class="targetVariableSetting tempVariable" (click)="switch_Temp(perMultipleValueJSON,perGroup)">取消临时</span>
+                                                                        <input *ngIf="perMultipleValueJSON.DestinationMappingType===Enum_DestinationMappingType['临时']" (keyup.enter)="submitTempVariable($event.target.value,perMultipleValueJSON,groupIndex,tableIndex,ruleIndex,multipleIndex,true)" type="text" name="tempVariable" placeholder="请输入临时变量" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <span (click)="deleteGroupLine(groupIndex,tableIndex,ruleIndex,perGroup.MappingSectionID,rule.MappingRuleID)" class="deleteLine icon iconfont" title="删除此行">&#xe6a1;</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                                <table>
+                                    <tr>
+                                        <td class="perVariable sourcePerVariable leftTD emptyTD droppabled">拖拽左侧树节点以添加变量</td>
+                                        <td class="perVariable targetPerVariable rightTD emptyTD droppabled">拖拽右侧树节点以添加变量</td>
+                                    </tr>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!--临时表区域-->
+                <div class="checkData" *ngIf="allTempTablesData.length>0">
+                    <div [attr.id]="'tempTable_'+ perTempTable.TempororyTableID" *ngFor="let perTempTable of allTempTablesData;let tempTableIndex=index;">
+                        <div class="orderNum">{{perTempTable.TempororyTableName}}({{tempTableIndex+1}})</div>
+                        <div class="tempTablesArea">
+                            <!--临时表头-->
+                            <div class="tempTablesHead">
+                                <!--添加分组-->
+                                <div (click)="addTempGroup(perTempTable.TempororyTableID,tempTableIndex)" class="addButton addTempGroup" title="添加临时分组">
+                                    <span class="icon iconfont">&#xe616;</span><span class="addTempGroupText">添加</span>
+                                </div>
+                                <!--删除临时表按钮-->
+                                <span (click)="deleteTempTable(tempTableIndex,perTempTable.TempororyTableID)" class="deleteTempTable icon iconfont" title="删除临时表">&#xe6cc;</span>
+                            </div>
+                            <!--分组区域-->
+                            <div class="checkData" *ngIf="perTempTable.Sections.length>0">
+                                <div class="sGroupArea" *ngFor="let perTempGroup of perTempTable.Sections;let tempGroupIndex=index;">
+                                    <div class="checkData" *ngIf="perTempGroup.TableHeads.length>0">
+                                        <div *ngFor="let perTable of perTempGroup.TableHeads;let perTableIndex=index;">
+                                            <!--表区域-->
+                                            <div class="tableLine tableName">
+                                                {{perTable.SourceTableName}}
+                                                <span (click)="deleteTableOrVariableOfTempGroup(tempTableIndex,tempGroupIndex,perTableIndex,-1,perTempTable.TempororyTableID,perTempGroup.TempororyTableSectionID,perTable.SourceTableID,true)" class="deleteThisLine icon iconfont" title="删除此表">&#xe6a1;</span>
+                                            </div>
+                                            <!--变量区域-->
+                                            <div class="checkData" *ngIf="perTable.Fields.length>0">
+                                                <div class="tableLine VariableName" *ngFor="let perField of perTable.Fields;let fieldIndex=index;">
+                                                    {{perField.SourceFieldName}}
+                                                    <span (click)="deleteTableOrVariableOfTempGroup(tempTableIndex,tempGroupIndex,perTableIndex,fieldIndex,perTempTable.TempororyTableID,perTempGroup.TempororyTableSectionID,perField.TempororyTableFieldID.toString(),false)" class="deleteVariable icon iconfont" title="删除变量">&#xe6cc;</span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <!--空白区域-->
+                                    <div class="droppabled emptyLine tempTableEmptyLine">添加变量</div>
+                                    <!--筛选按钮-->
+                                    <div (click)="filterVariableOfTempGroup(tempTableIndex,tempGroupIndex)"class="tempTableFilter">
+                                        <div class="icon iconfont" title="有更新">
+                                            &#xe6b1;
+                                            <span *ngIf="perTempGroup.DataFilterType===Enum_DataFilterType['有筛选有更新']" class="filterStatus red" title="有更新"></span>
+                                            <span *ngIf="perTempGroup.DataFilterType===Enum_DataFilterType['有筛选无更新']" class="filterStatus yellow" title="无更新"></span>
+                                            <span *ngIf="perTempGroup.DataFilterType===Enum_DataFilterType['无筛选']" class="filterStatus green" title="未筛选"></span>
+                                        </div>
+                                        <span class="filterText">筛选</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <!--提交区域-->
+            <div class="submitArea">
+                <button (click)="submitAllGroup()" class="submitMatchTables"><span class="icon iconfont">&#xe600;</span> 提交</button>
+            </div>
+        </div>
+        <!--mappingMatch右侧，标准树-->
+        <div class="mappingMatchTreeArea mappingMatch_Right">
+            <!--标题-->
+            <div class="dataTitle targetDataTitle">
+                <p class="typeTitle">目标数据</p>
+                <p class="detailTitle">{{standardName}}</p>
+            </div>
+            <!--过滤-->
+            <div class="variableFilter targetFilter">
+                <!--搜索-->
+                <div class="search">
+                    <input (keyup)="searchTreeField('right',$event.target.value)" id="target_search" type="text" placeholder="搜索标准变量" name="target_srarch"><span title="搜索目标字段" class="icon iconfont searchLogo">&#xe603;</span>
+                </div>
+                <div class="filterNoMappingRadio" (click)="isCheckedNotMappingOption(mappingMatchStatus.is_right_tree_not_mapping,'position_rightTree')">
+                    <span [innerHTML]="mappingMatchStatus.is_right_tree_not_mapping?'&#xe625;':'&#xe628;'" class="icon iconfont"></span>
+                    <span>未映射项</span>
+                </div>
+            </div>
+            <!--树-->
+            <div class="treeArea targetTree">
+                <!--树遍历开始-->
+                <div id="target_tree" class="ztree"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--mappingMatch主体部分，结束-->

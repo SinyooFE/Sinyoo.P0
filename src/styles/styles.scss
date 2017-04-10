@@ -1,0 +1,33 @@
+/* this file will be extracted to main dist folder and is imported in index.html */
+
+/* This file is for setting global styles  */
+
+@import 'variables';
+
+body {background-color: #ebf2fb;overflow-y: hidden;overflow-x: auto;min-width: 1200px;}
+
+/*logo 导航*/
+header{height: 80px;position: relative;}
+.logo{height:80px;width: 250px;display: inline-block;background: #18aefb url(../assets/img/logo.jpg) no-repeat center center; }
+.top {height: 80px;border: none;margin-bottom: 0px;}
+.top .collapse{background-color: #fff;}
+.top .container-fluid{ padding: 0;}
+.top .container-fluid .navbar-header{ margin: 0;}
+.nav li{font-size: 16px;padding: 0 20px;background: url(../assets/img/border.png) no-repeat right center;}
+.nav li:last-child{ background: none;}
+.nav li i.iconfont{padding-right: 5px;font-size: 18px;}
+.nav li.e i,.nav li.e a,.nav a:hover i,.nav a:hover{ color: #4f5c76;}
+.nav li a {position:relative; display: block;height: 80px; line-height: 80px;padding: 0;cursor: pointer;}
+.nav li.e a em,.nav a:hover em{border-bottom: #515e78 2px solid; position: absolute;left: 0;bottom: 0;width:100%;}
+
+/*当前用户下拉*/
+.admins{ position: absolute; right:20px;top:25px;}
+.admins .dropdown{ margin:6px 15px 0 0;}
+.admins .dropdown,.admins .userImg{float: left;}
+.admins .userImg{ color: #afc6f0; font-size: 25px;}
+.admins .dropdown-menu a{ cursor: pointer;}
+ 
+/*page公用的 start*/
+.main-container{ width: 100%; overflow: hidden;}
+.main-left{float: left;width: 250px;height: 100%;padding: 10px;background-color: #FFF;}
+.main-right{ height: 100%;position: relative;overflow:hidden;}
