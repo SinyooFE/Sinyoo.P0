@@ -55,6 +55,7 @@
     "start:hmr": "npm run server:dev:hmr",
     "start": "npm run server:dev",
     "front": "npm run server:front",
+    "updatecrabyter":"npm update crabyter-p0-server --registry=http://npm.crabyter.info --save",
     "test": "npm run lint && karma start",
     "tslint": "tslint",
     "typedoc": "typedoc",
